@@ -4,15 +4,15 @@ import java.util.List;
 
 import com.ihsinformatics.spring.appgpa.model.Semester;
 
-public interface ISemesterDAO {
+public interface SemesterDAO {
 
 	List<Semester> getAll();
 
 	Semester getSingle(int id);
 
-	boolean save(Semester student);
+	boolean save(Semester semester);
 
-	boolean update(Semester student);
+	boolean update(Semester semester);
 
 	boolean delete(int id);
 }

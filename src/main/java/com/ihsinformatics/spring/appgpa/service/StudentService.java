@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ihsinformatics.spring.appgpa.model.Student;
 
-public interface SStudentService {
+public interface StudentService {
 
 	public List<Student> getAll();
 
