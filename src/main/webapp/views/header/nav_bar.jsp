@@ -3,11 +3,12 @@
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">CGPA SYS</a>
 		</div>
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="${pageContext.request.contextPath}/index">Home</a>
+		<ul class="nav navbar-nav">	
+			<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>		
+			<li class="active"><a href="index.jsp"> Home</a>
 			</li>
 			<li><a
-				href="../student_views/add_student_form.jsp">Students</a></li>
+				href="${pageContext.request.contextPath}/views/student_views/add_student_form.jsp">Students</a></li>
 			<li><a
 				href="${pageContext.request.contextPath}/views/semester_views/add_semester_form.jsp">Semesters</a></li>
 			<li><a

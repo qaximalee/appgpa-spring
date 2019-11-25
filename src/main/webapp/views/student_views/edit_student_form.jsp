@@ -16,33 +16,24 @@
 </head>
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
-
-	<%
-		String id = request.getParameter("id");
-		StudentService stdOprt = new StudentServiceImp();
-		Student std = stdOprt.getSingle(Integer.parseInt(id));
-		
-		
-	%>
 	<div class="container">
 		<h1>Edit Form</h1>
-		<form action="../../StudentServlet" method="get">
-			<input type="hidden" name="actionType" value="edit"/>
-			<input type="hidden" name="studentId" value="<%=std.getStudentId()%>" />
+		<form action="${pageContext.request.contextPath}/student/editStudent" method="POST">
+			<input type="hidden" name="studentId" value="${student.getStudentId()}" />
 			<div class="form-group">
 				<label for="firstName">First Name:</label> <input type="text"
-					class="form-control" id="firstName" value="<%=std.getFirstName()%>"
+					class="form-control" id="firstName" value="${student.getFirstName()}"
 					name="firstName">
 			</div>
 			<div class="form-group">
 				<label for="lastName">Last Name:</label> <input type="text"
-					class="form-control" id="lastName" value="<%=std.getLastName()%>"
+					class="form-control" id="lastName" value="${student.getLastName()}"
 					name="lastName">
 			</div>
 			<div class="form-group">
 				<label for="registrationNo">First Name:</label> <input type="text"
 					class="form-control" id="registrationNo"
-					value="<%=std.getRegistrationNo()%>" name="registrationNo">
+					value="${student.getRegistrationNo()}" name="registrationNo">
 			</div>
 			<button type="submit" class="btn btn-default">Edit Student</button>
 		</form>

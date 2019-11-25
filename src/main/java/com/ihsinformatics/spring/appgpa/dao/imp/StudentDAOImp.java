@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,7 +26,8 @@ public class StudentDAOImp implements StudentDAO {
 	public List<Student> getAll() {
 		// TODO Auto-generated method stub
 		List<Student> students = new ArrayList<>();
-		try (Session session = sessionFactory.openSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			students = session.createQuery("from Student", Student.class).list();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -40,8 +40,8 @@ public class StudentDAOImp implements StudentDAO {
 	public Student getSingle(int id) {
 		// TODO Auto-generated method stub
 		Student student = new Student();
-		// Session session = HibernateUtils.getSessionFactory().openSession()
-		try (Session session = sessionFactory.openSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			String hql = "FROM Student Std WHERE Std.studentId = :student_id";
 			Query<Student> query = session.createQuery(hql);
 			query.setParameter("student_id", id);
@@ -56,29 +56,19 @@ public class StudentDAOImp implements StudentDAO {
 	public boolean save(Student student) {
 		// TODO Auto-generated method stub
 		boolean saved = false;
-		Transaction transaction = null;
-		// Session session = HibernateUtils.getSessionFactory().openSession()
-		// (Session session = HibernateUtils.getHibernateSession())
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			// start a transaction
-			transaction = session.beginTransaction();
 			// save the student objects
-			session.save(student);
-			// commit transaction
-			transaction.commit();
-
-			saved = true;
+			int a = (int) session.save(student);
+			if (a > 0)
+				saved = true;
+			else
+				saved = false;
+			session.flush();
 		} catch (Exception e) {
 			saved = false;
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
-		} finally {
-			session.close();
 		}
-
 		return saved;
 	}
 
@@ -86,21 +76,13 @@ public class StudentDAOImp implements StudentDAO {
 	public boolean update(Student student) {
 		// TODO Auto-generated method stub
 		boolean updated = false;
-		Transaction transaction = null;
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		try {
-			transaction = session.beginTransaction();
 			session.update(student);
-			transaction.commit();
 			updated = true;
 		} catch (Exception e) {
 			updated = false;
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
-		} finally {
-			session.close();
 		}
 		return updated;
 	}
@@ -109,25 +91,17 @@ public class StudentDAOImp implements StudentDAO {
 	public boolean delete(int id) {
 		// TODO Auto-generated method stub
 		boolean deleted = false;
-		Transaction transaction = null;
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			transaction = session.beginTransaction();
 			String hql = "DELETE FROM Student Std " + "WHERE Std.studentId = :student_id";
 			Query query = session.createQuery(hql);
 			query.setParameter("student_id", id);
 			int result = query.executeUpdate();
-			transaction.commit();
 			if (result == 1)
 				deleted = true;
 		} catch (Exception e) {
 			deleted = false;
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
-		} finally {
-			session.close();
 		}
 
 		return deleted;

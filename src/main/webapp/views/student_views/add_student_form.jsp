@@ -20,13 +20,12 @@
 	<jsp:include page="../header/nav_bar.jsp"></jsp:include>
 
 	<div class="container">
-		<a href="view_students.jsp" style="float: right">View All Records</a>
+		<a href="${pageContext.request.contextPath}/student/viewStudents" style="float: right">View All Records</a>
 		<br />
 
 		<h1>Add New Student</h1>
-		<form action="../../addStudent" method="post" name="studentForm"
+		<form action="${pageContext.request.contextPath}/student/addStudent" method="post" name="studentForm"
 			id="studentForm" onsubmit="return getValidated()">
-			<input type="hidden" name="actionType" value="add"/>
 			<div class="form-group">
 				<label for="firstName">First Name:</label> <input type="text"
 					class="form-control" id="firstName" placeholder="Enter First Name"

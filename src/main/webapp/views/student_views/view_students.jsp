@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-
-<%@page import="com.ihsinformatics.spring.appgpa.model.Student"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.imp.StudentServiceImp"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.StudentService"%>
 <%@page import="java.util.List"%>
 <html>
 <head>
@@ -12,11 +8,11 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <!-- include the script -->
-<script src="../../js_lib/alertify.min.js"></script>
+<script src="../../../js_lib/alertify.min.js"></script>
 <!-- include the style -->
-<link rel="stylesheet" href="../../js_lib/css/alertify.min.css" />
+<link rel="stylesheet" href="../../../js_lib/css/alertify.min.css" />
 <!-- include a theme -->
-<link rel="stylesheet" href="../../js_lib/css/themes/default.min.css" />
+<link rel="stylesheet" href="../../../js_lib/css/themes/default.min.css" />
 
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
@@ -28,7 +24,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="../../js_lib/css/bootstrap_search.css"/>
+<link rel="stylesheet" href="/js_lib/css/bootstrap_search.css"/>
 
 </head>
 <body>
@@ -36,21 +32,8 @@
 	
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
-	<%
-		if(request.getParameter("from") != null){ 
-		%>
-	<input type="hidden" id="fromRequest"
-		value="<%= request.getParameter("from") %>">
-	<%		
-		} 
-			
-		StudentService stdOprt = new StudentServiceImp();
-		List<Student> hStdList = stdOprt.getAll();
-		request.setAttribute("list", hStdList);
-		
-		
-	%>
+	<input type="hidden" id="fromRequest" value="${alertMessageIdentitfier}">
+	
 	<div class="row">
 	<div class="container">
 		<h2>All Students</h2>
@@ -66,19 +49,19 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${list}" var="std">
+				<c:forEach items="${data}" var="std">
 					<tr>
 						<td data-table-header="Id">${std.getStudentId()}</td>
 						<td data-table-header="First Name">${std.getFirstName()}</td>
 						<td data-table-header="Last Name">${std.getLastName()}</td>
 						<td data-table-header="Registration No">${std.getRegistrationNo()}</td>
-						<td data-table-header="Edit"><a href="edit_student_form.jsp?id=${std.getStudentId()}">Edit</a></td>
-						<td data-table-header="Delete" id="delete-student" onclick="deleteARecord()")><a href="../../StudentServlet?actionType=delete&id=${std.getStudentId()}">Delete</a></td>
+						<td data-table-header="Edit"><a href="${pageContext.request.contextPath}/student/editStudentForm?id=${std.getStudentId()}">Edit</a></td>
+						<td data-table-header="Delete" id="delete-student" onclick="deleteARecord()")><a href="${pageContext.request.contextPath}/student/deleteStudent?id=${std.getStudentId()}">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<br /> <a href="add_student_form.jsp">Add New Student</a>
+		<br /> <a href="${pageContext.request.contextPath}/views/student_views/add_student_form.jsp">Add New Student</a>
 	</div></div>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

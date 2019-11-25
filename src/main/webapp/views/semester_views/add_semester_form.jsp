@@ -22,7 +22,7 @@
 		<br />
 
 		<h1>Add New Semester</h1>
-		<form action="../../SemesterServlet" method="post">
+		<form action="../../student/add_semester" method="post">
 			<input type="hidden" name="actionType" value="add" />
 			<div class="form-group">
 				<label for="semesterNo">Semester No:</label> <input type="number" min="1" max="8"

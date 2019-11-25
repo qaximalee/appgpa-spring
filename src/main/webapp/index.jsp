@@ -10,7 +10,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <body>
 	<h2>CGPA Calculator System</h2>
-	<jsp:include page="WEB-INF/views/header/nav_bar.jsp"></jsp:include>
+	<jsp:include page="views/header/nav_bar.jsp"></jsp:include>
 	
 </body>
 
