@@ -9,21 +9,20 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- include the script -->
-<script src="../../js_lib/alertify.min.js"></script>
+<script src="../../js/alertify.min.js"></script>
 <!-- include the style -->
-<link rel="stylesheet" href="../../js_lib/css/alertify.min.css" />
+<link rel="stylesheet" href="../../js/css/alertify.min.css" />
 <!-- include a theme -->
-<link rel="stylesheet" href="../../js_lib/css/themes/default.min.css" />
+<link rel="stylesheet" href="../../js/css/themes/default.min.css" />
 </head>
 <body>
 	<jsp:include page="../header/nav_bar.jsp"></jsp:include>
 	<div class="container">
-		<a href="view_semesters.jsp" style="float: right">View All Records</a>
+		<a href="${pageContext.request.contextPath}/semester/viewSemesters" style="float: right">View All Records</a>
 		<br />
 
 		<h1>Add New Semester</h1>
-		<form action="../../student/add_semester" method="post">
-			<input type="hidden" name="actionType" value="add" />
+		<form action="${pageContext.request.contextPath}/semester/addSemester" method="post">
 			<div class="form-group">
 				<label for="semesterNo">Semester No:</label> <input type="number" min="1" max="8"
 					class="form-control" id="semesterNo"

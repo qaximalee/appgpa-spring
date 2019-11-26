@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<%@page import="com.ihsinformatics.spring.appgpa.model.SemesterResultsPOJO"%>
-<%@page import="java.util.List"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.imp.SemesterResultsServiceImp"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.SemesterResultsService"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
@@ -19,28 +15,18 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- include the script -->
-<script src="../../js_lib/alertify.min.js"></script>
+<script src="../../js/alertify.min.js"></script>
 <!-- include the style -->
-<link rel="stylesheet" href="../../js_lib/css/alertify.min.css" />
+<link rel="stylesheet" href="../../js/css/alertify.min.css" />
 <!-- include a theme -->
-<link rel="stylesheet" href="../../js_lib/css/themes/default.min.css" />
-<link rel="stylesheet" href="../../js_lib/css/bootstrap_search.css"/>
+<link rel="stylesheet" href="../../js/css/themes/default.min.css" />
+<link rel="stylesheet" href="../../js/css/bootstrap_search.css"/>
 </head>
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
-	<%
-		if(request.getParameter("from") != null ){ 
-		%>
-			<input type="hidden" id="fromRequest" value="<%= request.getParameter("from") %>">
-	<%		
-		} 
 	
-		SemesterResultsService semResOprt = new SemesterResultsServiceImp();
-
-		List<SemesterResultsPOJO> list = semResOprt.getAllReadableResults();
-		request.setAttribute("list", list);
-		
-	%>
+	<input type="hidden" id="fromRequest" value="${pageContext.request.contextPath}">
+	
 	<div class="row">
 	<div class="container">
 		<h1>Semester Results List</h1>
@@ -56,7 +42,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${list}" var="semRes">
+				<c:forEach items="${semesterResults}" var="semRes">
 					<tr>
 						<td data-table-header="First Name">${semRes.getFirstName()}</td>
 						<td data-table-header="Last Name">${semRes.getLastName()}</td>
@@ -68,7 +54,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<br /> <a href="add_semester_results_form.jsp">Add New Semester Results</a>
+		<br /> <a href="${pageContext.request.contextPath}/semester-results/">Add New Semester Results</a>
 	</div></div>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

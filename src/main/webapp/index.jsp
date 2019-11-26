@@ -8,6 +8,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 <body>
 	<h2>CGPA Calculator System</h2>
 	<jsp:include page="views/header/nav_bar.jsp"></jsp:include>

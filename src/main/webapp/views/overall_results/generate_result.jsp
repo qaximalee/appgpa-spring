@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<%@page import="com.ihsinformatics.spring.appgpa.model.Student"%>
-<%@page import="java.util.List"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.imp.StudentServiceImp"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.StudentService"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
@@ -14,23 +10,15 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- include the script -->
-<script src="../../js_lib/alertify.min.js"></script>
+<script src="../../js/alertify.min.js"></script>
 <!-- include the style -->
-<link rel="stylesheet" href="../../js_lib/css/alertify.min.css" />
+<link rel="stylesheet" href="../../js/css/alertify.min.css" />
 <!-- include a theme -->
-<link rel="stylesheet" href="../../js_lib/css/themes/default.min.css" />
+<link rel="stylesheet" href="../../js/css/themes/default.min.css" />
 
 </head>
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
-	<%
- 
-		
-		StudentService studentOprt = new StudentServiceImp();
-
-		List<Student> studentList = studentOprt.getAll();
-		request.setAttribute("studentList", studentList);
-	%>
 
 	<div class="container">
 		<form onchange="generateResult()">
@@ -54,7 +42,7 @@
 		function getStudent(){
 			var std = document.getElementById("studentId");
 			var stdId = std.options[std.selectedIndex].value; 
-			const url = "../../GetStudentByRegistration?studentID="+stdId;
+			const url = "../course-results/getStudentByRegistration?studentID="+stdId;
 	
 			// Populate dropdown with list of students
 			$.getJSON(url, function (data) {
@@ -73,7 +61,7 @@
 			
 			document.getElementById("error").innerHTML = "";
 
-			const url = "../../GetResultByStudent?id="+stdId;
+			const url = "../result/getResultByStudent?id="+stdId;
 			$.getJSON(url, function (data) {
 				var table = document.querySelector("table");
 				var resultData = data.results;

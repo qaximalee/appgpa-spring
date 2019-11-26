@@ -57,14 +57,14 @@ public class StudentController {
 	@RequestMapping(value = "/editStudentForm", method = RequestMethod.GET)
 	public ModelAndView editStudent(@RequestParam("id") int studentId) {
 		ModelAndView mav = new ModelAndView("student_views/edit_student_form");
-		mav.addObject("student", studentService.getSingle(studentId));
+		mav.addObject("student", studentService.getStudentById(studentId));
 		return mav;
 	}
 
 	@RequestMapping(value = "/deleteStudent", method = RequestMethod.GET)
 	public ModelAndView deleteStudent(@RequestParam("id") int studentId) {
 
-		if (studentService.delete(studentId))
+		if (studentService.deleteStudentById(studentId))
 			return viewStudent(DELETED_SUCCESS);
 		else
 			return viewStudent(DELETED_UNSUCCESS);
@@ -77,7 +77,7 @@ public class StudentController {
 			System.out.println(alertMessageIdentifier);
 		}
 		ModelAndView mav = new ModelAndView(STUDENT_VIEW_URL);
-		mav.addObject("data", studentService.getAll());
+		mav.addObject("data", studentService.getAllStudents());
 		mav.addObject("alertMessageIdentitfier", alertMessageIdentifier);
 		return mav;
 	}

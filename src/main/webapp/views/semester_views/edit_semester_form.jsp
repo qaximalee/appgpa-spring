@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<%@page import="com.ihsinformatics.spring.appgpa.service.imp.SemesterServiceImp"%>
-<%@page import="com.ihsinformatics.spring.appgpa.model.Semester"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.SemesterService"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -16,22 +13,15 @@
 </head>
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
-
-	<%
-		String id = request.getParameter("id");
-		SemesterService semesterOprt = new SemesterServiceImp();
-		Semester std = semesterOprt.getSingle(Integer.parseInt(id));
-	%>
 	<div class="container">
 		<h1>Edit Form</h1>
-		<form action="../../SemesterServlet" method="get">
-			<input type="hidden" name="actionType" value="edit"/>
+		<form action="${pageContext.request.contextPath}/semester/editSemester" method="POST">
 			<input type="hidden" name="semesterId"
-				value="<%=std.getSemesterId()%>" />
+				value="${semester.getSemesterId()}" />
 			<div class="form-group">
 				<label for="semesterNo">Semester No:</label> <input type="text"
 					class="form-control" id="semesterNo"
-					value="<%=std.getSemesterNo()%>" name="semesterNo">
+					value="${semester.getSemesterNo()}" name="semesterNo">
 			</div>
 			<button type="submit" class="btn btn-default">Edit Semester</button>
 

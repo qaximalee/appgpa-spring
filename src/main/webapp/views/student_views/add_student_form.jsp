@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:url value="/go/alertify.js" var="alertifyJS"/>
+<c:url value="/css/alertify.min.css" var="alertifyMinCSS"/>
+<c:url value="/css/themes/default.min.css" var="defaultMinCSS"/>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Add Student Form</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <!-- include the script -->
-<script src="../../js_lib/alertify.min.js"></script>
+<script src="${alertifyJS}"></script>
 <!-- include the style -->
-<link rel="stylesheet" href="../../js_lib/css/alertify.min.css" />
+<link rel="stylesheet" href="${alertifyMinCSS}" type=text/css />
 <!-- include a theme -->
-<link rel="stylesheet" href="../../js_lib/css/themes/default.min.css" />
+<link rel="stylesheet" href="${defaultMinCSS}" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 

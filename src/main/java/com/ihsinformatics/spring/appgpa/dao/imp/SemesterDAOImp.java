@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,10 +21,11 @@ public class SemesterDAOImp implements SemesterDAO {
 	}
 
 	@Override
-	public List<Semester> getAll() {
+	public List<Semester> getAllSemesters() {
 		// TODO Auto-generated method stub
 		List<Semester> semesters = new ArrayList<>();
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			semesters = session.createQuery("from Semester", Semester.class).list();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -35,10 +35,11 @@ public class SemesterDAOImp implements SemesterDAO {
 	}
 
 	@Override
-	public Semester getSingle(int id) {
+	public Semester getSemesterById(int id) {
 		// TODO Auto-generated method stub
 		Semester semester = new Semester();
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			String hql = "FROM Semester Sem WHERE Sem.semesterId = :semester_id";
 			Query<Semester> query = session.createQuery(hql, Semester.class);
 			query.setParameter("semester_id", id);
@@ -53,20 +54,12 @@ public class SemesterDAOImp implements SemesterDAO {
 	public boolean save(Semester semester) {
 		// TODO Auto-generated method stub
 		boolean saved = false;
-		Transaction transaction = null;
-		try (Session session = sessionFactory.getCurrentSession()) {
-			// start a transaction
-			transaction = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			// save the semester objects
 			session.save(semester);
-			// commit transaction
-			transaction.commit();
-
 			saved = true;
 		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
 		}
 
@@ -77,43 +70,32 @@ public class SemesterDAOImp implements SemesterDAO {
 	public boolean update(Semester semester) {
 		// TODO Auto-generated method stub
 		boolean updated = false;
-		Transaction transaction = null;
-		try (Session session = sessionFactory.getCurrentSession()) {
-			transaction = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			session.update(semester);
-			transaction.commit();
 			updated = true;
 		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
 		}
 		return updated;
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean deleteSemesterById(int id) {
 		// TODO Auto-generated method stub
 		boolean deleted = false;
-		Transaction transaction = null;
-		try (Session session = sessionFactory.getCurrentSession()) {
-			transaction = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			String hql = "DELETE FROM Semester Sem " + "WHERE Sem.semesterId = :semester_id";
 			Query query = session.createQuery(hql);
 			query.setParameter("semester_id", id);
 			int result = query.executeUpdate();
-			transaction.commit();
 			if (result == 1)
 				deleted = true;
 		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
 		}
 
 		return deleted;
 	}
-
 }

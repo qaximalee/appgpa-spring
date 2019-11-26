@@ -12,31 +12,21 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <!-- include the script -->
-<script src="../../js_lib/alertify.min.js"></script>
+<script src="../../js/alertify.min.js"></script>
 <!-- include the style -->
-<link rel="stylesheet" href="../../js_lib/css/alertify.min.css" />
+<link rel="stylesheet" href="../../js/css/alertify.min.css" />
 <!-- include a theme -->
-<link rel="stylesheet" href="../../js_lib/css/themes/default.min.css" />
+<link rel="stylesheet" href="../../js/css/themes/default.min.css" />
 
 </head>
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
-	<%
-		if(request.getParameter("from") != null ){ 
-		%>
-			<input type="hidden" id="fromRequest" value="<%= request.getParameter("from") %>">
-	<%		
-		} 
-		int stdId = Integer.parseInt(request.getParameter("id"));
-		SemesterResultsService semResOprt = new SemesterResultsServiceImp();
-
-		List<SemesterResultsPOJO> list = semResOprt.getStudentSemResults(stdId);
-		request.setAttribute("list", list);
-		request.setAttribute("name", list.get(0).getFirstName()+" "+list.get(0).getLastName());
-	%>
+	
+	<input type="hidden" id="fromRequest" value="${alertMessageIdentifier}">
+	
 
 	<div class="container">
-		<h1>Semester Results OF ${name}</h1>
+		<h1>Semester Results OF ${semesterResults.get(0).getFirstName()}</h1>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -49,7 +39,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${list}" var="semRes">
+				<c:forEach items="${semesterResults}" var="semRes">
 					<tr>
 						<td>${semRes.getFirstName()}</td>
 						<td>${semRes.getLastName()}</td>
@@ -62,7 +52,7 @@
 			</tbody>
 		</table>
 		<br /> <a href="add_semester_results_form.jsp">Add New Semester Results</a>
-		<a href="view_semester_results.jsp" style="float:right">View All Semester Results</a>
+		<a href="${pageContext.request.contextPath}/semester-results/viewSemesterResults" style="float:right">View All Semester Results</a>
 	</div>
 	<script type="text/javascript">
 	

@@ -1,14 +1,4 @@
 <!DOCTYPE html>
-<%@page import="com.ihsinformatics.spring.appgpa.service.imp.SemesterServiceImp"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.SemesterService"%>
-<%@page import="com.ihsinformatics.spring.appgpa.model.Semester"%>
-<%@page import="com.ihsinformatics.spring.appgpa.model.Student"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.imp.StudentServiceImp"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.StudentService"%>
-<%@page import="com.ihsinformatics.spring.appgpa.model.Course"%>
-<%@page import="java.util.List"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.imp.CourseServiceImp"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.CourseService"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -26,26 +16,10 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 	<div class="container">
-		<a href="view_courses_results.jsp" style="float:right">View All Courses Results</a>
+		<a href="${pageContext.request.contextPath}/course-results/viewCourseResults" style="float:right">View All Courses Results</a>
 		<h1>Add Course Results</h1>
 
-		<%
-			CourseService courseOprt = new CourseServiceImp();
-
-			List<Course> courseList = courseOprt.getAll();
-			request.setAttribute("courseList", courseList);
-
-			StudentService studentOprt = new StudentServiceImp();
-
-			List<Student> studentList = studentOprt.getAll();
-			request.setAttribute("studentList", studentList);
-			
-			SemesterService semesterOprt = new SemesterServiceImp();
-			List<Semester> semesterList = semesterOprt.getAll();
-			request.setAttribute("semesterList", semesterList);
-		%>
-
-		<form action="../../CourseResultsServlet" method="post">
+		<form action="${pageContext.request.contextPath}/course-results/addCourseResults" method="post">
 			<div class="form-group">
 				<label for="studentId">Student Id:</label> <select name="studentId" id="studentId" onchange="getStudent()"
 					required>
@@ -65,15 +39,6 @@
 							</c:forEach>
 				</select>
 			</div>
-			<%-- <div class="form-group">
-				<label for="courseId">Course Id:</label> <select name="courseId" id="courseId"
-					required >
-					<c:forEach items="${courseList}" var="course">
-								<option value='<c:out value="${course.getCourseId()}"/>'><c:out
-										value="${course.getCourseCode()}" /></option>
-							</c:forEach>
-				</select>
-			</div> --%>
 			<div class="form-group">
 				<label for="courseId">Course Id:</label> <select name="courseId" id="courseId"
 					required >
@@ -103,7 +68,7 @@
 			dropdown.append('<option selected="true" disabled>Choose Course</option>');
 			dropdown.prop('selectedIndex', 0);
 
-			const url = "../../GetCoursesBySemester?semesterID="+semNum;
+			const url = "getCoursesBySemester?semesterID="+semNum;
 
 			// Populate dropdown with list of provinces
 			$.getJSON(url, function (data) {
@@ -120,8 +85,8 @@
 			var std = document.getElementById("studentId");
 			var stdId = std.options[std.selectedIndex].value; 
 			
-			const url = "../../GetStudentByRegistration?studentID="+stdId;
-
+			const url = "getStudentByRegistration?studentID="+stdId;
+			//alert(window.location.pathname);
 			// Populate dropdown with list of provinces
 			$.getJSON(url, function (data) {
 				var studentDetails = "Full Name: "+data.firstName+" "+data.lastName;

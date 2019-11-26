@@ -56,13 +56,13 @@ public class CourseResultsServiceImp implements CourseResultsService {
 	@Override
 	public List<CourseResults> getAllCourseResultsBySemester(int semesterId, int studentId) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.courseResultsDAO.getAllCourseResultsBySemester(semesterId, studentId);
 	}
 
 	@Override
 	public List<CourseResultsPOJO> getAllReadableResults() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.courseResultsDAO.getAllReadableResults();
 	}
 
 }

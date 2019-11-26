@@ -12,15 +12,14 @@
 			<li><a
 				href="${pageContext.request.contextPath}/views/semester_views/add_semester_form.jsp">Semesters</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/views/course_views/add_course_form.jsp">Courses</a></li>
+				href="${pageContext.request.contextPath}/course/">Courses</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/views/course_results_views/add_course_results_form.jsp">Courses
+				href="${pageContext.request.contextPath}/course-results/">Courses Results</a></li>
+			<li><a
+				href="${pageContext.request.contextPath}/semester-results/">Semesters
 					Results</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/views/semester_results_views/add_semester_results_form.jsp">Semesters
-					Results</a></li>
-			<li><a
-				href="${pageContext.request.contextPath}/views/overall_results/generate_result.jsp">Generate
+				href="${pageContext.request.contextPath}/result/">Generate
 					Results</a></li>
 		</ul>
 	</div>

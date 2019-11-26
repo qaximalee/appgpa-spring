@@ -1,11 +1,4 @@
 <!DOCTYPE html>
-<%@page import="com.ihsinformatics.spring.appgpa.model.Student"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.imp.StudentServiceImp"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.StudentService"%>
-<%@page import="com.ihsinformatics.spring.appgpa.model.Semester"%>
-<%@page import="java.util.List"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.imp.SemesterServiceImp"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.SemesterService"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -27,24 +20,10 @@
 
 
 	<div class="container">
-		<a href="view_semester_results.jsp" style="float:right">View All Semester Results</a>	
+		<a href="${pageContext.request.contextPath}/semester-results/viewSemesterResults" style="float:right">View All Semester Results</a>	
 		<h1>Add Semester Results</h1>
 
-		<%
-			SemesterService semesterOprt = new SemesterServiceImp();
-
-			List<Semester> semesterList = semesterOprt.getAll();
-			request.setAttribute("semesterList", semesterList);
-
-			StudentService studentOprt = new StudentServiceImp();
-
-			List<Student> studentList = studentOprt.getAll();
-			request.setAttribute("studentList", studentList);
-			
-			
-		%>
-
-		<form action="../../SemesterResultsServlet" method="post">
+		<form action="${pageContext.request.contextPath}/semester-results/addSemesterResults" method="post">
 			<div class="form-group">
 				<label for="studentId">Student Id:</label> <select name="studentId" id="studentId" onchange="getStudent()"
 					required>
@@ -72,7 +51,7 @@
 		function getStudent(){
 			var std = document.getElementById("studentId");
 			var stdId = std.options[std.selectedIndex].value;
-			const url = "../../getStudentByRegistration?studentID="+stdId;
+			const url = "../course-results/getStudentByRegistration?studentID="+stdId;
 	
 			// Populate dropdown with list of provinces
 			$.getJSON(url, function (data) {

@@ -1,19 +1,15 @@
 <!DOCTYPE html>
-<%@page import="com.ihsinformatics.spring.appgpa.model.CourseResultsPOJO"%>
-<%@page import="java.util.List"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.imp.CourseResultsServiceImp"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.CourseResultsService"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>View Courses Results</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- include the script -->
-<script src="../../js_lib/alertify.min.js"></script>
+<script src="../../js/alertify.min.js"></script>
 <!-- include the style -->
-<link rel="stylesheet" href="../../js_lib/css/alertify.min.css" />
+<link rel="stylesheet" href="../../js/css/alertify.min.css" />
 <!-- include a theme -->
-<link rel="stylesheet" href="../../js_lib/css/themes/default.min.css" />
+<link rel="stylesheet" href="../../js/css/themes/default.min.css" />
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 
@@ -24,7 +20,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="../../js_lib/css/bootstrap_search.css"/>
+<link rel="stylesheet" href="../../js/css/bootstrap_search.css"/>
 </head>
 <body>
 	<jsp:include page="../header/nav_bar.jsp"></jsp:include>
@@ -33,20 +29,9 @@
 	<div class="container">
 		<h1>Courses Results List</h1>
 
-		<%
-			if (request.getParameter("from") != null) {
-		%>
 		<input type="hidden" id="fromRequest"
-			value="<%=request.getParameter("from")%>">
-		<%
-			}
-			
-			
-			CourseResultsService courseResultsOprt = new CourseResultsServiceImp();
-			
-			List<CourseResultsPOJO> lists = courseResultsOprt.getAllReadableResults();
-			request.setAttribute("lists", lists);
-		%>
+			value="${alertMessageIdentifier}">
+		
 		<table class="table responsive" id="sort">
 			<thead>
 				<tr>
@@ -63,7 +48,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${lists}" var="courseResults">
+				<c:forEach items="${courseResultsList}" var="courseResults">
 					<tr>
 						<td data-table-header="First Name">${courseResults.getFirstName()}</td>
 						<td data-table-header="Last Name">${courseResults.getLastName()}</td>
@@ -76,13 +61,13 @@
 						<td data-table-header="Total Points">${courseResults.getTotalPoints()}</td>
 
 						<td data-table-header="Actions"><a
-							href="../../DeleteCourseResults?id=${courseResults.getCourseResultId()}"
+							href="${pageContext.request.contextPath}/course-results/deleteCourseResult?id=${courseResults.getCourseResultId()}"
 							id="delete">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<br /> <a href="add_course_results_form.jsp">Add New Course</a>
+		<br /> <a href="${pageContext.request.contextPath}/course-results/">Add New Course</a>
 	</div></div>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

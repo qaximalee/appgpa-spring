@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,7 +25,8 @@ public class CourseResultsDAOImp implements CourseResultsDAO {
 	public List<CourseResults> getAll() {
 		// TODO Auto-generated method stub
 		List<CourseResults> courseResultss = new ArrayList<>();
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			courseResultss = session.createQuery("from CourseResults", CourseResults.class).list();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -39,7 +39,8 @@ public class CourseResultsDAOImp implements CourseResultsDAO {
 	public CourseResults getSingle(int id) {
 		// TODO Auto-generated method stub
 		CourseResults courseResults = new CourseResults();
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			String hql = "FROM CourseResults Crs_Rs WHERE Crs_Rs.courseResultId = :courseResult_id";
 			Query<CourseResults> query = session.createQuery(hql, CourseResults.class);
 			query.setParameter("courseResult_id", id);
@@ -54,20 +55,15 @@ public class CourseResultsDAOImp implements CourseResultsDAO {
 	public boolean delete(int id) {
 		// TODO Auto-generated method stub
 		boolean deleted = false;
-		Transaction transaction = null;
-		try (Session session = sessionFactory.getCurrentSession()) {
-			transaction = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			String hql = "DELETE FROM CourseResults Crs_Rs " + "WHERE Crs_Rs.courseResultId = :courseResult_id";
 			Query query = session.createQuery(hql);
 			query.setParameter("courseResult_id", id);
 			int result = query.executeUpdate();
-			transaction.commit();
 			if (result == 1)
 				deleted = true;
 		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
 		}
 
@@ -78,16 +74,11 @@ public class CourseResultsDAOImp implements CourseResultsDAO {
 	public boolean update(CourseResults data) {
 		// TODO Auto-generated method stub
 		boolean updated = false;
-		Transaction transaction = null;
-		try (Session session = sessionFactory.getCurrentSession()) {
-			transaction = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			session.update(data);
-			transaction.commit();
 			updated = true;
 		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
 		}
 		return updated;
@@ -97,19 +88,11 @@ public class CourseResultsDAOImp implements CourseResultsDAO {
 	public boolean save(CourseResults data) {
 		// TODO Auto-generated method stub
 		boolean saved = false;
-		Transaction transaction = null;
-		try (Session session = sessionFactory.getCurrentSession()) {
-			// start a transaction
-			// transaction = session.beginTransaction();
-			// save the courseResults objects
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			session.save(data);
-			// commit transaction
-			// transaction.commit();
 			saved = true;
 		} catch (Exception e) {
-			// if (transaction != null) {
-			// transaction.rollback();
-			// }
 			e.printStackTrace();
 		}
 
@@ -119,7 +102,8 @@ public class CourseResultsDAOImp implements CourseResultsDAO {
 	@Override
 	public List<CourseResults> getAllCourseResultsBySemester(int semesterId, int studentId) {
 		List<CourseResults> courseResults = new ArrayList<>();
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			Query query = session.createSQLQuery("CALL getCourseResults(:semesterId, :studentId)")
 					.addEntity(CourseResults.class);
 			query.setParameter("semesterId", semesterId);
@@ -136,7 +120,8 @@ public class CourseResultsDAOImp implements CourseResultsDAO {
 	@SuppressWarnings("unchecked")
 	public List<CourseResultsPOJO> getAllReadableResults() {
 		List<CourseResultsPOJO> courseResults = new ArrayList<>();
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			courseResults = session.createSQLQuery("CALL getAllCourseResults()").addEntity(CourseResultsPOJO.class)
 					.list();
 		} catch (Exception e) {

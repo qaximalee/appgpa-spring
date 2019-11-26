@@ -51,4 +51,10 @@ public class CourseServiceImp implements CourseService {
 		// TODO Auto-generated method stub
 		return this.courseDAO.delete(id);
 	}
+
+	@Override
+	public List<Course> getCoursesBySemester(int semesterId) {
+		// TODO Auto-generated method stub
+		return this.courseDAO.getCoursesBySemester(semesterId);
+	}
 }

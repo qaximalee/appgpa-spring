@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-
-<%@page import="com.ihsinformatics.spring.appgpa.model.Semester"%>
-<%@page import="java.util.List"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.imp.SemesterServiceImp"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.SemesterService"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -12,29 +7,19 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <!-- include the script -->
-<script src="../../js_lib/alertify.min.js"></script>
+<script src="../../js/alertify.min.js"></script>
 <!-- include the style -->
-<link rel="stylesheet" href="../../js_lib/css/alertify.min.css" />
+<link rel="stylesheet" href="../../js/css/alertify.min.css" />
 <!-- include a theme -->
-<link rel="stylesheet" href="../../js_lib/css/themes/default.min.css" />
+<link rel="stylesheet" href="../../js/css/themes/default.min.css" />
 </head>
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-	<%
-		if(request.getParameter("from") != null){ 
-		%>
-			<input type="hidden" id="fromRequest" value="<%= request.getParameter("from") %>">
-	<%		
-		} 
+	<input type="hidden" id="fromRequest" value="${alertMessageIdentitfier}">
 	
-		SemesterService stdOprt = new SemesterServiceImp();
-
-		List<Semester> list = stdOprt.getAll();
-		request.setAttribute("list", list);
-	%>
 
 	<div class="container">
 		<h1>Semesters List</h1>
@@ -46,18 +31,18 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${list}" var="std">
+				<c:forEach items="${data}" var="sem">
 					<tr>
-						<td>${std.getSemesterId()}</td>
-						<td>${std.getSemesterNo()}</td>
+						<td>${sem.getSemesterId()}</td>
+						<td>${sem.getSemesterNo()}</td>
 						<td><a
-							href="edit_semester_form.jsp?id=${std.getSemesterId()}">Edit</a></td>
-						<td><a href="../../SemesterServlet?actionType=delete&id=${std.getSemesterId()}">Delete</a></td>
+							href="${pageContext.request.contextPath}/semester/editSemesterForm?id=${sem.getSemesterId()}">Edit</a></td>
+						<td><a href="${pageContext.request.contextPath}/semester/deleteSemester?actionType=delete&id=${sem.getSemesterId()}">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<br /> <a href="add_semester_form.jsp">Add New Semester</a>
+		<br /> <a href="${pageContext.request.contextPath}/views/semester_views/add_semester_form.jsp">Add New Semester</a>
 	</div>
 	<script type="text/javascript">
 		var fromRequest = document.getElementById("fromRequest").value;

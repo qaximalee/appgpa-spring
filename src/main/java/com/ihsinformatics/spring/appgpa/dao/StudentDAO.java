@@ -6,13 +6,13 @@ import com.ihsinformatics.spring.appgpa.model.Student;
 
 public interface StudentDAO {
 
-	List<Student> getAll();
+	List<Student> getAllStudents();
 
-	Student getSingle(int id);
+	Student getStudentById(int id);
 
 	boolean save(Student student);
 
 	boolean update(Student student);
 
-	boolean delete(int id);
+	boolean deleteStudentById(int id);
 }

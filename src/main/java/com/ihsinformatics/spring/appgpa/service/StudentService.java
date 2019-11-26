@@ -6,13 +6,13 @@ import com.ihsinformatics.spring.appgpa.model.Student;
 
 public interface StudentService {
 
-	public List<Student> getAll();
+	public List<Student> getAllStudents();
 
-	public Student getSingle(int id);
+	public Student getStudentById(int id);
 
 	public boolean save(Student student);
 
 	public boolean update(Student student);
 
-	public boolean delete(int id);
+	public boolean deleteStudentById(int id);
 }

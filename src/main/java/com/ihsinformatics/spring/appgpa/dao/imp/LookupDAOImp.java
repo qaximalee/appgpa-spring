@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,7 +24,8 @@ public class LookupDAOImp implements LookupDAO {
 	public List<Lookup> getAll() {
 		// TODO Auto-generated method stub
 		List<Lookup> lookups = new ArrayList<>();
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			lookups = session.createQuery("from Lookup", Lookup.class).list();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,7 +38,8 @@ public class LookupDAOImp implements LookupDAO {
 	public Lookup getSingle(int id) {
 		// TODO Auto-generated method stub
 		Lookup lookup = new Lookup();
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			String hql = "FROM Lookup Lkup WHERE Lkup.lookupId = :lookup_id";
 			Query<Lookup> query = session.createQuery(hql);
 			query.setParameter("lookup_id", id);
@@ -53,20 +54,12 @@ public class LookupDAOImp implements LookupDAO {
 	public boolean save(Lookup lookup) {
 		// TODO Auto-generated method stub
 		boolean saved = false;
-		Transaction transaction = null;
-		try (Session session = sessionFactory.getCurrentSession()) {
-			// start a transaction
-			transaction = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			// save the lookup objects
 			session.save(lookup);
-			// commit transaction
-			transaction.commit();
-
 			saved = true;
 		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
 		}
 
@@ -77,16 +70,11 @@ public class LookupDAOImp implements LookupDAO {
 	public boolean update(Lookup lookup) {
 		// TODO Auto-generated method stub
 		boolean updated = false;
-		Transaction transaction = null;
-		try (Session session = sessionFactory.getCurrentSession()) {
-			transaction = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			session.update(lookup);
-			transaction.commit();
 			updated = true;
 		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
 		}
 		return updated;
@@ -96,20 +84,15 @@ public class LookupDAOImp implements LookupDAO {
 	public boolean delete(int id) {
 		// TODO Auto-generated method stub
 		boolean deleted = false;
-		Transaction transaction = null;
-		try (Session session = sessionFactory.getCurrentSession()) {
-			transaction = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			String hql = "DELETE FROM Lookup Lkup " + "WHERE Lkup.lookupId = :lookup_id";
 			Query query = session.createQuery(hql);
 			query.setParameter("lookup_id", id);
 			int result = query.executeUpdate();
-			transaction.commit();
 			if (result == 1)
 				deleted = true;
 		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
 		}
 

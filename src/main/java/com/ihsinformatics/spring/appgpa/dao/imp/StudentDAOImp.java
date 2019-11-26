@@ -23,7 +23,7 @@ public class StudentDAOImp implements StudentDAO {
 	}
 
 	@Override
-	public List<Student> getAll() {
+	public List<Student> getAllStudents() {
 		// TODO Auto-generated method stub
 		List<Student> students = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
@@ -37,7 +37,7 @@ public class StudentDAOImp implements StudentDAO {
 	}
 
 	@Override
-	public Student getSingle(int id) {
+	public Student getStudentById(int id) {
 		// TODO Auto-generated method stub
 		Student student = new Student();
 		Session session = sessionFactory.getCurrentSession();
@@ -88,7 +88,7 @@ public class StudentDAOImp implements StudentDAO {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean deleteStudentById(int id) {
 		// TODO Auto-generated method stub
 		boolean deleted = false;
 		Session session = this.sessionFactory.getCurrentSession();

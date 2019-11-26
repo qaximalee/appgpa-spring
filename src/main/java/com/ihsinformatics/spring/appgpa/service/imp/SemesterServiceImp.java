@@ -23,15 +23,15 @@ public class SemesterServiceImp implements SemesterService {
 	}
 
 	@Override
-	public List<Semester> getAll() {
+	public List<Semester> getAllSemester() {
 		// TODO Auto-generated method stub
-		return this.semesterDAO.getAll();
+		return this.semesterDAO.getAllSemesters();
 	}
 
 	@Override
-	public Semester getSingle(int id) {
+	public Semester getSemesterById(int id) {
 		// TODO Auto-generated method stub
-		return this.semesterDAO.getSingle(id);
+		return this.semesterDAO.getSemesterById(id);
 	}
 
 	@Override
@@ -47,8 +47,8 @@ public class SemesterServiceImp implements SemesterService {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean deleteSemesterById(int id) {
 		// TODO Auto-generated method stub
-		return this.semesterDAO.delete(id);
+		return this.semesterDAO.deleteSemesterById(id);
 	}
 }

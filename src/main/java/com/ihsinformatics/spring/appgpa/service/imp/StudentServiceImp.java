@@ -23,15 +23,15 @@ public class StudentServiceImp implements StudentService {
 	}
 
 	@Override
-	public List<Student> getAll() {
+	public List<Student> getAllStudents() {
 		// TODO Auto-generated method stub
-		return this.studentDAO.getAll();
+		return this.studentDAO.getAllStudents();
 	}
 
 	@Override
-	public Student getSingle(int id) {
+	public Student getStudentById(int id) {
 		// TODO Auto-generated method stub
-		return this.studentDAO.getSingle(id);
+		return this.studentDAO.getStudentById(id);
 	}
 
 	@Override
@@ -47,8 +47,8 @@ public class StudentServiceImp implements StudentService {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean deleteStudentById(int id) {
 		// TODO Auto-generated method stub
-		return this.studentDAO.delete(id);
+		return this.studentDAO.deleteStudentById(id);
 	}
 }

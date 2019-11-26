@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.ihsinformatics.spring.appgpa.dao.SemesterResultsDAO;
@@ -25,7 +24,8 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 	public List<SemesterResults> getAll() {
 		// TODO Auto-generated method stub
 		List<SemesterResults> semesterResultss = new ArrayList<>();
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			semesterResultss = session.createQuery("from SemesterResults", SemesterResults.class).list();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,7 +38,8 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 	public SemesterResults getSingle(int id) {
 		// TODO Auto-generated method stub
 		SemesterResults semesterResults = new SemesterResults();
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			String hql = "FROM SemesterResults Std WHERE Std.semesterResultId = :semesterResults_id";
 			Query<SemesterResults> query = session.createQuery(hql, SemesterResults.class);
 			query.setParameter("semesterResults_id", id);
@@ -53,20 +54,15 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 	public boolean delete(int id) {
 		// TODO Auto-generated method stub
 		boolean deleted = false;
-		Transaction transaction = null;
-		try (Session session = sessionFactory.getCurrentSession()) {
-			transaction = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			String hql = "DELETE FROM SemesterResults Std " + "WHERE Std.semesterResultId = :semesterResults_id";
 			Query query = session.createQuery(hql);
 			query.setParameter("semesterResults_id", id);
 			int result = query.executeUpdate();
-			transaction.commit();
 			if (result == 1)
 				deleted = true;
 		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
 		}
 
@@ -77,16 +73,11 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 	public boolean update(SemesterResults data) {
 		// TODO Auto-generated method stub
 		boolean updated = false;
-		Transaction transaction = null;
-		try (Session session = sessionFactory.getCurrentSession()) {
-			transaction = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			session.update(data);
-			transaction.commit();
 			updated = true;
 		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
 		}
 		return updated;
@@ -96,12 +87,10 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 	public boolean save(SemesterResults data) {
 		// TODO Auto-generated method stub
 		boolean saved = false;
-		Transaction transaction = null;
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 
 			data.setcGPA(getCGPA(data.getStudent().getStudentId()));
-			// start a transaction
-			// transaction = session.beginTransaction();
 
 			// String hql = "FROM SemesterResults Sem_RS WHERE Sem_RS.semester = :semesterID
 			// AND Sem_RS.student = :studentID";
@@ -121,14 +110,8 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 				// save the semesterResults objects
 				session.save(data);
 				saved = true;
-				// commit transaction
-				// transaction.commit();
 			}
 		} catch (Exception e) {
-			// if (transaction != null) {
-			// transaction.rollback();
-			// }
-
 			e.printStackTrace();
 			saved = false;
 		}
@@ -137,7 +120,8 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 	}
 
 	private double getCGPA(int studentId) {
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			String hql = "FROM CourseResults Crs_RS WHERE Crs_RS.student.studentId = :studentID";
 			Query query = session.createQuery(hql);
 			query.setParameter("studentID", studentId);
@@ -161,7 +145,8 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 	public List<SemesterResultsPOJO> getAllReadableResults() {
 
 		List<SemesterResultsPOJO> semResults = new ArrayList<>();
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			semResults = session.createSQLQuery("CALL getAllSemesterResults()").addEntity(SemesterResultsPOJO.class)
 					.list();
 		} catch (Exception e) {
@@ -176,7 +161,8 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 	public List<SemesterResultsPOJO> getStudentSemResults(int studentId) {
 
 		List<SemesterResultsPOJO> semResults = new ArrayList<>();
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			semResults = session.createSQLQuery("Call getStudentSemResults(:studentID)")
 					.setParameter("studentID", studentId).addEntity(SemesterResultsPOJO.class).list();
 		} catch (Exception e) {
@@ -191,12 +177,13 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 		// TODO Auto-generated method stub
 
 		SemesterResults semesterResults = new SemesterResults();
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			String hql = "FROM SemesterResults Std WHERE Std.semester.semesterId = :semesterID AND Std.student.studentId = :studentID";
 			Query<SemesterResults> query = session.createQuery(hql, SemesterResults.class);
 			query.setParameter("semesterID", semesterId);
 			query.setParameter("studentID", studentId);
-			semesterResults = query.getSingleResult();// query.list();
+			semesterResults = query.getSingleResult();
 			if (semesterResults.getSemester() != null) {
 				return true;
 			}
@@ -211,7 +198,8 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 	@Override
 	public List<SemesterResults> getSemResEntityByStudent(int studentId) {
 		List<SemesterResults> semesterResults = new ArrayList<>();
-		try (Session session = sessionFactory.getCurrentSession()) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
 			String hql = "FROM SemesterResults Std WHERE Std.student.studentId = :student_id";
 			semesterResults = session.createQuery(hql, SemesterResults.class).setParameter("student_id", studentId)
 					.list();

@@ -6,13 +6,13 @@ import com.ihsinformatics.spring.appgpa.model.Semester;
 
 public interface SemesterDAO {
 
-	List<Semester> getAll();
+	List<Semester> getAllSemesters();
 
-	Semester getSingle(int id);
+	Semester getSemesterById(int id);
 
 	boolean save(Semester semester);
 
 	boolean update(Semester semester);
 
-	boolean delete(int id);
+	boolean deleteSemesterById(int id);
 }

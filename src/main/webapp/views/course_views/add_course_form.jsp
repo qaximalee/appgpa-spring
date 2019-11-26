@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<%@page import="com.ihsinformatics.spring.appgpa.model.Semester"%>
-<%@page import="java.util.List"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.imp.SemesterServiceImp"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.SemesterService"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -13,30 +9,22 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- include the script -->
-<script src="../../js_lib/alertify.min.js"></script>
+<script src="../../js/alertify.min.js"></script>
 <!-- include the style -->
-<link rel="stylesheet" href="../../js_lib/css/alertify.min.css" />
+<link rel="stylesheet" href="../../js/css/alertify.min.css" />
 <!-- include a theme -->
-<link rel="stylesheet" href="../../js_lib/css/themes/default.min.css" />
+<link rel="stylesheet" href="../../js/css/themes/default.min.css" />
 </head>
 <body>
 
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-	<%
-		SemesterService semesterOprt = new SemesterServiceImp();
-
-		List<Semester> list = semesterOprt.getAll();
-		request.setAttribute("list", list);
-	%>
-
 	<div class="container">
-		<a href="view_courses.jsp" style="float:right">View All Courses</a>
+		<a href="${pageContext.request.contextPath}/course/viewCourses" style="float:right">View All Courses</a>
 		<h1>Add Course</h1>
 
-		<form action="../../CourseServlet" method="post">
-			<input type="hidden" name="actionType" value="add"/>
+		<form action="${pageContext.request.contextPath}/course/addCourse" method="post">
 			<div class="form-group">
 				<label for="courseCode">Course Code:</label> <input type="text"
 					class="form-control" id="courseCode" placeholder="Enter CourseCode"
@@ -45,7 +33,7 @@
 			<div class="form-group">
 				<label for="name">Semester No:</label> <select name="semester"
 					required>
-					<c:forEach items="${list}" var="sem">
+					<c:forEach items="${semesterList}" var="sem">
 						<option value='<c:out value="${sem.getSemesterId()}"/>'><c:out
 								value="${sem.getSemesterNo()}" /></option>
 					</c:forEach>

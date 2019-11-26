@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<%@page import="com.ihsinformatics.spring.appgpa.model.Student"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.imp.StudentServiceImp"%>
-<%@page import="com.ihsinformatics.spring.appgpa.service.StudentService"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
