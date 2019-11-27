@@ -8,9 +8,9 @@
 			<li class="active"><a href="index.jsp"> Home</a>
 			</li>
 			<li><a
-				href="${pageContext.request.contextPath}/views/student_views/add_student_form.jsp">Students</a></li>
+				href="${pageContext.request.contextPath}/student/">Students</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/views/semester_views/add_semester_form.jsp">Semesters</a></li>
+				href="${pageContext.request.contextPath}/semester/">Semesters</a></li>
 			<li><a
 				href="${pageContext.request.contextPath}/course/">Courses</a></li>
 			<li><a

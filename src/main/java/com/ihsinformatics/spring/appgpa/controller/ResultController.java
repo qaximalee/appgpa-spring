@@ -48,7 +48,7 @@ public class ResultController {
 
 	@RequestMapping(value = "/getResultByStudent", method = RequestMethod.GET)
 	public void getResultByStudent(HttpServletResponse response, @RequestParam("id") int studentId) {
-		List<SemesterResults> list = semesterResultsService.getSemResEntityByStudent(studentId);
+		List<SemesterResults> list = semesterResultsService.getSemesterResultsEntityByStudentId(studentId);
 		List<Result> results = new ArrayList<>();
 		String message = "NOT-NULL";
 		if (list.size() <= 0) {
@@ -70,7 +70,7 @@ public class ResultController {
 		int counter = 0;
 		while (counter < list.size()) {
 			List<CourseResults> courseResults = courseResultsService
-					.getAllCourseResultsBySemester(list.get(counter).getSemester().getSemesterId(), studentId);
+					.getCourseResultsByStudentAndSemesterId(list.get(counter).getSemester().getSemesterId(), studentId);
 			for (CourseResults courseResult : courseResults) {
 				Result result = new Result(list.get(counter).getSemesterResultId(),
 						courseResult.getCourse().getCourseCode(), courseResult.getCourse().getName(),

@@ -24,15 +24,15 @@ public class SemesterResultsServiceImp implements SemesterResultsService {
 	}
 
 	@Override
-	public List<SemesterResults> getAll() {
+	public List<SemesterResults> getAllSemesterResults() {
 		// TODO Auto-generated method stub
-		return this.semesterResultsDAO.getAll();
+		return this.semesterResultsDAO.getAllSemesterResults();
 	}
 
 	@Override
-	public SemesterResults getSingle(int id) {
+	public SemesterResults getSemesterResultsById(int id) {
 		// TODO Auto-generated method stub
-		return this.semesterResultsDAO.getSingle(id);
+		return this.semesterResultsDAO.getSemesterResultsById(id);
 	}
 
 	@Override
@@ -48,32 +48,32 @@ public class SemesterResultsServiceImp implements SemesterResultsService {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean deleteSemesterResultsById(int id) {
 		// TODO Auto-generated method stub
-		return this.semesterResultsDAO.delete(id);
+		return this.semesterResultsDAO.deleteSemesterResultsById(id);
 	}
 
 	@Override
-	public List<SemesterResultsPOJO> getAllReadableResults() {
+	public List<SemesterResultsPOJO> getAllReadableSemesterResults() {
 		// TODO Auto-generated method stub
-		return this.semesterResultsDAO.getAllReadableResults();
+		return this.semesterResultsDAO.getAllReadableSemesterResults();
 	}
 
 	@Override
-	public List<SemesterResultsPOJO> getStudentSemResults(int studentId) {
+	public List<SemesterResultsPOJO> getSemesterResultsByStudentId(int studentId) {
 		// TODO Auto-generated method stub
-		return this.semesterResultsDAO.getStudentSemResults(studentId);
+		return this.semesterResultsDAO.getSemesterResultsByStudentId(studentId);
 	}
 
 	@Override
-	public boolean getSemesterResultsBy(int studentId, int semesterId) {
+	public boolean getSemesterResultsByStudentAndSemesterId(int studentId, int semesterId) {
 		// TODO Auto-generated method stub
-		return this.semesterResultsDAO.getSemesterResultsBy(studentId, semesterId);
+		return this.semesterResultsDAO.getSemesterResultsByStudentAndSemesterId(studentId, semesterId);
 	}
 
 	@Override
-	public List<SemesterResults> getSemResEntityByStudent(int studentId) {
+	public List<SemesterResults> getSemesterResultsEntityByStudentId(int studentId) {
 		// TODO Auto-generated method stub
-		return this.semesterResultsDAO.getSemResEntityByStudent(studentId);
+		return this.semesterResultsDAO.getSemesterResultsEntityByStudentId(studentId);
 	}
 }

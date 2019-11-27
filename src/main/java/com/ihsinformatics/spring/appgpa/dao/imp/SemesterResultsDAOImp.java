@@ -21,7 +21,7 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 	}
 
 	@Override
-	public List<SemesterResults> getAll() {
+	public List<SemesterResults> getAllSemesterResults() {
 		// TODO Auto-generated method stub
 		List<SemesterResults> semesterResultss = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
@@ -35,7 +35,7 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 	}
 
 	@Override
-	public SemesterResults getSingle(int id) {
+	public SemesterResults getSemesterResultsById(int id) {
 		// TODO Auto-generated method stub
 		SemesterResults semesterResults = new SemesterResults();
 		Session session = sessionFactory.getCurrentSession();
@@ -51,7 +51,7 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean deleteSemesterResultsById(int id) {
 		// TODO Auto-generated method stub
 		boolean deleted = false;
 		Session session = sessionFactory.getCurrentSession();
@@ -142,7 +142,7 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<SemesterResultsPOJO> getAllReadableResults() {
+	public List<SemesterResultsPOJO> getAllReadableSemesterResults() {
 
 		List<SemesterResultsPOJO> semResults = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
@@ -158,7 +158,7 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<SemesterResultsPOJO> getStudentSemResults(int studentId) {
+	public List<SemesterResultsPOJO> getSemesterResultsByStudentId(int studentId) {
 
 		List<SemesterResultsPOJO> semResults = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
@@ -173,7 +173,7 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 	}
 
 	@Override
-	public boolean getSemesterResultsBy(int studentId, int semesterId) {
+	public boolean getSemesterResultsByStudentAndSemesterId(int studentId, int semesterId) {
 		// TODO Auto-generated method stub
 
 		SemesterResults semesterResults = new SemesterResults();
@@ -196,7 +196,7 @@ public class SemesterResultsDAOImp implements SemesterResultsDAO {
 	}
 
 	@Override
-	public List<SemesterResults> getSemResEntityByStudent(int studentId) {
+	public List<SemesterResults> getSemesterResultsEntityByStudentId(int studentId) {
 		List<SemesterResults> semesterResults = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
 		try {

@@ -23,15 +23,15 @@ public class CourseServiceImp implements CourseService {
 	}
 
 	@Override
-	public List<Course> getAll() {
+	public List<Course> getAllCourses() {
 		// TODO Auto-generated method stub
-		return this.courseDAO.getAll();
+		return this.courseDAO.getAllCourses();
 	}
 
 	@Override
-	public Course getSingle(int id) {
+	public Course getCourseById(int id) {
 		// TODO Auto-generated method stub
-		return this.courseDAO.getSingle(id);
+		return this.courseDAO.getCourseById(id);
 	}
 
 	@Override
@@ -47,14 +47,14 @@ public class CourseServiceImp implements CourseService {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean deleteCourseById(int id) {
 		// TODO Auto-generated method stub
-		return this.courseDAO.delete(id);
+		return this.courseDAO.deleteCourseById(id);
 	}
 
 	@Override
-	public List<Course> getCoursesBySemester(int semesterId) {
+	public List<Course> getCoursesBySemesterId(int semesterId) {
 		// TODO Auto-generated method stub
-		return this.courseDAO.getCoursesBySemester(semesterId);
+		return this.courseDAO.getCoursesBySemesterId(semesterId);
 	}
 }

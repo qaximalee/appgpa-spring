@@ -23,15 +23,15 @@ public class LookupServiceImp implements LookupService {
 	}
 
 	@Override
-	public List<Lookup> getAll() {
+	public List<Lookup> getAllLookup() {
 		// TODO Auto-generated method stub
-		return this.lookupDAO.getAll();
+		return this.lookupDAO.getAllLookup();
 	}
 
 	@Override
-	public Lookup getSingle(int id) {
+	public Lookup getLookupById(int id) {
 		// TODO Auto-generated method stub
-		return this.lookupDAO.getSingle(id);
+		return this.lookupDAO.getLookupById(id);
 	}
 
 	@Override
@@ -47,8 +47,8 @@ public class LookupServiceImp implements LookupService {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean deleteLookupById(int id) {
 		// TODO Auto-generated method stub
-		return this.lookupDAO.delete(id);
+		return this.lookupDAO.deleteLookupById(id);
 	}
 }

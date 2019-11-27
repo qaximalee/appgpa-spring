@@ -24,15 +24,15 @@ public class CourseResultsServiceImp implements CourseResultsService {
 	}
 
 	@Override
-	public List<CourseResults> getAll() {
+	public List<CourseResults> getAllCourseResults() {
 		// TODO Auto-generated method stub
-		return this.courseResultsDAO.getAll();
+		return this.courseResultsDAO.getAllCourseResults();
 	}
 
 	@Override
-	public CourseResults getSingle(int id) {
+	public CourseResults getCourseResultsById(int id) {
 		// TODO Auto-generated method stub
-		return this.courseResultsDAO.getSingle(id);
+		return this.courseResultsDAO.getCourseResultsById(id);
 	}
 
 	@Override
@@ -48,21 +48,21 @@ public class CourseResultsServiceImp implements CourseResultsService {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean deleteCourseResultsById(int id) {
 		// TODO Auto-generated method stub
-		return this.courseResultsDAO.delete(id);
+		return this.courseResultsDAO.deleteCourseResultsById(id);
 	}
 
 	@Override
-	public List<CourseResults> getAllCourseResultsBySemester(int semesterId, int studentId) {
+	public List<CourseResults> getCourseResultsByStudentAndSemesterId(int semesterId, int studentId) {
 		// TODO Auto-generated method stub
-		return this.courseResultsDAO.getAllCourseResultsBySemester(semesterId, studentId);
+		return this.courseResultsDAO.getCourseResultsByStudentAndSemesterId(semesterId, studentId);
 	}
 
 	@Override
-	public List<CourseResultsPOJO> getAllReadableResults() {
+	public List<CourseResultsPOJO> getAllReadableCourseResults() {
 		// TODO Auto-generated method stub
-		return this.courseResultsDAO.getAllReadableResults();
+		return this.courseResultsDAO.getAllReadableCourseResults();
 	}
 
 }

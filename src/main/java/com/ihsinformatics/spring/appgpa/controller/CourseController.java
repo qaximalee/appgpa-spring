@@ -14,6 +14,7 @@ import com.ihsinformatics.spring.appgpa.model.Semester;
 import com.ihsinformatics.spring.appgpa.service.CourseService;
 import com.ihsinformatics.spring.appgpa.service.SemesterService;
 import com.ihsinformatics.spring.appgpa.service.imp.CourseServiceImp;
+import com.ihsinformatics.spring.appgpa.values.Values;
 
 @Controller
 @RequestMapping("/course")
@@ -24,15 +25,6 @@ public class CourseController {
 
 	@Autowired
 	private SemesterService semesterService;
-
-	private static final String CREATED_SUCCESS = "from-create";
-	private static final String CREATED_UNSUCCESS = "from-create-error";
-	private static final String UPDATED_SUCCESS = "from-edit";
-	private static final String UPDATED_UNSUCCESS = "from-edit-error";
-	private static final String DELETED_SUCCESS = "from-delete";
-	private static final String DELETED_UNSUCCESS = "from-delete-error";
-
-	private static final String COURSE_VIEW_URL = "/course_views/view_courses";
 
 	public void setCourseService(CourseServiceImp courseService) {
 		this.courseService = courseService;
@@ -49,9 +41,9 @@ public class CourseController {
 		Course course = new Course(0, courseCode, name, semester);
 
 		if (courseService.save(course))
-			return viewCourses(null, CREATED_SUCCESS);
+			return viewCourses(null, Values.CREATED_SUCCESS);
 		else
-			return viewCourses(null, CREATED_UNSUCCESS);
+			return viewCourses(null, Values.CREATED_UNSUCCESS);
 	}
 
 	@RequestMapping(value = "/editCourse", method = RequestMethod.POST)
@@ -61,15 +53,15 @@ public class CourseController {
 		Course course = new Course(courseId, courseCode, name, semester);
 
 		if (courseService.update(course))
-			return viewCourses(null, UPDATED_SUCCESS);
+			return viewCourses(null, Values.UPDATED_SUCCESS);
 		else
-			return viewCourses(null, UPDATED_UNSUCCESS);
+			return viewCourses(null, Values.UPDATED_UNSUCCESS);
 	}
 
 	@RequestMapping(value = "/editCourseForm", method = RequestMethod.GET)
 	public ModelAndView editCourseForm(@RequestParam("id") int courseId) {
 		ModelAndView mav = new ModelAndView("course_views/edit_course_form");
-		mav.addObject("course", courseService.getSingle(courseId));
+		mav.addObject("course", courseService.getCourseById(courseId));
 		mav.addObject("semesters", semesterService.getAllSemester());
 		return mav;
 	}
@@ -77,10 +69,10 @@ public class CourseController {
 	@RequestMapping(value = "/deleteCourse", method = RequestMethod.GET)
 	public ModelAndView deleteCourse(@RequestParam("id") int courseId) {
 
-		if (courseService.delete(courseId))
-			return viewCourses(null, DELETED_SUCCESS);
+		if (courseService.deleteCourseById(courseId))
+			return viewCourses(null, Values.DELETED_SUCCESS);
 		else
-			return viewCourses(null, DELETED_UNSUCCESS);
+			return viewCourses(null, Values.DELETED_UNSUCCESS);
 	}
 
 	@RequestMapping(value = { "/", "/viewCourses" })
@@ -90,8 +82,8 @@ public class CourseController {
 				alertMessageIdentifier = "just-view";
 				System.out.println(alertMessageIdentifier);
 			}
-			ModelAndView mav = new ModelAndView(COURSE_VIEW_URL);
-			mav.addObject("courseList", courseService.getAll());
+			ModelAndView mav = new ModelAndView(Values.COURSE_VIEW_URL);
+			mav.addObject("courseList", courseService.getAllCourses());
 			mav.addObject("alertMessageIdentitfier", alertMessageIdentifier);
 			return mav;
 		} else {

@@ -21,7 +21,7 @@ public class LookupDAOImp implements LookupDAO {
 	}
 
 	@Override
-	public List<Lookup> getAll() {
+	public List<Lookup> getAllLookup() {
 		// TODO Auto-generated method stub
 		List<Lookup> lookups = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
@@ -35,7 +35,7 @@ public class LookupDAOImp implements LookupDAO {
 	}
 
 	@Override
-	public Lookup getSingle(int id) {
+	public Lookup getLookupById(int id) {
 		// TODO Auto-generated method stub
 		Lookup lookup = new Lookup();
 		Session session = sessionFactory.getCurrentSession();
@@ -81,7 +81,7 @@ public class LookupDAOImp implements LookupDAO {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean deleteLookupById(int id) {
 		// TODO Auto-generated method stub
 		boolean deleted = false;
 		Session session = sessionFactory.getCurrentSession();

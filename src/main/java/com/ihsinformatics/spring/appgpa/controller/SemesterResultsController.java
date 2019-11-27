@@ -19,6 +19,7 @@ import com.ihsinformatics.spring.appgpa.service.CourseResultsService;
 import com.ihsinformatics.spring.appgpa.service.SemesterResultsService;
 import com.ihsinformatics.spring.appgpa.service.SemesterService;
 import com.ihsinformatics.spring.appgpa.service.StudentService;
+import com.ihsinformatics.spring.appgpa.values.Values;
 
 @Controller
 @RequestMapping("/semester-results")
@@ -35,15 +36,6 @@ public class SemesterResultsController {
 
 	@Autowired
 	private CourseResultsService courseResultsService;
-
-	private static final String CREATED_SUCCESS = "from-create";
-	private static final String CREATED_UNSUCCESS = "from-create-error";
-	private static final String UPDATED_SUCCESS = "from-edit";
-	private static final String UPDATED_UNSUCCESS = "from-edit-error";
-	private static final String DELETED_SUCCESS = "from-delete";
-	private static final String DELETED_UNSUCCESS = "from-delete-error";
-
-	private static final String SEMESTER_RESULTS_VIEW_URL = "/semester_results_views/view_semester_results";
 
 	public void setSemesterResultsService(SemesterResultsService semesterResultsService) {
 		this.semesterResultsService = semesterResultsService;
@@ -67,8 +59,8 @@ public class SemesterResultsController {
 		Student student = studentService.getStudentById(studentId);
 		Semester semester = semesterService.getSemesterById(semesterId);
 
-		List<CourseResults> listOfCourseResults = courseResultsService.getAllCourseResultsBySemester(semesterId,
-				studentId);
+		List<CourseResults> listOfCourseResults = courseResultsService
+				.getCourseResultsByStudentAndSemesterId(semesterId, studentId);
 
 		// Semester GPA can be get by below formula
 		// gpa = totalPoints / gradableCredit
@@ -86,19 +78,20 @@ public class SemesterResultsController {
 
 		SemesterResults semesterResults = new SemesterResults(0, semester, student, semesterGPA, semesterGPA);
 
-		boolean isSemesterResultPresent = semesterResultsService.getSemesterResultsBy(studentId, semesterId);
+		boolean isSemesterResultPresent = semesterResultsService.getSemesterResultsByStudentAndSemesterId(studentId,
+				semesterId);
 
 		if (isSemesterResultPresent) {
 			return new ModelAndView("semester_results_views/view_std_semester_results")
-					.addObject("semesterResults", semesterResultsService.getStudentSemResults(studentId))
+					.addObject("semesterResults", semesterResultsService.getSemesterResultsByStudentId(studentId))
 					.addObject("alertMessageIdentifier", "retrieve");
 		} else if (semesterResultsService.save(semesterResults)) {
 			return new ModelAndView("semester_results_views/view_std_semester_results")
-					.addObject("alertMessageIdentifier", CREATED_SUCCESS)
-					.addObject("semesterResults", semesterResultsService.getStudentSemResults(studentId));
+					.addObject("alertMessageIdentifier", Values.CREATED_SUCCESS)
+					.addObject("semesterResults", semesterResultsService.getSemesterResultsByStudentId(studentId));
 		} else {
 			return new ModelAndView("semester_results_views/view_std_semester_results")
-					.addObject("alertMessageIdentifier", CREATED_UNSUCCESS);
+					.addObject("alertMessageIdentifier", Values.CREATED_UNSUCCESS);
 		}
 	}
 
@@ -109,8 +102,8 @@ public class SemesterResultsController {
 				alertMessageIdentifier = "just-view";
 				System.out.println(alertMessageIdentifier);
 			}
-			ModelAndView mav = new ModelAndView(SEMESTER_RESULTS_VIEW_URL);
-			mav.addObject("semesterResults", semesterResultsService.getAllReadableResults());
+			ModelAndView mav = new ModelAndView(Values.SEMESTER_RESULTS_VIEW_URL);
+			mav.addObject("semesterResults", semesterResultsService.getAllReadableSemesterResults());
 			return mav;
 		} else {
 			ModelAndView mav = new ModelAndView("/semester_results_views/add_semester_results_form");

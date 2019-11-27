@@ -7,21 +7,21 @@ import com.ihsinformatics.spring.appgpa.model.SemesterResultsPOJO;
 
 public interface SemesterResultsService {
 
-	List<SemesterResults> getAll();
+	List<SemesterResults> getAllSemesterResults();
 
-	SemesterResults getSingle(int id);
+	SemesterResults getSemesterResultsById(int id);
 
 	boolean save(SemesterResults semesterResults);
 
 	boolean update(SemesterResults semesterResults);
 
-	boolean delete(int id);
+	boolean deleteSemesterResultsById(int id);
 
-	List<SemesterResultsPOJO> getAllReadableResults();
+	List<SemesterResultsPOJO> getAllReadableSemesterResults();
 
-	List<SemesterResultsPOJO> getStudentSemResults(int studentId);
+	List<SemesterResultsPOJO> getSemesterResultsByStudentId(int studentId);
 
-	boolean getSemesterResultsBy(int studentId, int semesterId);
+	boolean getSemesterResultsByStudentAndSemesterId(int studentId, int semesterId);
 
-	List<SemesterResults> getSemResEntityByStudent(int studentId);
+	List<SemesterResults> getSemesterResultsEntityByStudentId(int studentId);
 }

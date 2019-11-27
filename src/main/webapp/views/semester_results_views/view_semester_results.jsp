@@ -15,12 +15,12 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- include the script -->
-<script src="../../js/alertify.min.js"></script>
+<script src="../resources/js/alertify.min.js"></script>
 <!-- include the style -->
-<link rel="stylesheet" href="../../js/css/alertify.min.css" />
+<link rel="stylesheet" href="../resources/css/alertify.min.css" />
 <!-- include a theme -->
-<link rel="stylesheet" href="../../js/css/themes/default.min.css" />
-<link rel="stylesheet" href="../../js/css/bootstrap_search.css"/>
+<link rel="stylesheet" href="../resources/css/themes/default.min.css" />
+<link rel="stylesheet" href="../resources/css/bootstrap_search.css"/>
 </head>
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>

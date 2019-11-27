@@ -21,7 +21,7 @@ public class CourseDAOImp implements CourseDAO {
 	}
 
 	@Override
-	public List<Course> getAll() {
+	public List<Course> getAllCourses() {
 		// TODO Auto-generated method stub
 		List<Course> courses = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
@@ -35,7 +35,7 @@ public class CourseDAOImp implements CourseDAO {
 	}
 
 	@Override
-	public Course getSingle(int id) {
+	public Course getCourseById(int id) {
 		// TODO Auto-generated method stub
 		Course course = new Course();
 		Session session = sessionFactory.getCurrentSession();
@@ -82,7 +82,7 @@ public class CourseDAOImp implements CourseDAO {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean deleteCourseById(int id) {
 		// TODO Auto-generated method stub
 		boolean deleted = false;
 		Session session = sessionFactory.getCurrentSession();
@@ -100,7 +100,7 @@ public class CourseDAOImp implements CourseDAO {
 	}
 
 	@Override
-	public List<Course> getCoursesBySemester(int semesterId) {
+	public List<Course> getCoursesBySemesterId(int semesterId) {
 		List<Course> courses = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
 		try {

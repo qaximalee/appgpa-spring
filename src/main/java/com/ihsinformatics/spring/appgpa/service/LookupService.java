@@ -6,13 +6,13 @@ import com.ihsinformatics.spring.appgpa.model.Lookup;
 
 public interface LookupService {
 
-	public List<Lookup> getAll();
+	public List<Lookup> getAllLookup();
 
-	public Lookup getSingle(int id);
+	public Lookup getLookupById(int id);
 
 	public boolean save(Lookup lookup);
 
 	public boolean update(Lookup lookup);
 
-	public boolean delete(int id);
+	public boolean deleteLookupById(int id);
 }

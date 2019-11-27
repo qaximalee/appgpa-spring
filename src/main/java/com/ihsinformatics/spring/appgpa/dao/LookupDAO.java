@@ -6,13 +6,13 @@ import com.ihsinformatics.spring.appgpa.model.Lookup;
 
 public interface LookupDAO {
 
-	List<Lookup> getAll();
+	List<Lookup> getAllLookup();
 
-	Lookup getSingle(int id);
+	Lookup getLookupById(int id);
 
 	boolean save(Lookup lookup);
 
 	boolean update(Lookup lookup);
 
-	boolean delete(int id);
+	boolean deleteLookupById(int id);
 }

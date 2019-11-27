@@ -23,7 +23,8 @@
 		<beans:property name="prefix" value="/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	<mvc:resources mapping="/go/**" location="/go/"/>
+	
+	<mvc:resources mapping="/resources/**" location="/resources/"/>
 	
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">

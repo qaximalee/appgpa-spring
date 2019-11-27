@@ -22,7 +22,7 @@ public class CourseResultsDAOImp implements CourseResultsDAO {
 	}
 
 	@Override
-	public List<CourseResults> getAll() {
+	public List<CourseResults> getAllCourseResults() {
 		// TODO Auto-generated method stub
 		List<CourseResults> courseResultss = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
@@ -36,7 +36,7 @@ public class CourseResultsDAOImp implements CourseResultsDAO {
 	}
 
 	@Override
-	public CourseResults getSingle(int id) {
+	public CourseResults getCourseResultsById(int id) {
 		// TODO Auto-generated method stub
 		CourseResults courseResults = new CourseResults();
 		Session session = sessionFactory.getCurrentSession();
@@ -52,7 +52,7 @@ public class CourseResultsDAOImp implements CourseResultsDAO {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean deleteCourseResultsById(int id) {
 		// TODO Auto-generated method stub
 		boolean deleted = false;
 		Session session = sessionFactory.getCurrentSession();
@@ -100,7 +100,7 @@ public class CourseResultsDAOImp implements CourseResultsDAO {
 	}
 
 	@Override
-	public List<CourseResults> getAllCourseResultsBySemester(int semesterId, int studentId) {
+	public List<CourseResults> getCourseResultsByStudentAndSemesterId(int semesterId, int studentId) {
 		List<CourseResults> courseResults = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
 		try {
@@ -118,7 +118,7 @@ public class CourseResultsDAOImp implements CourseResultsDAO {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<CourseResultsPOJO> getAllReadableResults() {
+	public List<CourseResultsPOJO> getAllReadableCourseResults() {
 		List<CourseResultsPOJO> courseResults = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
 		try {

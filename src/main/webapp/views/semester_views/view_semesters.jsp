@@ -7,11 +7,13 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <!-- include the script -->
-<script src="../../js/alertify.min.js"></script>
+<script src="../resources/js/alertify.min.js"></script>
 <!-- include the style -->
-<link rel="stylesheet" href="../../js/css/alertify.min.css" />
+<link rel="stylesheet" href="../resources/css/alertify.min.css" />
 <!-- include a theme -->
-<link rel="stylesheet" href="../../js/css/themes/default.min.css" />
+<link rel="stylesheet" href="../resources/css/themes/default.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>

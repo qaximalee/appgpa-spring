@@ -1,5 +1,7 @@
 package com.ihsinformatics.spring.appgpa.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ihsinformatics.spring.appgpa.model.Semester;
 import com.ihsinformatics.spring.appgpa.service.SemesterService;
 import com.ihsinformatics.spring.appgpa.service.imp.SemesterServiceImp;
+import com.ihsinformatics.spring.appgpa.values.Values;
 
 @Controller
 @RequestMapping("/semester")
@@ -17,15 +20,6 @@ public class SemesterController {
 
 	@Autowired
 	private SemesterService semesterService;
-
-	private static final String CREATED_SUCCESS = "from-create";
-	private static final String CREATED_UNSUCCESS = "from-create-error";
-	private static final String UPDATED_SUCCESS = "from-edit";
-	private static final String UPDATED_UNSUCCESS = "from-edit-error";
-	private static final String DELETED_SUCCESS = "from-delete";
-	private static final String DELETED_UNSUCCESS = "from-delete-error";
-
-	private static final String SEMESTER_VIEW_URL = "/semester_views/view_semesters";
 
 	public void setSemesterService(SemesterServiceImp semesterService) {
 		this.semesterService = semesterService;
@@ -36,9 +30,9 @@ public class SemesterController {
 		Semester semester = new Semester(0, semesterNo);
 
 		if (semesterService.save(semester))
-			return viewSemesters(CREATED_SUCCESS);
+			return viewSemesters(null, Values.CREATED_SUCCESS);
 		else
-			return viewSemesters(CREATED_UNSUCCESS);
+			return viewSemesters(null, Values.CREATED_UNSUCCESS);
 	}
 
 	@RequestMapping(value = "/editSemester", method = RequestMethod.POST)
@@ -47,9 +41,9 @@ public class SemesterController {
 		Semester semester = new Semester(semesterId, semesterNo);
 
 		if (semesterService.update(semester))
-			return viewSemesters(UPDATED_SUCCESS);
+			return viewSemesters(null, Values.UPDATED_SUCCESS);
 		else
-			return viewSemesters(UPDATED_UNSUCCESS);
+			return viewSemesters(null, Values.UPDATED_UNSUCCESS);
 	}
 
 	@RequestMapping(value = "/editSemesterForm", method = RequestMethod.GET)
@@ -63,22 +57,26 @@ public class SemesterController {
 	public ModelAndView deleteSemester(@RequestParam("id") int semesterId) {
 
 		if (semesterService.deleteSemesterById(semesterId))
-			return viewSemesters(DELETED_SUCCESS);
+			return viewSemesters(null, Values.DELETED_SUCCESS);
 		else
-			return viewSemesters(DELETED_UNSUCCESS);
+			return viewSemesters(null, Values.DELETED_UNSUCCESS);
 	}
 
-	@RequestMapping(value = "/viewSemesters", method = RequestMethod.GET)
-	public ModelAndView viewSemesters(String alertMessageIdentifier) {
+	@RequestMapping(value = { "/", "/viewSemesters" })
+	public ModelAndView viewSemesters(HttpServletRequest request, String alertMessageIdentifier) {
 		// TODO Auto-generated method stub
-		if (alertMessageIdentifier == null) {
-			alertMessageIdentifier = "just-view";
-			System.out.println(alertMessageIdentifier);
+		if (request == null || request.getRequestURL().toString().contains("viewSemesters")) {
+			if (alertMessageIdentifier == null) {
+				alertMessageIdentifier = "just-view";
+				System.out.println(alertMessageIdentifier);
+			}
+			ModelAndView mav = new ModelAndView(Values.SEMESTER_VIEW_URL);
+			mav.addObject("data", semesterService.getAllSemester());
+			mav.addObject("alertMessageIdentitfier", alertMessageIdentifier);
+			return mav;
+		} else {
+			return new ModelAndView("semester_views/add_semester_form");
 		}
-		ModelAndView mav = new ModelAndView(SEMESTER_VIEW_URL);
-		mav.addObject("data", semesterService.getAllSemester());
-		mav.addObject("alertMessageIdentitfier", alertMessageIdentifier);
-		return mav;
 	}
 
 }

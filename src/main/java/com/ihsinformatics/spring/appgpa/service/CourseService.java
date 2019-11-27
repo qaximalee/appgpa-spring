@@ -6,15 +6,15 @@ import com.ihsinformatics.spring.appgpa.model.Course;
 
 public interface CourseService {
 
-	List<Course> getAll();
+	List<Course> getAllCourses();
 
-	Course getSingle(int id);
+	Course getCourseById(int id);
 
 	boolean save(Course course);
 
 	boolean update(Course course);
 
-	boolean delete(int id);
+	boolean deleteCourseById(int id);
 
-	List<Course> getCoursesBySemester(int semesterId);
+	List<Course> getCoursesBySemesterId(int semesterId);
 }

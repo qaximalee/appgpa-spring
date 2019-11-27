@@ -12,11 +12,11 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <!-- include the script -->
-<script src="${alertifyJS}"></script>
+<script type="text/javascript" src="../../resources/js/alertify.js"></script>
 <!-- include the style -->
-<link rel="stylesheet" href="${alertifyMinCSS}" type=text/css />
+<link rel="stylesheet" href="../../resources/css/alertify.min.css" />
 <!-- include a theme -->
-<link rel="stylesheet" href="${defaultMinCSS}" />
+<link rel="stylesheet" href="../../resources/css/themes/default.min.css"/>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 

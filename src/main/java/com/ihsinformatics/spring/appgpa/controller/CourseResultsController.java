@@ -25,6 +25,7 @@ import com.ihsinformatics.spring.appgpa.service.LookupService;
 import com.ihsinformatics.spring.appgpa.service.SemesterService;
 import com.ihsinformatics.spring.appgpa.service.StudentService;
 import com.ihsinformatics.spring.appgpa.service.imp.CourseResultsServiceImp;
+import com.ihsinformatics.spring.appgpa.values.Values;
 
 @Controller
 @RequestMapping("/course-results")
@@ -44,15 +45,6 @@ public class CourseResultsController {
 
 	@Autowired
 	private LookupService lookupService;
-
-	private static final String CREATED_SUCCESS = "from-create";
-	private static final String CREATED_UNSUCCESS = "from-create-error";
-	private static final String UPDATED_SUCCESS = "from-edit";
-	private static final String UPDATED_UNSUCCESS = "from-edit-error";
-	private static final String DELETED_SUCCESS = "from-delete";
-	private static final String DELETED_UNSUCCESS = "from-delete-error";
-
-	private static final String COURSE_RESULTS_VIEW_URL = "/course_results_views/view_courses_results";
 
 	public void setCourseResultsService(CourseResultsServiceImp courseResultsService) {
 		this.courseResultsService = courseResultsService;
@@ -78,13 +70,13 @@ public class CourseResultsController {
 	public ModelAndView addCourseResults(@RequestParam("studentId") int studentId,
 			@RequestParam("semesterId") int semesterId, @RequestParam("courseId") int courseId,
 			@RequestParam("percentage") double percentage) {
-		Course course = courseService.getSingle(courseId);
+		Course course = courseService.getCourseById(courseId);
 		Student student = studentService.getStudentById(studentId);
 
 		StringBuilder grade = new StringBuilder();
 		double gpa = 0.0;
 
-		List<Lookup> listOfLookup = lookupService.getAll();
+		List<Lookup> listOfLookup = lookupService.getAllLookup();
 		for (Lookup lookup : listOfLookup) {
 			if (percentage >= lookup.getStartParcentage() && percentage <= lookup.getEndPercentage()) {
 				gpa = lookup.getGpa();
@@ -98,14 +90,14 @@ public class CourseResultsController {
 				totalPoints);
 		grade.replace(0, grade.length(), "");
 		if (courseResultsService.save(courseResults))
-			return courseResultsView(null, CREATED_SUCCESS);
+			return courseResultsView(null, Values.CREATED_SUCCESS);
 		else
-			return courseResultsView(null, CREATED_UNSUCCESS);
+			return courseResultsView(null, Values.CREATED_UNSUCCESS);
 	}
 
 	@RequestMapping(value = "/getCoursesBySemester", method = RequestMethod.GET)
 	public void getCoursesBySemester(HttpServletResponse response, @RequestParam("semesterID") int semesterId) {
-		List<Course> courses = courseService.getCoursesBySemester(semesterId);
+		List<Course> courses = courseService.getCoursesBySemesterId(semesterId);
 		JSONArray courseJson = new JSONArray(courses);
 		try {
 			response.getWriter().print(courseJson.toString());
@@ -129,10 +121,10 @@ public class CourseResultsController {
 
 	@RequestMapping(value = "/deleteCourseResult", method = RequestMethod.GET)
 	public ModelAndView deleteCourseResult(@RequestParam("id") int courseResultsId) {
-		if (courseResultsService.delete(courseResultsId))
-			return courseResultsView(null, DELETED_SUCCESS);
+		if (courseResultsService.deleteCourseResultsById(courseResultsId))
+			return courseResultsView(null, Values.DELETED_SUCCESS);
 		else
-			return courseResultsView(null, DELETED_UNSUCCESS);
+			return courseResultsView(null, Values.DELETED_UNSUCCESS);
 	}
 
 	@RequestMapping(value = { "/", "/viewCourseResults" })
@@ -142,14 +134,14 @@ public class CourseResultsController {
 				alertMessageIdentifier = "just-view";
 				System.out.println(alertMessageIdentifier);
 			}
-			ModelAndView mav = new ModelAndView(COURSE_RESULTS_VIEW_URL);
-			mav.addObject("courseResultsList", courseResultsService.getAllReadableResults());
+			ModelAndView mav = new ModelAndView(Values.COURSE_RESULTS_VIEW_URL);
+			mav.addObject("courseResultsList", courseResultsService.getAllReadableCourseResults());
 			mav.addObject("alertMessageIdentitfier", alertMessageIdentifier);
 			return mav;
 		} else {
 			ModelAndView mav = new ModelAndView("course_results_views/add_course_results_form");
 			mav.addObject("semesterList", semesterService.getAllSemester());
-			mav.addObject("courseList", courseService.getAll());
+			mav.addObject("courseList", courseService.getAllCourses());
 			mav.addObject("studentList", studentService.getAllStudents());
 			return mav;
 		}

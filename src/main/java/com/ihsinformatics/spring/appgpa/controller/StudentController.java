@@ -1,5 +1,7 @@
 package com.ihsinformatics.spring.appgpa.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ihsinformatics.spring.appgpa.model.Student;
 import com.ihsinformatics.spring.appgpa.service.StudentService;
 import com.ihsinformatics.spring.appgpa.service.imp.StudentServiceImp;
+import com.ihsinformatics.spring.appgpa.values.Values;
 
 @Controller
 @RequestMapping("/student")
@@ -17,15 +20,6 @@ public class StudentController {
 
 	@Autowired
 	private StudentService studentService;
-
-	private static final String CREATED_SUCCESS = "from-create";
-	private static final String CREATED_UNSUCCESS = "from-create-error";
-	private static final String UPDATED_SUCCESS = "from-edit";
-	private static final String UPDATED_UNSUCCESS = "from-edit-error";
-	private static final String DELETED_SUCCESS = "from-delete";
-	private static final String DELETED_UNSUCCESS = "from-delete-error";
-
-	private static final String STUDENT_VIEW_URL = "/student_views/view_students";
 
 	public void setStudentService(StudentServiceImp studentService) {
 		this.studentService = studentService;
@@ -37,9 +31,9 @@ public class StudentController {
 
 		Student student = new Student(0, registrationNo, firstName, lastName);
 		if (studentService.save(student))
-			return viewStudent(CREATED_SUCCESS);
+			return viewStudent(null, Values.CREATED_SUCCESS);
 		else
-			return viewStudent(CREATED_UNSUCCESS);
+			return viewStudent(null, Values.CREATED_UNSUCCESS);
 	}
 
 	@RequestMapping(value = "/editStudent", method = RequestMethod.POST)
@@ -49,9 +43,9 @@ public class StudentController {
 		Student student = new Student(studentId, registrationNo, firstName, lastName);
 
 		if (studentService.update(student))
-			return viewStudent(UPDATED_SUCCESS);
+			return viewStudent(null, Values.UPDATED_SUCCESS);
 		else
-			return viewStudent(UPDATED_UNSUCCESS);
+			return viewStudent(null, Values.UPDATED_UNSUCCESS);
 	}
 
 	@RequestMapping(value = "/editStudentForm", method = RequestMethod.GET)
@@ -65,21 +59,25 @@ public class StudentController {
 	public ModelAndView deleteStudent(@RequestParam("id") int studentId) {
 
 		if (studentService.deleteStudentById(studentId))
-			return viewStudent(DELETED_SUCCESS);
+			return viewStudent(null, Values.DELETED_SUCCESS);
 		else
-			return viewStudent(DELETED_UNSUCCESS);
+			return viewStudent(null, Values.DELETED_UNSUCCESS);
 	}
 
-	@RequestMapping(value = "/viewStudents", method = RequestMethod.GET)
-	public ModelAndView viewStudent(String alertMessageIdentifier) {
-		if (alertMessageIdentifier == null) {
-			alertMessageIdentifier = "just-view";
-			System.out.println(alertMessageIdentifier);
+	@RequestMapping(value = { "/", "/viewStudents" })
+	public ModelAndView viewStudent(HttpServletRequest request, String alertMessageIdentifier) {
+		if (request == null || request.getRequestURL().toString().contains("viewStudents")) {
+			if (alertMessageIdentifier == null) {
+				alertMessageIdentifier = "just-view";
+				System.out.println(alertMessageIdentifier);
+			}
+			ModelAndView mav = new ModelAndView(Values.STUDENT_VIEW_URL);
+			mav.addObject("data", studentService.getAllStudents());
+			mav.addObject("alertMessageIdentitfier", alertMessageIdentifier);
+			return mav;
+		} else {
+			return new ModelAndView("student_views/add_student_form");
 		}
-		ModelAndView mav = new ModelAndView(STUDENT_VIEW_URL);
-		mav.addObject("data", studentService.getAllStudents());
-		mav.addObject("alertMessageIdentitfier", alertMessageIdentifier);
-		return mav;
 	}
 
 }
