@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ihsinformatics.spring.appgpa.model.Course;
 
-public interface CourseDAO {
+public interface CourseDao {
 
 	List<Course> getAllCourses();
 

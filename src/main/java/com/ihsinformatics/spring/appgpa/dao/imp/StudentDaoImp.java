@@ -9,11 +9,11 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ihsinformatics.spring.appgpa.dao.StudentDAO;
+import com.ihsinformatics.spring.appgpa.dao.StudentDao;
 import com.ihsinformatics.spring.appgpa.model.Student;
 
 @Repository
-public class StudentDAOImp implements StudentDAO {
+public class StudentDaoImp implements StudentDao {
 
 	private SessionFactory sessionFactory;
 

@@ -8,10 +8,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ihsinformatics.spring.appgpa.dao.SemesterDAO;
-import com.ihsinformatics.spring.appgpa.model.Semester;
+import com.ihsinformatics.spring.appgpa.dao.CourseDao;
+import com.ihsinformatics.spring.appgpa.model.Course;
 
-public class SemesterDAOImp implements SemesterDAO {
+public class CourseDaoImp implements CourseDao {
 
 	private SessionFactory sessionFactory;
 
@@ -21,43 +21,44 @@ public class SemesterDAOImp implements SemesterDAO {
 	}
 
 	@Override
-	public List<Semester> getAllSemesters() {
+	public List<Course> getAllCourses() {
 		// TODO Auto-generated method stub
-		List<Semester> semesters = new ArrayList<>();
+		List<Course> courses = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			semesters = session.createQuery("from Semester", Semester.class).list();
+			courses = session.createQuery("from Course", Course.class).list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return semesters;
+		return courses;
 	}
 
 	@Override
-	public Semester getSemesterById(int id) {
+	public Course getCourseById(int id) {
 		// TODO Auto-generated method stub
-		Semester semester = new Semester();
+		Course course = new Course();
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			String hql = "FROM Semester Sem WHERE Sem.semesterId = :semester_id";
-			Query<Semester> query = session.createQuery(hql, Semester.class);
-			query.setParameter("semester_id", id);
-			semester = query.getSingleResult();// query.list();
+			String hql = "FROM Course Crs WHERE Crs.courseId = :course_id";
+			Query<Course> query = session.createQuery(hql, Course.class);
+			query.setParameter("course_id", id);
+			course = query.getSingleResult();// query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return semester;
+		return course;
 	}
 
 	@Override
-	public boolean save(Semester semester) {
+	public boolean save(Course course) {
 		// TODO Auto-generated method stub
 		boolean saved = false;
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			// save the semester objects
-			session.save(semester);
+			// save the course objects
+			session.save(course);
+
 			saved = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,12 +68,12 @@ public class SemesterDAOImp implements SemesterDAO {
 	}
 
 	@Override
-	public boolean update(Semester semester) {
+	public boolean update(Course course) {
 		// TODO Auto-generated method stub
 		boolean updated = false;
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			session.update(semester);
+			session.update(course);
 			updated = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,21 +82,34 @@ public class SemesterDAOImp implements SemesterDAO {
 	}
 
 	@Override
-	public boolean deleteSemesterById(int id) {
+	public boolean deleteCourseById(int id) {
 		// TODO Auto-generated method stub
 		boolean deleted = false;
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			String hql = "DELETE FROM Semester Sem " + "WHERE Sem.semesterId = :semester_id";
+			String hql = "DELETE FROM Course Crs " + "WHERE Crs.courseId = :course_id";
 			Query query = session.createQuery(hql);
-			query.setParameter("semester_id", id);
+			query.setParameter("course_id", id);
 			int result = query.executeUpdate();
 			if (result == 1)
 				deleted = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return deleted;
+	}
+
+	@Override
+	public List<Course> getCoursesBySemesterId(int semesterId) {
+		List<Course> courses = new ArrayList<>();
+		Session session = sessionFactory.getCurrentSession();
+		try {
+			courses = session.createQuery("from Course Cr WHERE Cr.semester.semesterId = :semesterID", Course.class)
+					.setParameter("semesterID", semesterId).list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return courses;
 	}
 }

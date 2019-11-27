@@ -65,51 +65,51 @@
 	<!--                                  BEANS INITIALIZATION START                                         -->
 	
 	<!-- Bean For STUDENT -->
-	<beans:bean id="studentDAO" class="com.ihsinformatics.spring.appgpa.dao.imp.StudentDAOImp" >
+	<beans:bean id="studentDao" class="com.ihsinformatics.spring.appgpa.dao.imp.StudentDaoImp" >
 		<beans:property name="sessionFactory" ref="sessionFactory" />
 	</beans:bean>
 	<beans:bean id="studentService" class="com.ihsinformatics.spring.appgpa.service.imp.StudentServiceImp" >
-		<beans:property name="studentDAO" ref="studentDAO"></beans:property>
+		<beans:property name="studentDao" ref="studentDao"></beans:property>
 	</beans:bean>
 	
 	<!-- Bean For Course -->
-	<beans:bean id="courseDAO" class="com.ihsinformatics.spring.appgpa.dao.imp.CourseDAOImp" >
+	<beans:bean id="courseDao" class="com.ihsinformatics.spring.appgpa.dao.imp.CourseDaoImp" >
 		<beans:property name="sessionFactory" ref="sessionFactory" />
 	</beans:bean>
 	<beans:bean id="courseService" class="com.ihsinformatics.spring.appgpa.service.imp.CourseServiceImp" >
-		<beans:property name="courseDAO" ref="courseDAO"></beans:property>
+		<beans:property name="courseDao" ref="courseDao"></beans:property>
 	</beans:bean>
 	
 	<!-- Bean For Semester -->
-	<beans:bean id="semesterDAO" class="com.ihsinformatics.spring.appgpa.dao.imp.SemesterDAOImp" >
+	<beans:bean id="semesterDao" class="com.ihsinformatics.spring.appgpa.dao.imp.SemesterDaoImp" >
 		<beans:property name="sessionFactory" ref="sessionFactory" />
 	</beans:bean>
 	<beans:bean id="semesterService" class="com.ihsinformatics.spring.appgpa.service.imp.SemesterServiceImp" >
-		<beans:property name="semesterDAO" ref="semesterDAO"></beans:property>
+		<beans:property name="semesterDao" ref="semesterDao"></beans:property>
 	</beans:bean>
 	
 	<!-- Bean For Course Results -->
-	<beans:bean id="courseResultsDAO" class="com.ihsinformatics.spring.appgpa.dao.imp.CourseResultsDAOImp" >
+	<beans:bean id="courseResultsDao" class="com.ihsinformatics.spring.appgpa.dao.imp.CourseResultsDaoImp" >
 		<beans:property name="sessionFactory" ref="sessionFactory" />
 	</beans:bean>
 	<beans:bean id="courseResultsService" class="com.ihsinformatics.spring.appgpa.service.imp.CourseResultsServiceImp" >
-		<beans:property name="courseResultsDAO" ref="courseResultsDAO"></beans:property>
+		<beans:property name="courseResultsDao" ref="courseResultsDao"></beans:property>
 	</beans:bean>
 	
 	<!-- Bean For Semester Results -->
-	<beans:bean id="semesterResultsDAO" class="com.ihsinformatics.spring.appgpa.dao.imp.SemesterResultsDAOImp" >
+	<beans:bean id="semesterResultsDao" class="com.ihsinformatics.spring.appgpa.dao.imp.SemesterResultsDaoImp" >
 		<beans:property name="sessionFactory" ref="sessionFactory" />
 	</beans:bean>
 	<beans:bean id="semesterResultsService" class="com.ihsinformatics.spring.appgpa.service.imp.SemesterResultsServiceImp" >
-		<beans:property name="semesterResultsDAO" ref="semesterResultsDAO"></beans:property>
+		<beans:property name="semesterResultsDao" ref="semesterResultsDao"></beans:property>
 	</beans:bean>
 	
 	<!-- Bean For Lookup -->
-	<beans:bean id="lookupDAO" class="com.ihsinformatics.spring.appgpa.dao.imp.LookupDAOImp" >
+	<beans:bean id="lookupDao" class="com.ihsinformatics.spring.appgpa.dao.imp.LookupDaoImp" >
 		<beans:property name="sessionFactory" ref="sessionFactory" />
 	</beans:bean>
 	<beans:bean id="lookupService" class="com.ihsinformatics.spring.appgpa.service.imp.LookupServiceImp" >
-		<beans:property name="lookupDAO" ref="lookupDAO"></beans:property>
+		<beans:property name="lookupDao" ref="lookupDao"></beans:property>
 	</beans:bean>
 	
 	<!--                                  BEANS INITIALIZATION ENDED                                         -->

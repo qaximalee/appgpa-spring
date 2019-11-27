@@ -8,10 +8,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ihsinformatics.spring.appgpa.dao.LookupDAO;
-import com.ihsinformatics.spring.appgpa.model.Lookup;
+import com.ihsinformatics.spring.appgpa.dao.SemesterDao;
+import com.ihsinformatics.spring.appgpa.model.Semester;
 
-public class LookupDAOImp implements LookupDAO {
+public class SemesterDaoImp implements SemesterDao {
 
 	private SessionFactory sessionFactory;
 
@@ -21,43 +21,43 @@ public class LookupDAOImp implements LookupDAO {
 	}
 
 	@Override
-	public List<Lookup> getAllLookup() {
+	public List<Semester> getAllSemesters() {
 		// TODO Auto-generated method stub
-		List<Lookup> lookups = new ArrayList<>();
+		List<Semester> semesters = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			lookups = session.createQuery("from Lookup", Lookup.class).list();
+			semesters = session.createQuery("from Semester", Semester.class).list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return lookups;
+		return semesters;
 	}
 
 	@Override
-	public Lookup getLookupById(int id) {
+	public Semester getSemesterById(int id) {
 		// TODO Auto-generated method stub
-		Lookup lookup = new Lookup();
+		Semester semester = new Semester();
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			String hql = "FROM Lookup Lkup WHERE Lkup.lookupId = :lookup_id";
-			Query<Lookup> query = session.createQuery(hql);
-			query.setParameter("lookup_id", id);
-			lookup = query.getSingleResult();// query.list();
+			String hql = "FROM Semester Sem WHERE Sem.semesterId = :semester_id";
+			Query<Semester> query = session.createQuery(hql, Semester.class);
+			query.setParameter("semester_id", id);
+			semester = query.getSingleResult();// query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return lookup;
+		return semester;
 	}
 
 	@Override
-	public boolean save(Lookup lookup) {
+	public boolean save(Semester semester) {
 		// TODO Auto-generated method stub
 		boolean saved = false;
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			// save the lookup objects
-			session.save(lookup);
+			// save the semester objects
+			session.save(semester);
 			saved = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,12 +67,12 @@ public class LookupDAOImp implements LookupDAO {
 	}
 
 	@Override
-	public boolean update(Lookup lookup) {
+	public boolean update(Semester semester) {
 		// TODO Auto-generated method stub
 		boolean updated = false;
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			session.update(lookup);
+			session.update(semester);
 			updated = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,14 +81,14 @@ public class LookupDAOImp implements LookupDAO {
 	}
 
 	@Override
-	public boolean deleteLookupById(int id) {
+	public boolean deleteSemesterById(int id) {
 		// TODO Auto-generated method stub
 		boolean deleted = false;
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			String hql = "DELETE FROM Lookup Lkup " + "WHERE Lkup.lookupId = :lookup_id";
+			String hql = "DELETE FROM Semester Sem " + "WHERE Sem.semesterId = :semester_id";
 			Query query = session.createQuery(hql);
-			query.setParameter("lookup_id", id);
+			query.setParameter("semester_id", id);
 			int result = query.executeUpdate();
 			if (result == 1)
 				deleted = true;
@@ -98,5 +98,4 @@ public class LookupDAOImp implements LookupDAO {
 
 		return deleted;
 	}
-
 }

@@ -8,11 +8,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ihsinformatics.spring.appgpa.dao.CourseResultsDAO;
+import com.ihsinformatics.spring.appgpa.dao.CourseResultsDao;
 import com.ihsinformatics.spring.appgpa.model.CourseResults;
 import com.ihsinformatics.spring.appgpa.model.CourseResultsPOJO;
 
-public class CourseResultsDAOImp implements CourseResultsDAO {
+public class CourseResultsDaoImp implements CourseResultsDao {
 
 	private SessionFactory sessionFactory;
 

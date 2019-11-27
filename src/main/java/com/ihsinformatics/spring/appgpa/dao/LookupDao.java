@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ihsinformatics.spring.appgpa.model.Lookup;
 
-public interface LookupDAO {
+public interface LookupDao {
 
 	List<Lookup> getAllLookup();
 

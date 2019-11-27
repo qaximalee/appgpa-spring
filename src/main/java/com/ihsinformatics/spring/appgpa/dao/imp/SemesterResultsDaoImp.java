@@ -7,12 +7,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
-import com.ihsinformatics.spring.appgpa.dao.SemesterResultsDAO;
+import com.ihsinformatics.spring.appgpa.dao.SemesterResultsDao;
 import com.ihsinformatics.spring.appgpa.model.CourseResults;
 import com.ihsinformatics.spring.appgpa.model.SemesterResults;
 import com.ihsinformatics.spring.appgpa.model.SemesterResultsPOJO;
 
-public class SemesterResultsDAOImp implements SemesterResultsDAO {
+public class SemesterResultsDaoImp implements SemesterResultsDao {
 
 	private SessionFactory sessionFactory;
 

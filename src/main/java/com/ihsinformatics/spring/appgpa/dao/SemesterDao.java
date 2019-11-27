@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ihsinformatics.spring.appgpa.model.Semester;
 
-public interface SemesterDAO {
+public interface SemesterDao {
 
 	List<Semester> getAllSemesters();
 

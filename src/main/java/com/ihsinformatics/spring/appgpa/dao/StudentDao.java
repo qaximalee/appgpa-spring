@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ihsinformatics.spring.appgpa.model.Student;
 
-public interface StudentDAO {
+public interface StudentDao {
 
 	List<Student> getAllStudents();
 
