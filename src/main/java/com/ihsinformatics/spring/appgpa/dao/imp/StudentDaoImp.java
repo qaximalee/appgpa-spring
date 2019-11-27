@@ -3,6 +3,10 @@ package com.ihsinformatics.spring.appgpa.dao.imp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -28,7 +32,12 @@ public class StudentDaoImp implements StudentDao {
 		List<Student> students = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			students = session.createQuery("from Student", Student.class).list();
+			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaQuery<Student> criteriaQuery = criteriaBuilder.createQuery(Student.class);
+			Root<Student> root = criteriaQuery.from(Student.class);
+			criteriaQuery.select(root);
+
+			students = session.createQuery(criteriaQuery).list();// "from Student", Student.class).list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
