@@ -2,8 +2,6 @@ package com.ihsinformatics.spring.appgpa.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -95,21 +93,22 @@ public class SemesterResultsController {
 		}
 	}
 
-	@RequestMapping(value = { "/", "/viewSemesterResults" }, method = RequestMethod.GET)
-	public ModelAndView viewSemesterResults(HttpServletRequest request, String alertMessageIdentifier) {
-		if (request == null || request.getRequestURL().toString().contains("viewSemesterResults")) {
-			if (alertMessageIdentifier == null) {
-				alertMessageIdentifier = "just-view";
-				System.out.println(alertMessageIdentifier);
-			}
-			ModelAndView mav = new ModelAndView(Values.SEMESTER_RESULTS_VIEW_URL);
-			mav.addObject("semesterResults", semesterResultsService.getAllReadableSemesterResults());
-			return mav;
-		} else {
-			ModelAndView mav = new ModelAndView("/semester_results_views/add_semester_results_form");
-			mav.addObject("semesterList", semesterService.getAllSemester());
-			mav.addObject("studentList", studentService.getAllStudents());
-			return mav;
+	@RequestMapping(value = "/viewSemesterResults", method = RequestMethod.GET)
+	public ModelAndView viewSemesterResults(String alertMessageIdentifier) {
+		if (alertMessageIdentifier == null) {
+			alertMessageIdentifier = "just-view";
+			System.out.println(alertMessageIdentifier);
 		}
+		ModelAndView mav = new ModelAndView(Values.SEMESTER_RESULTS_VIEW_URL);
+		mav.addObject("semesterResults", semesterResultsService.getAllReadableSemesterResults());
+		return mav;
+	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView initialView() {
+		ModelAndView mav = new ModelAndView("/semester_results_views/add_semester_results_form");
+		mav.addObject("semesterList", semesterService.getAllSemester());
+		mav.addObject("studentList", studentService.getAllStudents());
+		return mav;
 	}
 }

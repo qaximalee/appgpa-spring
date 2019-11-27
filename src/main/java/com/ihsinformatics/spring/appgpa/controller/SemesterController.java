@@ -1,7 +1,5 @@
 package com.ihsinformatics.spring.appgpa.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,9 +28,9 @@ public class SemesterController {
 		Semester semester = new Semester(0, semesterNo);
 
 		if (semesterService.save(semester))
-			return viewSemesters(null, Values.CREATED_SUCCESS);
+			return viewSemesters(Values.CREATED_SUCCESS);
 		else
-			return viewSemesters(null, Values.CREATED_UNSUCCESS);
+			return viewSemesters(Values.CREATED_UNSUCCESS);
 	}
 
 	@RequestMapping(value = "/editSemester", method = RequestMethod.POST)
@@ -41,9 +39,9 @@ public class SemesterController {
 		Semester semester = new Semester(semesterId, semesterNo);
 
 		if (semesterService.update(semester))
-			return viewSemesters(null, Values.UPDATED_SUCCESS);
+			return viewSemesters(Values.UPDATED_SUCCESS);
 		else
-			return viewSemesters(null, Values.UPDATED_UNSUCCESS);
+			return viewSemesters(Values.UPDATED_UNSUCCESS);
 	}
 
 	@RequestMapping(value = "/editSemesterForm", method = RequestMethod.GET)
@@ -57,26 +55,28 @@ public class SemesterController {
 	public ModelAndView deleteSemester(@RequestParam("id") int semesterId) {
 
 		if (semesterService.deleteSemesterById(semesterId))
-			return viewSemesters(null, Values.DELETED_SUCCESS);
+			return viewSemesters(Values.DELETED_SUCCESS);
 		else
-			return viewSemesters(null, Values.DELETED_UNSUCCESS);
+			return viewSemesters(Values.DELETED_UNSUCCESS);
 	}
 
-	@RequestMapping(value = { "/", "/viewSemesters" })
-	public ModelAndView viewSemesters(HttpServletRequest request, String alertMessageIdentifier) {
+	@RequestMapping(value = "/viewSemesters")
+	public ModelAndView viewSemesters(String alertMessageIdentifier) {
 		// TODO Auto-generated method stub
-		if (request == null || request.getRequestURL().toString().contains("viewSemesters")) {
-			if (alertMessageIdentifier == null) {
-				alertMessageIdentifier = "just-view";
-				System.out.println(alertMessageIdentifier);
-			}
-			ModelAndView mav = new ModelAndView(Values.SEMESTER_VIEW_URL);
-			mav.addObject("data", semesterService.getAllSemester());
-			mav.addObject("alertMessageIdentitfier", alertMessageIdentifier);
-			return mav;
-		} else {
-			return new ModelAndView("semester_views/add_semester_form");
+		if (alertMessageIdentifier == null) {
+			alertMessageIdentifier = "just-view";
+			System.out.println(alertMessageIdentifier);
 		}
+		ModelAndView mav = new ModelAndView(Values.SEMESTER_VIEW_URL);
+		mav.addObject("data", semesterService.getAllSemester());
+		mav.addObject("alertMessageIdentitfier", alertMessageIdentifier);
+		return mav;
+
+	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView initialView() {
+		return new ModelAndView("semester_views/add_semester_form");
 	}
 
 }

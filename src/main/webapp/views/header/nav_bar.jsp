@@ -8,15 +8,15 @@
 			<li class="active"><a href="index.jsp"> Home</a>
 			</li>
 			<li><a
-				href="${pageContext.request.contextPath}/student/">Students</a></li>
+				href="${pageContext.request.contextPath}/student">Students</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/semester/">Semesters</a></li>
+				href="${pageContext.request.contextPath}/semester">Semesters</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/course/">Courses</a></li>
+				href="${pageContext.request.contextPath}/course">Courses</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/course-results/">Courses Results</a></li>
+				href="${pageContext.request.contextPath}/course-results">Courses Results</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/semester-results/">Semesters
+				href="${pageContext.request.contextPath}/semester-results">Semesters
 					Results</a></li>
 			<li><a
 				href="${pageContext.request.contextPath}/result/">Generate
