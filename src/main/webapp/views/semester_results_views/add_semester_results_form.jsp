@@ -51,7 +51,7 @@
 		function getStudent(){
 			var std = document.getElementById("studentId");
 			var stdId = std.options[std.selectedIndex].value;
-			const url = "../course-results/getStudentByRegistration?studentID="+stdId;
+			const url = "course-results/getStudentByRegistration?studentID="+stdId;
 	
 			// Populate dropdown with list of provinces
 			$.getJSON(url, function (data) {
