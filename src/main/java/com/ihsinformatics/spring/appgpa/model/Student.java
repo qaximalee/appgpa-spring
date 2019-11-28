@@ -29,7 +29,6 @@ public class Student {
 	 * @OneToMany(mappedBy = "students") private List<SemesterResults>
 	 * semesterReults;
 	 */
-
 	public Student() {
 	}
 
