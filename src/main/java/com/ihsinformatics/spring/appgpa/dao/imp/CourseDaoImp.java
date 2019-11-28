@@ -3,21 +3,34 @@ package com.ihsinformatics.spring.appgpa.dao.imp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ihsinformatics.spring.appgpa.dao.CourseDao;
+import com.ihsinformatics.spring.appgpa.dao.SemesterDao;
 import com.ihsinformatics.spring.appgpa.model.Course;
+import com.ihsinformatics.spring.appgpa.model.Semester;
 
 public class CourseDaoImp implements CourseDao {
 
 	private SessionFactory sessionFactory;
+	private SemesterDao semesterDao;
 
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
+	}
+
+	@Autowired
+	public void setSemesterDao(SemesterDaoImp semesterDao) {
+		this.semesterDao = semesterDao;
 	}
 
 	@Override
@@ -26,7 +39,12 @@ public class CourseDaoImp implements CourseDao {
 		List<Course> courses = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			courses = session.createQuery("from Course", Course.class).list();
+			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaQuery<Course> criteriaQuery = criteriaBuilder.createQuery(Course.class);
+			Root<Course> root = criteriaQuery.from(Course.class);
+			criteriaQuery.select(root);
+
+			courses = session.createQuery(criteriaQuery).list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -40,10 +58,11 @@ public class CourseDaoImp implements CourseDao {
 		Course course = new Course();
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			String hql = "FROM Course Crs WHERE Crs.courseId = :course_id";
-			Query<Course> query = session.createQuery(hql, Course.class);
-			query.setParameter("course_id", id);
-			course = query.getSingleResult();// query.list();
+			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaQuery<Course> criteriaQuery = criteriaBuilder.createQuery(Course.class);
+			Root<Course> root = criteriaQuery.from(Course.class);
+			criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("courseId"), id));
+			course = session.createQuery(criteriaQuery).getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,8 +92,17 @@ public class CourseDaoImp implements CourseDao {
 		boolean updated = false;
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			session.update(course);
-			updated = true;
+			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaUpdate<Course> criteriaUpdate = criteriaBuilder.createCriteriaUpdate(Course.class);
+			Root<Course> root = criteriaUpdate.from(Course.class);
+			criteriaUpdate.set("courseId", course.getCourseId());
+			criteriaUpdate.set("courseCode", course.getCourseCode());
+			criteriaUpdate.set("name", course.getName());
+			criteriaUpdate.set("semester", course.getSemester());
+			criteriaUpdate.where(criteriaBuilder.equal(root.get("courseId"), course.getCourseId()));
+			int result = session.createQuery(criteriaUpdate).executeUpdate();
+			if (result > 0)
+				updated = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -87,10 +115,12 @@ public class CourseDaoImp implements CourseDao {
 		boolean deleted = false;
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			String hql = "DELETE FROM Course Crs " + "WHERE Crs.courseId = :course_id";
-			Query query = session.createQuery(hql);
-			query.setParameter("course_id", id);
-			int result = query.executeUpdate();
+			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaDelete<Course> criteriaDelete = criteriaBuilder.createCriteriaDelete(Course.class);
+			Root<Course> root = criteriaDelete.from(Course.class);
+			criteriaDelete.where(criteriaBuilder.equal(root.get("courseId"), id));
+
+			int result = session.createQuery(criteriaDelete).executeUpdate();
 			if (result == 1)
 				deleted = true;
 		} catch (Exception e) {
@@ -104,8 +134,14 @@ public class CourseDaoImp implements CourseDao {
 		List<Course> courses = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			courses = session.createQuery("from Course Cr WHERE Cr.semester.semesterId = :semesterID", Course.class)
-					.setParameter("semesterID", semesterId).list();
+			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaQuery<Course> criteriaQuery = criteriaBuilder.createQuery(Course.class);
+			Root<Course> root = criteriaQuery.from(Course.class);
+
+			Semester semester = semesterDao.getSemesterById(semesterId);
+
+			criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("semester"), semester));
+			courses = session.createQuery(criteriaQuery).list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

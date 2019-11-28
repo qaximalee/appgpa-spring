@@ -3,9 +3,14 @@ package com.ihsinformatics.spring.appgpa.dao.imp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ihsinformatics.spring.appgpa.dao.SemesterDao;
@@ -26,7 +31,11 @@ public class SemesterDaoImp implements SemesterDao {
 		List<Semester> semesters = new ArrayList<>();
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			semesters = session.createQuery("from Semester", Semester.class).list();
+			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaQuery<Semester> criteriaQuery = criteriaBuilder.createQuery(Semester.class);
+			Root<Semester> root = criteriaQuery.from(Semester.class);
+			criteriaQuery.select(root);
+			semesters = session.createQuery(criteriaQuery).list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -40,10 +49,11 @@ public class SemesterDaoImp implements SemesterDao {
 		Semester semester = new Semester();
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			String hql = "FROM Semester Sem WHERE Sem.semesterId = :semester_id";
-			Query<Semester> query = session.createQuery(hql, Semester.class);
-			query.setParameter("semester_id", id);
-			semester = query.getSingleResult();// query.list();
+			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaQuery<Semester> criteriaQuery = criteriaBuilder.createQuery(Semester.class);
+			Root<Semester> root = criteriaQuery.from(Semester.class);
+			criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("semesterId"), id));
+			semester = session.createQuery(criteriaQuery).getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -72,8 +82,15 @@ public class SemesterDaoImp implements SemesterDao {
 		boolean updated = false;
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			session.update(semester);
-			updated = true;
+			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaUpdate<Semester> criteriaUpdate = criteriaBuilder.createCriteriaUpdate(Semester.class);
+			Root<Semester> root = criteriaUpdate.from(Semester.class);
+			criteriaUpdate.set("semesterId", semester.getSemesterId());
+			criteriaUpdate.set("semesterNo", semester.getSemesterNo());
+			criteriaUpdate.where(criteriaBuilder.equal(root.get("semesterId"), semester.getSemesterId()));
+			int result = session.createQuery(criteriaUpdate).executeUpdate();
+			if (result > 0)
+				updated = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -86,10 +103,12 @@ public class SemesterDaoImp implements SemesterDao {
 		boolean deleted = false;
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			String hql = "DELETE FROM Semester Sem " + "WHERE Sem.semesterId = :semester_id";
-			Query query = session.createQuery(hql);
-			query.setParameter("semester_id", id);
-			int result = query.executeUpdate();
+			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaDelete<Semester> criteriaDelete = criteriaBuilder.createCriteriaDelete(Semester.class);
+			Root<Semester> root = criteriaDelete.from(Semester.class);
+			criteriaDelete.where(criteriaBuilder.equal(root.get("semesterId"), id));
+
+			int result = session.createQuery(criteriaDelete).executeUpdate();
 			if (result == 1)
 				deleted = true;
 		} catch (Exception e) {

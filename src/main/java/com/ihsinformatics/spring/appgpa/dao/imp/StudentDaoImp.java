@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -51,10 +52,12 @@ public class StudentDaoImp implements StudentDao {
 		Student student = new Student();
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			String hql = "FROM Student Std WHERE Std.studentId = :student_id";
-			Query<Student> query = session.createQuery(hql);
-			query.setParameter("student_id", id);
-			student = query.getSingleResult();// query.list();
+			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaQuery<Student> criteriaQuery = criteriaBuilder.createQuery(Student.class);
+			Root<Student> root = criteriaQuery.from(Student.class);
+			criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("studentId"), id));
+
+			student = session.createQuery(criteriaQuery).getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -67,6 +70,10 @@ public class StudentDaoImp implements StudentDao {
 		boolean saved = false;
 		Session session = sessionFactory.getCurrentSession();
 		try {
+			// CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			// CriteriaUpdate<Student> criteriaSave =
+			// criteriaBuilder.createCriteriaUpdate(Student.class);
+
 			// save the student objects
 			int a = (int) session.save(student);
 			if (a > 0)
@@ -87,8 +94,17 @@ public class StudentDaoImp implements StudentDao {
 		boolean updated = false;
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			session.update(student);
-			updated = true;
+			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaUpdate<Student> criteriaUpdate = criteriaBuilder.createCriteriaUpdate(Student.class);
+			Root<Student> root = criteriaUpdate.from(Student.class);
+			criteriaUpdate.set("studentId", student.getStudentId());
+			criteriaUpdate.set("firstName", student.getFirstName());
+			criteriaUpdate.set("lastName", student.getLastName());
+			criteriaUpdate.set("registrationNo", student.getRegistrationNo());
+			criteriaUpdate.where(criteriaBuilder.equal(root.get("studentId"), student.getStudentId()));
+			int result = session.createQuery(criteriaUpdate).executeUpdate();
+			if (result > 0)
+				updated = true;
 		} catch (Exception e) {
 			updated = false;
 			e.printStackTrace();
@@ -102,10 +118,12 @@ public class StudentDaoImp implements StudentDao {
 		boolean deleted = false;
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			String hql = "DELETE FROM Student Std " + "WHERE Std.studentId = :student_id";
-			Query query = session.createQuery(hql);
-			query.setParameter("student_id", id);
-			int result = query.executeUpdate();
+			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaDelete<Student> criteriaDelete = criteriaBuilder.createCriteriaDelete(Student.class);
+			Root<Student> root = criteriaDelete.from(Student.class);
+			criteriaDelete.where(criteriaBuilder.equal(root.get("studentId"), id));
+
+			int result = session.createQuery(criteriaDelete).executeUpdate();
 			if (result == 1)
 				deleted = true;
 		} catch (Exception e) {
