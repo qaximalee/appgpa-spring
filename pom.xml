@@ -5,7 +5,7 @@
 	<groupId>com.ihsinformatics.spring.appgpa</groupId>
 	<artifactId>appgpa-spring</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.1.0-SNAPSHOT</version>
 	<name>appgpa-spring Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
