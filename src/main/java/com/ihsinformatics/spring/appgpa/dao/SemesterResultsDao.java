@@ -5,7 +5,7 @@ import java.util.List;
 import com.ihsinformatics.spring.appgpa.model.SemesterResults;
 import com.ihsinformatics.spring.appgpa.model.SemesterResultsPOJO;
 
-public interface SemesterResultsDAO {
+public interface SemesterResultsDao {
 
 	List<SemesterResults> getAllSemesterResults();
 

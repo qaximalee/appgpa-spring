@@ -67,7 +67,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<br /> <a href="${pageContext.request.contextPath}/course-results/">Add New Course</a>
+		<br /> <a href="${pageContext.request.contextPath}/course-results/">Add New Course Result</a>
 	</div></div>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

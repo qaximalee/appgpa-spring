@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ihsinformatics.spring.appgpa.dao.SemesterDAO;
-import com.ihsinformatics.spring.appgpa.dao.imp.SemesterDAOImp;
+import com.ihsinformatics.spring.appgpa.dao.SemesterDao;
+import com.ihsinformatics.spring.appgpa.dao.imp.SemesterDaoImp;
 import com.ihsinformatics.spring.appgpa.model.Semester;
 import com.ihsinformatics.spring.appgpa.service.SemesterService;
 
@@ -15,40 +15,40 @@ import com.ihsinformatics.spring.appgpa.service.SemesterService;
 @Transactional
 public class SemesterServiceImp implements SemesterService {
 
-	private SemesterDAO semesterDAO;
+	private SemesterDao semesterDao;
 
 	@Autowired
-	public void setSemesterDAO(SemesterDAOImp semesterDAO) {
-		this.semesterDAO = semesterDAO;
+	public void setSemesterDao(SemesterDaoImp semesterDao) {
+		this.semesterDao = semesterDao;
 	}
 
 	@Override
 	public List<Semester> getAllSemester() {
 		// TODO Auto-generated method stub
-		return this.semesterDAO.getAllSemesters();
+		return this.semesterDao.getAllSemesters();
 	}
 
 	@Override
 	public Semester getSemesterById(int id) {
 		// TODO Auto-generated method stub
-		return this.semesterDAO.getSemesterById(id);
+		return this.semesterDao.getSemesterById(id);
 	}
 
 	@Override
 	public boolean save(Semester semester) {
 		// TODO Auto-generated method stub
-		return this.semesterDAO.save(semester);
+		return this.semesterDao.save(semester);
 	}
 
 	@Override
 	public boolean update(Semester semester) {
 		// TODO Auto-generated method stub
-		return this.semesterDAO.update(semester);
+		return this.semesterDao.update(semester);
 	}
 
 	@Override
 	public boolean deleteSemesterById(int id) {
 		// TODO Auto-generated method stub
-		return this.semesterDAO.deleteSemesterById(id);
+		return this.semesterDao.deleteSemesterById(id);
 	}
 }
