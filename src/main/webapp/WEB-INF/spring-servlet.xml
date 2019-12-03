@@ -112,6 +112,14 @@
 		<beans:property name="lookupDao" ref="lookupDao"></beans:property>
 	</beans:bean>
 	
+	<!-- Bean For StudentStatistics -->
+	<beans:bean id="studentStatisticsDao" class="com.ihsinformatics.spring.appgpa.dao.imp.StudentStatisticsDaoImp" >
+		<beans:property name="sessionFactory" ref="sessionFactory" />
+	</beans:bean>
+	<beans:bean id="studentStatisticsService" class="com.ihsinformatics.spring.appgpa.service.imp.StudentStatisticsServiceImp" >
+		<beans:property name="studentStatisticsDao" ref="studentStatisticsDao"></beans:property>
+	</beans:bean>
+	
 	<!--                                  BEANS INITIALIZATION ENDED                                         -->
 	
 	
