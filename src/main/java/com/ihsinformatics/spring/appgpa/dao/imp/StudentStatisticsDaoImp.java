@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -28,6 +29,8 @@ import com.ihsinformatics.spring.appgpa.model.SemesterResults;
 import com.ihsinformatics.spring.appgpa.model.Student;
 
 public class StudentStatisticsDaoImp implements StudentStatisticsDao {
+
+	Logger logger = Logger.getLogger(StudentStatisticsDaoImp.class.getName());
 
 	private SessionFactory sessionFactory;
 
@@ -101,14 +104,18 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 				Course course = (Course) obj[2];
 				double topPercentage = (double) obj[0];
 				CourseDto courseDto = new CourseDto(course, topPercentage, student);
-				System.out.println("CourseName: " + course.getName() + "Values: " + obj[0] + "\nValues of Students: "
-						+ student.getFirstName() + " " + student.getLastName());
+				// System.out.println("CourseName: " + course.getName() + "Values: " + obj[0] +
+				// "\nValues of Students: "+ student.getFirstName() + " " +
+				// student.getLastName());
 
 				courseData.add(courseDto);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			session.clear();
+			session.close();
 		}
 		return courseData;
 	}
@@ -137,13 +144,17 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 			for (Object[] coursesBySemester : coursesBySemesterList) {
 				Semester semester = (Semester) coursesBySemester[0];
 				long courses = (long) coursesBySemester[1];
-				System.out.println("CourseName: " + coursesBySemester[0] + "\t\t" + coursesBySemester[1]);
+				// System.out.println("CourseName: " + coursesBySemester[0] + "\t\t" +
+				// coursesBySemester[1]);
 
 				coursesBySemesterData.add(new CoursesBySemesterDto(semester, courses));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			session.clear();
+			session.close();
 		}
 		return coursesBySemesterData;
 	}
@@ -178,6 +189,9 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			session.clear();
+			session.close();
 		}
 
 		return studentCurrentSemester;
