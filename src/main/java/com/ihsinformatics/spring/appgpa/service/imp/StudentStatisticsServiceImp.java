@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.ihsinformatics.spring.appgpa.dao.StudentStatisticsDao;
 import com.ihsinformatics.spring.appgpa.dto.CourseDto;
 import com.ihsinformatics.spring.appgpa.dto.CoursesBySemesterDto;
-import com.ihsinformatics.spring.appgpa.dto.StudentDto;
 import com.ihsinformatics.spring.appgpa.dto.StudentSemesterDto;
+import com.ihsinformatics.spring.appgpa.model.TopCgpaPOJO;
 import com.ihsinformatics.spring.appgpa.service.StudentStatisticsService;
 
 public class StudentStatisticsServiceImp implements StudentStatisticsService {
@@ -22,7 +22,7 @@ public class StudentStatisticsServiceImp implements StudentStatisticsService {
 	}
 
 	@Override
-	public List<StudentDto> getTopCgpaHolders() {
+	public List<TopCgpaPOJO> getTopCgpaHolders() {
 		// TODO Auto-generated method stub
 		return this.studentStatisticsDao.getTopCgpaHolders();
 	}

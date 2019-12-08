@@ -50,6 +50,7 @@
 				<beans:value>com.ihsinformatics.spring.appgpa.model.SemesterResultsPOJO</beans:value>
 				<beans:value>com.ihsinformatics.spring.appgpa.model.Lookup</beans:value>
 				<beans:value>com.ihsinformatics.spring.appgpa.model.Result</beans:value>
+				<beans:value>com.ihsinformatics.spring.appgpa.model.TopCgpaPOJO</beans:value>
 				
 			</beans:list>
 		</beans:property>

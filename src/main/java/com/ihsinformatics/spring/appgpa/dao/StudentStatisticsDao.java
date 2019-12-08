@@ -5,12 +5,12 @@ import java.util.Map;
 
 import com.ihsinformatics.spring.appgpa.dto.CourseDto;
 import com.ihsinformatics.spring.appgpa.dto.CoursesBySemesterDto;
-import com.ihsinformatics.spring.appgpa.dto.StudentDto;
 import com.ihsinformatics.spring.appgpa.dto.StudentSemesterDto;
+import com.ihsinformatics.spring.appgpa.model.TopCgpaPOJO;
 
 public interface StudentStatisticsDao {
 
-	List<StudentDto> getTopCgpaHolders();
+	List<TopCgpaPOJO> getTopCgpaHolders();
 
 	Map<Integer, Integer> getTotalStudentsBySemester();
 

@@ -42,6 +42,11 @@ public class SemesterResultsDaoImp implements SemesterResultsDao {
 		this.semesterDao = semesterDao;
 	}
 
+	/**
+	 * This method will get all semester results in the database.
+	 * 
+	 * @return List<SemesterResults>
+	 */
 	@Override
 	public List<SemesterResults> getAllSemesterResults() {
 		// TODO Auto-generated method stub
@@ -61,6 +66,13 @@ public class SemesterResultsDaoImp implements SemesterResultsDao {
 		return semesterResultss;
 	}
 
+	/**
+	 * This method will get Semester Results by semester results id.
+	 * 
+	 * @param int
+	 *            id
+	 * @return SemesterResults
+	 */
 	@Override
 	public SemesterResults getSemesterResultsById(int id) {
 		// TODO Auto-generated method stub
@@ -79,6 +91,13 @@ public class SemesterResultsDaoImp implements SemesterResultsDao {
 		return semesterResults;
 	}
 
+	/**
+	 * This method will delete Semester Results.
+	 * 
+	 * @param int
+	 *            id
+	 * @return boolean
+	 */
 	@Override
 	public boolean deleteSemesterResultsById(int id) {
 		// TODO Auto-generated method stub
@@ -101,6 +120,13 @@ public class SemesterResultsDaoImp implements SemesterResultsDao {
 		return deleted;
 	}
 
+	/**
+	 * This method will update the Semester Results
+	 * 
+	 * @param SemesterResults
+	 *            semesterResults
+	 * @return boolean
+	 */
 	@Override
 	public boolean update(SemesterResults semesterResults) {
 		// TODO Auto-generated method stub
@@ -127,6 +153,13 @@ public class SemesterResultsDaoImp implements SemesterResultsDao {
 		return updated;
 	}
 
+	/**
+	 * This method will save the Semester Results.
+	 * 
+	 * @param SemesterResults
+	 *            data
+	 * @return boolean
+	 */
 	@Override
 	public boolean save(SemesterResults data) {
 		// TODO Auto-generated method stub
@@ -164,6 +197,14 @@ public class SemesterResultsDaoImp implements SemesterResultsDao {
 		return saved;
 	}
 
+	/**
+	 * This method will calculate the CGPA of a particular student. It is called
+	 * when the user generate semester result.
+	 * 
+	 * @param int
+	 *            studentId
+	 * @return double
+	 */
 	private double getCGPA(int studentId) {
 		Session session = sessionFactory.getCurrentSession();
 		try {
@@ -189,6 +230,12 @@ public class SemesterResultsDaoImp implements SemesterResultsDao {
 		return 0.0;
 	}
 
+	/**
+	 * This method gets all data of semester results in a readable form which is
+	 * showed in the view all semester results
+	 * 
+	 * @return List<SemesterResultsPOJO>
+	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<SemesterResultsPOJO> getAllReadableSemesterResults() {
@@ -205,6 +252,14 @@ public class SemesterResultsDaoImp implements SemesterResultsDao {
 		return semResults;
 	}
 
+	/**
+	 * This method will be called when a new semester result is added and the
+	 * student has any previous semester results.
+	 * 
+	 * @param int
+	 *            studentId
+	 * @return List<SemesterResultsPOJO>
+	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<SemesterResultsPOJO> getSemesterResultsByStudentId(int studentId) {
@@ -221,6 +276,14 @@ public class SemesterResultsDaoImp implements SemesterResultsDao {
 		return semResults;
 	}
 
+	/**
+	 * This method will be checking the semester result added by the student is the
+	 * same as previous semester's result.
+	 * 
+	 * @param int
+	 *            studentId, int semesterId
+	 * @return boolean
+	 */
 	@Override
 	public boolean getSemesterResultsByStudentAndSemesterId(int studentId, int semesterId) {
 		// TODO Auto-generated method stub
@@ -249,6 +312,14 @@ public class SemesterResultsDaoImp implements SemesterResultsDao {
 		return false;
 	}
 
+	/**
+	 * This method will get all semester results by student id and return in non
+	 * readable form means it will return in SemesterResults Entity.
+	 * 
+	 * @param int
+	 *            studentId
+	 * @return List<SemesterResults>
+	 */
 	@Override
 	public List<SemesterResults> getSemesterResultsEntityByStudentId(int studentId) {
 		List<SemesterResults> semesterResults = new ArrayList<>();

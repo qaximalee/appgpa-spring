@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ihsinformatics.spring.appgpa.dto.CourseDto;
 import com.ihsinformatics.spring.appgpa.dto.CoursesBySemesterDto;
 import com.ihsinformatics.spring.appgpa.dto.StudentSemesterDto;
+import com.ihsinformatics.spring.appgpa.model.TopCgpaPOJO;
 import com.ihsinformatics.spring.appgpa.service.StudentStatisticsService;
 
 @RestController
@@ -62,5 +63,19 @@ public class StudentStatisticsController {
 
 		JSONArray studentJson = new JSONArray(studentCurrentSemester);
 		return studentJson.toString();
+	}
+
+	@GetMapping("/getTopCgpaHolder")
+	public String getTopCgpaHolders() {
+		List<TopCgpaPOJO> topCgpaHolders = studentStatisticsService.getTopCgpaHolders();
+
+		JSONArray stdJson = new JSONArray();
+		for (TopCgpaPOJO topCgpa : topCgpaHolders) {
+			JSONObject obj = new JSONObject(topCgpa);
+			obj.put("cGpa", topCgpa.getcGpa());
+			stdJson.put(obj);
+		}
+		// JSONArray studentJson = new JSONArray(topCgpaHolders);
+		return stdJson.toString();
 	}
 }

@@ -73,14 +73,15 @@ public class CourseDaoImp implements CourseDao {
 	public boolean save(Course course) {
 		// TODO Auto-generated method stub
 		boolean saved = false;
-		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.openSession();
 		try {
 			// save the course objects
 			session.save(course);
-
 			saved = true;
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			session.close();
 		}
 
 		return saved;

@@ -40,7 +40,7 @@
 	<jsp:include page="views/header/nav_bar.jsp"></jsp:include>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xs-4">
+			<div class="col-xs-3">
 
 				<div class="list-group-item list-group-item-info" style="font-weight: 600; font-size: 16px; margin-bottom: 10px;">	    	
 			    	Top Marks By Courses
@@ -55,7 +55,7 @@
 					</div> -->
 				</div>
 			</div>
-			<div class="col-xs-4">
+			<div class="col-xs-3">
 				<div class="list-group list-group-item list-group-item-success" style="font-weight: 600; font-size: 16px;">
 			    	<span class="badge" style="font-size: 16px;">No of Courses</span>
 			    	Semester By Courses
@@ -67,10 +67,24 @@
 				  	</li> -->
 				</ul>
 			</div>
-			<div class="col-xs-4">
-				<div class="list-group-item list-group-item-warning" style="font-weight: 600; font-size: 16px; margin-bottom: 10px;">	    	Semester Completed By Students
+			<div class="col-xs-3">
+				<div class="list-group-item list-group-item-warning" style="font-weight: 600; font-size: 16px; margin-bottom: 10px;">	    	Students By Current Semester
 				  	</div>
 				<div class="crnt_smstr_list" id="curr_std_info">
+					
+					<!-- <div class="list-group" >
+						<a href="#" class="list-group-item ">
+						    <h4 class="list-group-item-heading">Qasim<span class="badge pull-right">43434</span></h4>
+						    <p class="list-group-item-text">Course Name: Lorem Ipsum</p>
+						    <p class="list-group-item-text">Couse Code: 03212</p>
+						</a>
+					</div> -->
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<div class="list-group-item list-group-item-warning" style="font-weight: 600; font-size: 16px; margin-bottom: 10px;">	    	Semester Completed By Students
+				  	</div>
+				<div class="crnt_smstr_list" id="top_cgpa_of_students">
 					
 					<!-- <div class="list-group" >
 						<a href="#" class="list-group-item ">
@@ -89,14 +103,13 @@
 <script type="text/javascript">
 	
 	$(document).ready(function(){
-		
-		 getCoursesBySemester()
+		var noOfSemesters = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th'];
+		 getStudentBySemester()
 		 .then(function (data) {
 		 	console.log('data',data);
 		 	 let studentInfoDiv = $('#curr_std_info');
 		 	for(var i = 0; i<data.length ;i++ ){
-		 		
-				 studentInfoDiv.append('<a href="#" class="list-group-item "><h4 class="list-group-item-heading">'+data[i].student.firstName+' '+data[i].student.lastName+'<span class="badge pull-right">'+data[i].currentSemester+'</span></h4><p class="list-group-item-text">Registration No: '+data[i].student.registrationNo+'</p></a>');
+				 studentInfoDiv.append('<a href="#" class="list-group-item "><h4 class="list-group-item-heading">'+data[i].student.firstName+' '+data[i].student.lastName+'<span class="badge pull-right">'+noOfSemesters[data[i].currentSemester]+'</span></h4><p class="list-group-item-text">Registration No: '+data[i].student.registrationNo+'</p></a>');
 
 		 	}
 					 })
@@ -108,9 +121,8 @@
 		 .then(function (data) {
 			console.log('data',data);
 			let coursesBySemester = $('#courses_by_smster');
-			let noOfSemesters = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th'];
 			for(var i = 0; i < data.length; i++){
-				coursesBySemester.append('<li class="list-group-item"><span class="badge">'+data[i].totalCourse+'</span>'+noOfSemesters[i]+' Semester</li>');
+				coursesBySemester.append('<li class="list-group-item"><span class="badge">'+data[i].totalCourse+' Course(s)</span>'+noOfSemesters[i]+' Semester</li>');
 			}	
 		 })
 		 .catch(function (e) {
@@ -122,16 +134,25 @@
 			//console.log('data',data);
 			let studentsWithHigherMarks = $('#students_with_higher_marks');
 			for(var i = 0; i < data.length; i++){
-				studentsWithHigherMarks.append('<div class="list-group"><a href="#" class="list-group-item "><h4 class="list-group-item-heading">'+data[i].students.firstName+' '+data[i].students.lastName+'<span class="badge pull-right">'+data[i].marks+'%</span></h4><p class="list-group-item-text">Course Name: '+data[i].course.name+'</p><p class="list-group-item-text">Couse Code: '+data[i].course.courseCode+'</p></a></div>');
+				studentsWithHigherMarks.append('<div class="list-group"><a href="#" class="list-group-item "><h4 class="list-group-item-heading">'+data[i].students.firstName+' '+data[i].students.lastName+'<span class="badge pull-right">'+data[i].marks+'%</span></h4><p class="list-group-item-text">Registration No: '+data[i].students.registrationNo+'</p><p class="list-group-item-text">Course Name: '+data[i].course.name+'</p><p class="list-group-item-text">Couse Code: '+data[i].course.courseCode+'</p></a></div>');
 			}
 		 })
 		 .catch((e) => {
 			 console.log("error",e);
 		 });
 		
+		 getTopCgpaHolder()
+		 .then((data) =>{
+			//console.log('data',data);
+			let studentsWithHigherMarks = $('#top_cgpa_of_students');
+			for(var i = 0; i < data.length; i++){
+				studentsWithHigherMarks.append('<div class="list-group"><a href="#" class="list-group-item "><h4 class="list-group-item-heading">'+data[i].student.firstName+' '+data[i].student.lastName+'<span class="badge pull-right">'+data[i].cGpa+'</span></h4><p class="list-group-item-text">Registration No: '+data[i].student.registrationNo+'</p><p class="list-group-item-text">Semester: '+data[i].semester.semesterNo+'</p><p class="list-group-item-text">Semester GPA: '+data[i].semesterGPA+'</p></a></div>');
+			} 
+		 })
+
 	});
 
-	function getCoursesBySemester(){
+	function getStudentBySemester(){
 		const url = "student-statistics/getStudentsCurrentSemester";
 
 		// Populate Students Info
@@ -156,5 +177,14 @@
 			$.getJSON(url,(data) => data ? resolve(data) : reject(data));
 		});
 	}
+
+	function getTopCgpaHolder(){
+		const url = "student-statistics/getTopCgpaHolder";
+
+		return new Promise((resolve, reject) => {
+			$.getJSON(url,(data) => data ? resolve(data) : reject(data));
+		});
+	}
+
 </script>
 </html>

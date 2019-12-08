@@ -12,6 +12,7 @@
 	<properties>
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<maven.compiler.source>1.7</maven.compiler.source>
+		<spring-security.version>3.2.5.RELEASE</spring-security.version>
 	</properties>
 
 	<!-- Add Spring Web and MVC dependencies -->
@@ -31,6 +32,16 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>4.3.9.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
 		</dependency>
 		<!-- Servlet -->
 		<dependency>
@@ -69,6 +80,15 @@
 			<version>1.2.2</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-jpamodelgen -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-jpamodelgen</artifactId>
+			<version>5.4.2.Final</version>
+			<scope>provided</scope>
+		</dependency>
+
+
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -84,7 +104,30 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<!-- <compilerArguments>
+						<processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+					</compilerArguments> -->
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generated-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>target/generated-sources/annotations</source>
+								<source>src/main/java/metamodel</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<finalName>appgpa-spring</finalName>

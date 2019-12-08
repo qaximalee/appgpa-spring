@@ -31,7 +31,7 @@
 					name="courseCode" required onchange="isValidCode(this.value)">
 			</div>
 			<div class="form-group">
-				<label for="name">Semester No:</label> <select name="semester"
+				<label for="name">Semester No:</label> <select class="form-control" name="semester"
 					required>
 					<c:forEach items="${semesterList}" var="sem">
 						<option value='<c:out value="${sem.getSemesterId()}"/>'><c:out

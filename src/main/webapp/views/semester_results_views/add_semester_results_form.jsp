@@ -25,7 +25,7 @@
 
 		<form action="${pageContext.request.contextPath}/semester-results/addSemesterResults" method="post">
 			<div class="form-group">
-				<label for="studentId">Student Id:</label> <select name="studentId" id="studentId" onchange="getStudent()"
+				<label for="studentId">Student Id:</label> <select class="form-control" style="width: 15%;" name="studentId" id="studentId" onchange="getStudent()"
 					required>
 					<c:forEach items="${studentList}" var="student">
 						<option value='<c:out value="${student.getStudentId()}"/>'><c:out
@@ -35,7 +35,7 @@
 			</div>
 			<h3 id="studName">Choose Student Registration NO...</h3>
 			<div class="form-group">
-				<label for="semesterId">Semester Id:</label> <select
+				<label for="semesterId">Semester Id:</label> <select class="form-control" style="width: 10%;"
 					name="semesterId" required>
 					<c:forEach items="${semesterList}" var="semester">
 						<option value='<c:out value="${semester.getSemesterId()}"/>'><c:out

@@ -30,6 +30,7 @@
 				<tr>
 					<th>Id</th>
 					<th>Semester No</th>
+					<th colspan="2">Actions</th>
 				</tr>
 			</thead>
 			<tbody>

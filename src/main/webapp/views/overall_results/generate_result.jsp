@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="../../js/css/alertify.min.css" />
 <!-- include a theme -->
 <link rel="stylesheet" href="../../js/css/themes/default.min.css" />
-
+	
 </head>
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
@@ -23,7 +23,7 @@
 	<div class="container">
 		<form onchange="generateResult()">
 			<div class="form-group">
-				<label for="studentId">Student Id:</label> <select name="studentId" id="studentId" onchange="getStudent()">
+				<label for="studentId">Student Id:</label> <select class="form-control" style="width: 15%;" name="studentId" id="studentId" onchange="getStudent()">
 					<c:forEach items="${studentList}" var="student">
 						<option value='<c:out value="${student.getStudentId()}"/>'><c:out
 								value="${student.getRegistrationNo()}" /></option>
