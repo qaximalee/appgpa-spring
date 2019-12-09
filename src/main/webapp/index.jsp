@@ -11,25 +11,25 @@
 <style>
 	body{ background-color: #f1f1f1; }
 	/* width */
-::-webkit-scrollbar {
-  width: 5px;
-  
-}
+	::-webkit-scrollbar {
+	  width: 5px;
+	  
+	}
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #777; 
-}
+	/* Track */
+	::-webkit-scrollbar-track {
+	  background: #f1f1f1; 
+	}
+	 
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+	  background: #777; 
+	}
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background:#555; 
-}
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+	  background:#555; 
+	}
 	.list-group-item { margin-bottom: 10px; margin-right: 5px;  }
 	.list-group{ margin-bottom: 10px; }
 	.crnt_smstr_list{ height: 320px; overflow-x: hidden; }
@@ -83,7 +83,7 @@
 			</div>
 			<div class="col-xs-3">
 				<div class="list-group-item list-group-item-warning" style="font-weight: 600; font-size: 16px; margin-bottom: 10px;">	    	Semester Completed By Students
-				  	</div>
+				</div>
 				<div class="crnt_smstr_list" id="top_cgpa_of_students">
 					
 					<!-- <div class="list-group" >

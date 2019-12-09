@@ -21,7 +21,6 @@ import com.ihsinformatics.spring.appgpa.dao.StudentStatisticsDao;
 import com.ihsinformatics.spring.appgpa.dto.CourseDto;
 import com.ihsinformatics.spring.appgpa.dto.CoursesBySemesterDto;
 import com.ihsinformatics.spring.appgpa.dto.StudentSemesterDto;
-import com.ihsinformatics.spring.appgpa.metamodel.CourseResults_;
 import com.ihsinformatics.spring.appgpa.model.Course;
 import com.ihsinformatics.spring.appgpa.model.CourseResults;
 import com.ihsinformatics.spring.appgpa.model.Semester;
@@ -50,43 +49,57 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 	@Override
 	public List<TopCgpaPOJO> getTopCgpaHolders() {
 		// TODO Auto-generated method stub
-
+		logger.info("getTopCgpaHolders is started");
 		Session session = sessionFactory.openSession();
 		List<TopCgpaPOJO> topCgpaList = new ArrayList<>();
 		try {
 
+			// topCgpaList = session.createSQLQuery("SELECT * FROM top_cgpa_holder").list();
+
 			topCgpaList = session.createSQLQuery("CALL getTopCgpa()").addEntity(TopCgpaPOJO.class).list();
 
-			for (TopCgpaPOJO topCgpa : topCgpaList) {
-				System.out.println("Semester Results ID: " + topCgpa.getSemesterResultId());
-				System.out.println("Student Name: " + topCgpa.getStudent().getFirstName() + " "
-						+ topCgpa.getStudent().getLastName());
-				System.out.println("Semester: " + topCgpa.getSemester().getSemesterNo());
-				System.out.println("Semester GPA : " + topCgpa.getSemesterGPA());
-				System.out.println("C- GPA : " + topCgpa.getcGpa());
-			}
+			/*
+			 * for (TopCgpaPOJO topCgpa : topCgpaList) {
+			 * System.out.println("Semester Results ID: " + topCgpa.getSemesterResultId());
+			 * System.out.println("Student Name: " + topCgpa.getStudent().getFirstName() +
+			 * " " + topCgpa.getStudent().getLastName()); System.out.println("Semester: " +
+			 * topCgpa.getSemester().getSemesterNo()); System.out.println("Semester GPA : "
+			 * + topCgpa.getSemesterGPA()); System.out.println("C- GPA : " +
+			 * topCgpa.getcGpa()); }
+			 */
 			// create the outer query
-			// CriteriaBuilder cb = session.getCriteriaBuilder();
-			// CriteriaQuery<SemesterResults> cq = cb.createQuery(SemesterResults.class);
-			// Root<SemesterResults> root = cq.from(SemesterResults.class);
-			//
-			// // count books written by an author
-			// Subquery<Long> sub = cq.subquery(Long.class);
-			// Root<Student> subRoot = sub.from(Student.class);
-			//
-			// Join<Student, SemesterResults> subAuthors =
-			// subRoot.join(Student_.STUDENT_ID);
-			// sub.select(cb.count(subRoot.get("studentId")));
-			// sub.where(cb.equal(root.get(SemesterResults_.semesterResultId),
-			// subAuthors.get(SemesterResults_.semesterResultId)));
-			//
-			// // check the result of the subquery
-			// cq.where(cb.greaterThanOrEqualTo(sub, 3L));
-			//
-			// TypedQuery<SemesterResults> query = session.createQuery(cq);
-			// List<SemesterResults> authors = query.getResultList();
-			//
-			// System.out.println(authors.get(0));
+			/*
+			 * CriteriaBuilder cb = session.getCriteriaBuilder(); CriteriaQuery<Object[]> cq
+			 * = cb.createQuery(Object[].class); Root<SemesterResults> root =
+			 * cq.from(SemesterResults.class); Root<Student> rootStudent =
+			 * cq.from(Student.class); Join<SemesterResults, Student> subAuthors =
+			 * root.join("student", JoinType.INNER); Predicate predicate1 =
+			 * cb.equal(root.get("student"), rootStudent.get("student"));
+			 */
+			/*
+			 * (Select max(semester_id) from semester_results WHERE student_id =
+			 * st.student_id)
+			 */
+
+			/*
+			 * Subquery<Long> sub = cq.subquery(Long.class); Root<Student> subRoot =
+			 * sub.from(Student.class); sub.select(cb.max(subRoot.get("semester")));
+			 * sub.where(cb.equal(subRoot.get("student"), subAuthors.get("student")));
+			 * 
+			 * Predicate predicate2 = root.get("semester").in(sub); Predicate finalPredicate
+			 * = cb.and(predicate1, predicate2); cq.multiselect(subAuthors);
+			 * cq.where(finalPredicate);
+			 * 
+			 * // check the result of the subquery // //
+			 * cq.where(cb.greaterThanOrEqualTo(sub,3L));
+			 * 
+			 * TypedQuery<Object[]> query = session.createQuery(cq); List<Object[]> results
+			 * = query.getResultList(); // for (Object[] obj : results) {
+			 * System.out.println("Name: " + obj[0].toString()); }
+			 */
+			// System.out.println("Name: " + results.get(0) + " " +
+			// results.get(0).getStudent().getLastName() + "\nGPA: "
+			// + results.get(0).getSemesterGPA() + "\nCGPA: " + results.get(0).getcGPA());
 
 			// ******************************************************************
 
@@ -123,6 +136,7 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 			session.clear();
 			session.close();
 		}
+		logger.info("getTopCgpaHolders is ended");
 		return topCgpaList;
 	}
 
@@ -134,6 +148,7 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 	@Override
 	public Map<Integer, Integer> getTotalStudentsBySemester() {
 		// TODO Auto-generated method stub
+		logger.info("getTotalStudentsBySemester is started");
 		Session session = sessionFactory.openSession();
 		Map<Integer, Integer> studentBySemester = new HashMap<>();
 		try {
@@ -153,6 +168,7 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 			studentBySemester.put(0, 0);
 			e.printStackTrace();
 		}
+		logger.info("getTotalStudentsBySemester is ended");
 		return studentBySemester;
 	}
 
@@ -166,13 +182,14 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 	@Override
 	public List<CourseDto> getTopCoursesByHigherMarks() {
 		// TODO Auto-generated method stub
+		logger.info("getTopCoursesByHigherMarks is started");
 		Session session = sessionFactory.openSession();
 		List<CourseDto> courseData = new ArrayList<>();
 		try {
 			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 			CriteriaQuery<Object[]> criteriaQuery = criteriaBuilder.createQuery(Object[].class);
 			Root<CourseResults> root = criteriaQuery.from(CourseResults.class);
-			Join<CourseResults, Student> p = root.join(CourseResults_.STUDENT, JoinType.INNER);
+			Join<CourseResults, Student> p = root.join("student", JoinType.INNER);
 
 			criteriaQuery.multiselect(criteriaBuilder.max(root.get("percentage")).alias("percent"), p,
 					root.get("course"));
@@ -198,7 +215,7 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 			session.clear();
 			session.close();
 		}
-
+		logger.info("getTopCoursesByHigherMarks is ended");
 		return courseData;
 	}
 
@@ -210,7 +227,7 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 	@Override
 	public List<CoursesBySemesterDto> getTotalCoursesBySemester() {
 		// TODO Auto-generated method stub
-
+		logger.info("getTotalCoursesBySemester is started");
 		Session session = sessionFactory.openSession();
 		List<CoursesBySemesterDto> coursesBySemesterData = new ArrayList<>();
 		try {
@@ -238,6 +255,7 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 			session.clear();
 			session.close();
 		}
+		logger.info("getTotalCoursesBySemester is ended");
 		return coursesBySemesterData;
 	}
 
@@ -249,7 +267,7 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 	@Override
 	public List<StudentSemesterDto> getStudentsBySemesterCompletion() {
 		// TODO Auto-generated method stub
-
+		logger.info("getStudentsBySemesterCompletion is started");
 		Session session = sessionFactory.openSession();
 		List<StudentSemesterDto> studentCurrentSemester = new ArrayList<>();
 		try {
@@ -275,7 +293,7 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 			session.clear();
 			session.close();
 		}
-
+		logger.info("getStudentsBySemesterCompletion is ended");
 		return studentCurrentSemester;
 	}
 
