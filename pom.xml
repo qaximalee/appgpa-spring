@@ -5,7 +5,7 @@
 	<groupId>com.ihsinformatics.spring.appgpa</groupId>
 	<artifactId>appgpa-spring</artifactId>
 	<packaging>war</packaging>
-	<version>1.1.0-SNAPSHOT</version>
+	<version>2.0.0-SNAPSHOT</version>
 	<name>appgpa-spring Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
@@ -95,6 +95,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.13</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -104,9 +110,8 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
-					<!-- <compilerArguments>
-						<processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
-					</compilerArguments> -->
+					<!-- <compilerArguments> <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor> 
+						</compilerArguments> -->
 				</configuration>
 			</plugin>
 			<plugin>
