@@ -6,11 +6,12 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +26,7 @@ public class SemesterRestController {
 	@Autowired
 	private SemesterService semesterService;
 
-	@GetMapping("/")
+	@GetMapping("/list")
 	public List<Semester> getAllSemester() {
 		List<Semester> semesters = this.semesterService.getAllSemester();
 		return semesters;
@@ -57,7 +58,7 @@ public class SemesterRestController {
 		}
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@PutMapping(value = "/update")
 	public ResponseEntity<Object> editSemester(@RequestParam("semesterId") int semesterId,
 			@RequestParam("semesterNo") int semesterNo) {
 		JSONObject jsonValidation = new JSONObject();
@@ -78,7 +79,7 @@ public class SemesterRestController {
 		}
 	}
 
-	@PostMapping("/delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Object> deleteSemester(@PathVariable("id") int semesterId) {
 		Semester semester = this.semesterService.getSemesterById(semesterId);
 

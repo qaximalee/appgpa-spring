@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="top_high_course_marks" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a17237d-9861-4716-ad6e-0c254f2f3d8b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[select s.first_name AS First_Name, s.last_name AS Last_Name, s.registration_no AS Registration_No,
+ c.name AS Course_Name, c.code AS Course_Code, max(percentage) as Percentage
+from course_results as cr inner join student as s on cr.student_id = s.student_id
+inner join course as c on c.course_id = cr.course_id
+group by cr.course_id order by Percentage desc]]>
+	</queryString>
+	<field name="First_Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="First_Name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="student"/>
+	</field>
+	<field name="Last_Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Last_Name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="student"/>
+	</field>
+	<field name="Registration_No" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Registration_No"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="student"/>
+	</field>
+	<field name="Course_Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Course_Name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="course"/>
+	</field>
+	<field name="Course_Code" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="Course_Code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="course"/>
+	</field>
+	<field name="Percentage" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="Percentage"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="42" y="20" width="470" height="41" uuid="d210250f-805a-4dac-820e-7f4fd3d37853"/>
+				<textElement textAlignment="Center">
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Top Marks In A Course By Students]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="95" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="68a64313-ad0f-4d63-8dc7-615b828a4833">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5ce91ba4-d0b1-485f-8dda-33156d24fcf3"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[First Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="0" width="92" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="475f5d92-ce50-4a97-accc-d8b2e9534495">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="066740c7-5ad4-4fec-93e3-5bf871ff6cd6"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Last Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="0" width="92" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="a424471b-0b42-4df7-8a58-e6772021ddee">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="467d53b6-dfab-4580-9723-bbbae87cdeae"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Registration No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="0" width="92" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="cd6a0637-eb96-40a1-abd5-e8ac3df5b440">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6f4856bb-957e-4755-b04f-fe44c672e59f"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Course Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="0" width="92" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="db4bd491-6b24-4474-bd91-bda5be7c6131">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="955010bc-27d0-4360-a10a-120e1e879e6d"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Course Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="463" y="0" width="92" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="f125cc23-0a55-42f3-8693-1e38d11b161b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="906ebfe1-a246-4e44-ad40-fdc429b573ca"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Percentage]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="95" height="30" uuid="5298cae3-e402-4814-a4af-723776340203">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5ce91ba4-d0b1-485f-8dda-33156d24fcf3"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{First_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="0" width="92" height="30" uuid="3d263021-2f3d-4ce4-9f14-26a72f648e68">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="066740c7-5ad4-4fec-93e3-5bf871ff6cd6"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Last_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="187" y="0" width="92" height="30" uuid="ae483fec-95d3-4cb9-8970-b30ec110cd13">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="467d53b6-dfab-4580-9723-bbbae87cdeae"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Registration_No}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="0" width="92" height="30" uuid="7842edd1-fd4e-49ad-ad70-2c18668e1013">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6f4856bb-957e-4755-b04f-fe44c672e59f"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Course_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="0" width="92" height="30" uuid="1fa9fe53-6dec-41b1-a1b9-453608a9a57a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="955010bc-27d0-4360-a10a-120e1e879e6d"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Course_Code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="463" y="0" width="92" height="30" uuid="b6c016be-28b3-40df-8e56-49ed7a7b2161">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="906ebfe1-a246-4e44-ad40-fdc429b573ca"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Percentage}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -6,9 +6,11 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +35,7 @@ public class StudentRestController {
 	/**
 	 * Get All Students in database.
 	 */
-	@GetMapping("/")
+	@GetMapping("/list")
 	public List<Student> getAllStudents() {
 
 		List<Student> studentList = this.studentService.getAllStudents();
@@ -98,7 +100,7 @@ public class StudentRestController {
 	 * 
 	 * @return JSON of student or Error message
 	 */
-	@PostMapping("/update/{id}")
+	@PutMapping("/update/{id}")
 	public String editStudent(@PathVariable("id") int studentId, @RequestParam("registrationNo") String registrationNo,
 			@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName
 
@@ -109,15 +111,15 @@ public class StudentRestController {
 
 		if (!Validate.isValidRegistrationNo(registrationNo)) {
 			validationError = true;
-			jsonError.put("error", "invalid-registrationNo");
+			jsonError.append("error", "invalid-registrationNo");
 		}
 		if (!Validate.isValidFirstName(firstName)) {
 			validationError = true;
-			jsonError.put("error", "invalid-firstName");
+			jsonError.append("error", "invalid-firstName");
 		}
 		if (!Validate.isValidLastName(lastName)) {
 			validationError = true;
-			jsonError.put("error", "invalid-lastName");
+			jsonError.append("error", "invalid-lastName");
 		}
 
 		Student student = new Student(studentId, registrationNo, firstName, lastName);
@@ -134,7 +136,7 @@ public class StudentRestController {
 	 * Delete a student by it's id. If deletion is success then it will generate
 	 * RESPONSE OK or RESPONSE BAD
 	 */
-	@PostMapping("/delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteStudent(@PathVariable("id") int id) {
 		if (studentService.deleteStudentById(id)) {
 			return new ResponseEntity<>("Student has been deleted successfully.", HttpStatus.OK);

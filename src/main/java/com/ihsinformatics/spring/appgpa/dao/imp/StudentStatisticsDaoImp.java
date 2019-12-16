@@ -57,65 +57,6 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 
 			topCgpaList = session.createSQLQuery("CALL getTopCgpa()").addEntity(TopCgpaPOJO.class).list();
 
-			for (TopCgpaPOJO topCgpa : topCgpaList) {
-				System.out.println("Semester Results ID: " + topCgpa.getSemesterResultId());
-				System.out.println("Student Name: " + topCgpa.getStudent().getFirstName() + " "
-						+ topCgpa.getStudent().getLastName());
-				System.out.println("Semester: " + topCgpa.getSemester().getSemesterNo());
-				System.out.println("Semester GPA : " + topCgpa.getSemesterGPA());
-				System.out.println("C- GPA : " + topCgpa.getcGpa());
-			}
-			// create the outer query
-			// CriteriaBuilder cb = session.getCriteriaBuilder();
-			// CriteriaQuery<SemesterResults> cq = cb.createQuery(SemesterResults.class);
-			// Root<SemesterResults> root = cq.from(SemesterResults.class);
-			//
-			// // count books written by an author
-			// Subquery<Long> sub = cq.subquery(Long.class);
-			// Root<Student> subRoot = sub.from(Student.class);
-			//
-			// Join<Student, SemesterResults> subAuthors =
-			// subRoot.join(Student_.STUDENT_ID);
-			// sub.select(cb.count(subRoot.get("studentId")));
-			// sub.where(cb.equal(root.get(SemesterResults_.semesterResultId),
-			// subAuthors.get(SemesterResults_.semesterResultId)));
-			//
-			// // check the result of the subquery
-			// cq.where(cb.greaterThanOrEqualTo(sub, 3L));
-			//
-			// TypedQuery<SemesterResults> query = session.createQuery(cq);
-			// List<SemesterResults> authors = query.getResultList();
-			//
-			// System.out.println(authors.get(0));
-
-			// ******************************************************************
-
-			// CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-			// CriteriaQuery<SemesterResults> query =
-			// criteriaBuilder.createQuery(SemesterResults.class);
-			// Root<SemesterResults> semesterResultsRoot =
-			// query.from(SemesterResults.class);
-			//
-			// query.select(semesterResultsRoot);
-			//
-			// Subquery<Long> sub = query.subquery(Long.class);
-			// Root<SemesterResults> subRoot = sub.from(SemesterResults.class);
-			// sub.select(subRoot.get("semester.semesterId"));
-
-			// query.where(criteriaBuilder.greaterThan(arg0, 2))
-			// List<SemesterResults> semResultList = session.createQuery(query).list();
-			// System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			// for (SemesterResults semResult : semResultList) {
-			// System.out.println("Semester Result Id: " + semResult.getSemesterResultId());
-			// System.out.println("Student: " + semResult.getStudent().getFirstName() + " "
-			// + semResult.getStudent().getLastName());
-			// System.out.println("Semester No: " +
-			// semResult.getSemester().getSemesterNo());
-			// System.out.println("Semester GPA: " + semResult.getSemesterGPA());
-			// System.out.println("C-GPA: " + semResult.getcGPA());
-			// System.out.println("----------------------------------------");
-			// }
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			topCgpaList = null;

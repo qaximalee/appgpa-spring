@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,7 +66,7 @@ public class CourseResultsRestController {
 	/**
 	 * Get All CourseResults in database.
 	 */
-	@GetMapping("/")
+	@GetMapping("/list")
 	public List<CourseResults> getAllCourseResults() {
 		List<CourseResults> courseResults = this.courseResultsService.getAllCourseResults();
 		return courseResults;
@@ -118,7 +119,7 @@ public class CourseResultsRestController {
 	 * Delete a CourseResults by it's id. If deletion is success then it will
 	 * generate RESPONSE OK or RESPONSE BAD
 	 */
-	@PostMapping("/delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<CourseResults> deleteCourseResult(@PathVariable("id") int id) {
 		CourseResults courseResult = getSingleCourseResult(id);
 		if (this.courseResultsService.deleteCourseResultsById(id))

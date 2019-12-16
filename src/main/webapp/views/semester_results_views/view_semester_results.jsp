@@ -29,7 +29,7 @@
 	
 	<div class="row">
 	<div class="container">
-		<h1>Semester Results List</h1>
+		<h1>Semester Results List</h1><a href="../rest-jasper-report/semester_results_pdf" target="_blank"><img src="../resources/images/download_image.png" width="30px" height="30px" data-toggle="tooltip" title="Download PDF"/></a>
 		<table class="table responsive" id="sort">
 			<thead>
 				<tr>

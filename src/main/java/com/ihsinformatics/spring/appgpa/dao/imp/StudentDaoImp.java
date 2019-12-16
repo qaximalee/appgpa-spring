@@ -118,6 +118,7 @@ public class StudentDaoImp implements StudentDao {
 		boolean deleted = false;
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
+			session.createSQLQuery("SET FOREIGN_KEY_CHECKS=0;").executeUpdate();
 			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 			CriteriaDelete<Student> criteriaDelete = criteriaBuilder.createCriteriaDelete(Student.class);
 			Root<Student> root = criteriaDelete.from(Student.class);
@@ -126,6 +127,7 @@ public class StudentDaoImp implements StudentDao {
 			int result = session.createQuery(criteriaDelete).executeUpdate();
 			if (result == 1)
 				deleted = true;
+			session.createSQLQuery("SET FOREIGN_KEY_CHECKS=1;").executeUpdate();
 		} catch (Exception e) {
 			deleted = false;
 			e.printStackTrace();

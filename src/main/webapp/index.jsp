@@ -44,6 +44,7 @@
 
 				<div class="list-group-item list-group-item-info" style="font-weight: 600; font-size: 16px; margin-bottom: 10px;">	    	
 			    	Top Marks By Courses
+			    	<a href="rest-jasper-report/top_high_course_marks_pdf" target="_blank"><img src="resources/images/download_image.png" width="30px" height="30px" data-toggle="tooltip" title="Download PDF"/></a>
 			  	</div>
 			  	<div class="crnt_smstr_list" id="students_with_higher_marks">
 					<!-- <div class="list-group">
@@ -83,6 +84,7 @@
 			</div>
 			<div class="col-xs-3">
 				<div class="list-group-item list-group-item-warning" style="font-weight: 600; font-size: 16px; margin-bottom: 10px;">	    	Semester Completed By Students
+					  	<a href="rest-jasper-report/top_cgpa_holder_pdf" target="_blank"><img src="resources/images/download_image.png" width="30px" height="30px" data-toggle="tooltip" title="Download PDF"/></a>
 				  	</div>
 				<div class="crnt_smstr_list" id="top_cgpa_of_students">
 					

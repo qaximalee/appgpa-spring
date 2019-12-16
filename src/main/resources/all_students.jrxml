@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="all_students" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="638c4cd4-ecee-46bc-89e3-349fb36ac91e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[Select first_name AS First_Name, last_name AS Last_Name, registration_no AS Registration_No FROM student]]>
+	</queryString>
+	<field name="First_Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="First_Name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="student"/>
+	</field>
+	<field name="Last_Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Last_Name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="student"/>
+	</field>
+	<field name="Registration_No" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Registration_No"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="student"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="140" y="0" width="281" height="40" uuid="8c1a8e61-6534-4e28-8eaa-f141cf18fccb"/>
+				<textElement textAlignment="Center">
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[All Students Info]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="185" height="30" uuid="1fb7631b-f143-4cb8-b2bd-e267ea93726a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1b8d1fbf-28db-419c-b008-212a9d64b146"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[First_Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="0" width="185" height="30" uuid="7d64a359-daff-48a1-9a63-a7bddeac389b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="431d2008-dbe9-4bb0-910e-08aef4567e1a"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Last_Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="0" width="185" height="30" uuid="cf1a791e-a39b-4627-9ad6-88b4e39b7117">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2cd9d7bf-fc0a-40b4-8a68-86935dbd55bd"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registration_No]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="185" height="30" uuid="0432aa43-346e-411f-bf0e-593da45a8a06">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1b8d1fbf-28db-419c-b008-212a9d64b146"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{First_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="0" width="185" height="30" uuid="2c9f6221-0cc5-4450-ab68-1a99efde63ab">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="431d2008-dbe9-4bb0-910e-08aef4567e1a"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Last_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="185" height="30" uuid="266e75d5-4f57-4da3-b6f3-a4e9f09ab485">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2cd9d7bf-fc0a-40b4-8a68-86935dbd55bd"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Registration_No}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

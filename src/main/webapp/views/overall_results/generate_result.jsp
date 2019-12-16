@@ -8,14 +8,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- include the script -->
-<script src="../../js/alertify.min.js"></script>
-<!-- include the style -->
-<link rel="stylesheet" href="../../js/css/alertify.min.css" />
-<!-- include a theme -->
-<link rel="stylesheet" href="../../js/css/themes/default.min.css" />
-	
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>	
 </head>
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
@@ -31,6 +24,7 @@
 				</select>
 			</div>
 			<span id="studName">Choose Student Registration NO...</span><br>
+			<div id="downloadAnchorTag"></div>
 		</form>
 		<h3 id="error"></h3>
 		<div id="result"></div>
@@ -43,7 +37,8 @@
 			var std = document.getElementById("studentId");
 			var stdId = std.options[std.selectedIndex].value; 
 			const url = "../course-results/getStudentByRegistration?studentID="+stdId;
-	
+			document.getElementById("downloadAnchorTag").innerHTML = "";
+			$("div#downloadAnchorTag").append('Download Result <a href="' + "../rest-jasper-report/result_pdf/" +stdId+ '" target="_blank"><img src="../resources/images/download_image.png" width="30px" height="30px" data-toggle="tooltip" title="Download PDF"/></a>');
 			// Populate dropdown with list of students
 			$.getJSON(url, function (data) {
 				var studentDetails = "Marksheet Of: "+data.firstName+" "+data.lastName;
@@ -52,7 +47,7 @@
 				console.log(data.firstName+" "+data.lastName);
 			});
 		}
-
+		
 		function generateResult(){
 			var std = document.getElementById("studentId");
 			var stdId = std.options[std.selectedIndex].value; 
@@ -63,6 +58,9 @@
 
 			const url = "../result/getResultByStudent?id="+stdId;
 			$.getJSON(url, function (data) {
+				if(data.message == "NULL"){
+					document.getElementById("downloadAnchorTag").innerHTML = "";
+				}
 				var table = document.querySelector("table");
 				var resultData = data.results;
 				console.log(resultData[0]);			

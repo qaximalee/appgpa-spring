@@ -6,9 +6,11 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +45,7 @@ public class CourseRestController {
 	 * 
 	 * @return List<Course>
 	 */
-	@GetMapping("/")
+	@GetMapping("/list")
 	public List<Course> getAllCourses() {
 
 		List<Course> courses = this.courseService.getAllCourses();
@@ -98,7 +100,7 @@ public class CourseRestController {
 	 * 
 	 * @return EntityResponse<Object> of Course or Error message
 	 */
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public ResponseEntity<Object> editCourse(@RequestParam("courseId") int courseId,
 			@RequestParam("courseCode") int courseCode, @RequestParam("semesterId") int semesterId,
 			@RequestParam("name") String name) {
@@ -128,7 +130,7 @@ public class CourseRestController {
 	 * 
 	 * @return EntityResponse<Object> of Course or Error message
 	 */
-	@PostMapping("/delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Object> deleteCourse(@PathVariable("id") int courseId) {
 		Course course = this.courseService.getCourseById(courseId);
 		if (courseService.deleteCourseById(courseId))

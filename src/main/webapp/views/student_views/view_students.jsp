@@ -35,7 +35,7 @@
 	
 	<div class="row">
 	<div class="container">
-		<h2>All Students</h2>
+		<h2>All Students</h2><a href="../rest-jasper-report/all_students_pdf" target="_blank"><img src="../resources/images/download_image.png" width="30px" height="30px" data-toggle="tooltip" title="Download PDF"/></a>
 		<table class="table responsive" id="sort">
 			<thead>
 				<tr>

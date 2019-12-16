@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_Landscape" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2784b9b1-e7bd-4f5d-add4-93a28a287325">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT st.first_name As First_Name, 
+st.last_name AS Last_Name, st.registration_no AS Registration_No,
+sem.semester_no as Semester, sr.semester_gpa AS Semester_GPA, 
+sr.cgpa AS CGPA
+FROM semester_results as sr
+INNER JOIN
+    (SELECT student_id, MAX(semester_id) AS semester_id
+    FROM semester_results
+    GROUP BY student_id) sr_grp 
+ON sr.student_id = sr_grp.student_id 
+AND sr.semester_id = sr_grp.semester_id
+INNER JOIN student as st ON sr.student_id = st.student_id
+INNER JOIN semester as sem ON sr.semester_id = sem.semester_id
+order by sr.cgpa DESC]]>
+	</queryString>
+	<field name="First_Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="First_Name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="student"/>
+	</field>
+	<field name="Last_Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Last_Name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="student"/>
+	</field>
+	<field name="Registration_No" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Registration_No"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="student"/>
+	</field>
+	<field name="Semester" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="Semester"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="semester"/>
+	</field>
+	<field name="Semester_GPA" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="Semester_GPA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="semester_results"/>
+	</field>
+	<field name="CGPA" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="CGPA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="semester_results"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement x="194" y="0" width="451" height="51" uuid="f23a45a8-89d4-4b8d-b10c-875f12882303"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri Light" size="35" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOP CGPA HOLDERS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
+			<staticText>
+				<reportElement x="0" y="0" width="134" height="32" uuid="551494a6-7bcf-416e-bcc7-e8c1aec5998b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1eb5ba67-c7df-448e-83be-a1a3416ae3cd"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[First Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="134" y="0" width="134" height="32" uuid="999adf24-3c72-4339-b010-bbebaae325f7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0f26d36a-ae12-47f6-85ae-b7fa6db29ca1"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Last Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="0" width="134" height="32" uuid="5300d767-254b-41f6-bd7b-408724327b5e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d39fcdd0-1483-4a81-93f7-bb5d399e5dc0"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registration No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="0" width="134" height="32" uuid="9ed64242-ce79-4b86-8111-c29e8bf5862d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="46d7e45c-19a6-48b3-94c7-4293d6f1f390"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Semester]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="536" y="0" width="133" height="32" uuid="b763347c-1741-4e22-b65e-b498ad021d55">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d2214b0f-3ab9-4ddd-abf9-39bb17e156c7"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Semester GPA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="669" y="0" width="133" height="32" uuid="3b03e372-92b6-42db-af76-d07346d33d41">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6921ee05-f365-4e51-8f90-487da4790f19"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CGPA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="137" height="30" uuid="7ae75a44-8275-44e4-9ae5-2937de66c9d1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1eb5ba67-c7df-448e-83be-a1a3416ae3cd"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{First_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="0" width="133" height="30" uuid="9244f806-a7c6-477e-b778-a0d6cbd5cb4d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0f26d36a-ae12-47f6-85ae-b7fa6db29ca1"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Last_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="0" width="133" height="30" uuid="5475f474-0e0a-4e80-8b8e-29355d290caf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d39fcdd0-1483-4a81-93f7-bb5d399e5dc0"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Registration_No}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="0" width="133" height="30" uuid="61a15ba5-7e51-46c3-a788-92de9ed4a9db">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="46d7e45c-19a6-48b3-94c7-4293d6f1f390"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Semester}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="536" y="0" width="133" height="30" uuid="1c1f31af-853d-4079-8a9b-e1ef3b77fa18">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d2214b0f-3ab9-4ddd-abf9-39bb17e156c7"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Semester_GPA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="669" y="0" width="133" height="30" uuid="97560ad7-7611-4302-8cb3-24c9f284d7ad">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6921ee05-f365-4e51-8f90-487da4790f19"/>
+				</reportElement>
+				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{CGPA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

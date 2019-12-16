@@ -27,8 +27,8 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<div class="row">
 	<div class="container">
-		<h1>Courses Results List</h1>
-
+		<h1>Courses Results List</h1><a href="../rest-jasper-report/course_results_pdf" target="_blank"><img src="../resources/images/download_image.png" width="30px" height="30px" data-toggle="tooltip" title="Download PDF"/></a>
+		
 		<input type="hidden" id="fromRequest"
 			value="${alertMessageIdentifier}">
 		

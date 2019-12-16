@@ -47,6 +47,6 @@ public class StudentStatisticsRestController {
 
 	@GetMapping("/getTopCgpaHolder")
 	public List<TopCgpaPOJO> getTopCgpaHolders() {
-		return studentStatisticsService.getTopCgpaHolders();// stdJson.toString();
+		return studentStatisticsService.getTopCgpaHolders();
 	}
 }

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="courses" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2a00d6dd-0718-4679-a300-97d8335f2ccb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[Select code AS Course_Code, semester_id AS Semester, name AS Course_Name FROM course]]>
+	</queryString>
+	<field name="Course_Code" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="Course_Code"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="course"/>
+	</field>
+	<field name="Semester" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="Semester"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="course"/>
+	</field>
+	<field name="Course_Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Course_Name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="course"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement x="140" y="30" width="281" height="51" uuid="282bf5ce-da0b-4663-80fb-8b81b32406e5"/>
+				<textElement textAlignment="Center">
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[All Courses]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="185" height="30" uuid="135929f5-7667-499c-8046-a3a183448e04">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5787a278-96f5-4aeb-89e3-25c3ce5708e0"/>
+				</reportElement>
+				<box topPadding="7" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Course Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="0" width="105" height="30" uuid="db4ce5eb-5bb3-46eb-b8af-117a005103a4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="99c7028d-b4c3-46a6-b7b6-73bd262cb1c0"/>
+				</reportElement>
+				<box topPadding="7" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Semester]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="0" width="265" height="30" uuid="57259954-807a-4f53-901c-e99a6f7837db">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d160c877-be31-4379-abbc-2a909fc6afb3"/>
+				</reportElement>
+				<box topPadding="7" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Course Name]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="185" height="30" uuid="82e54c22-e138-4f48-8c6c-a27619c42251">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5787a278-96f5-4aeb-89e3-25c3ce5708e0"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box topPadding="8" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Course_Code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="0" width="105" height="30" uuid="a9270abe-bfe1-4535-9add-df71fbc3850a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="99c7028d-b4c3-46a6-b7b6-73bd262cb1c0"/>
+				</reportElement>
+				<box topPadding="8" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Semester}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="0" width="265" height="30" uuid="eed2868a-5e9f-48f9-92d4-a0fe1acd7980">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d160c877-be31-4379-abbc-2a909fc6afb3"/>
+				</reportElement>
+				<box topPadding="8" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Course_Name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

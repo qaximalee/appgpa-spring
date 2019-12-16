@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,12 +40,12 @@ public class SemesterResultsRestController {
 	@Autowired
 	private CourseResultsService courseResultsService;
 
-	@GetMapping("/")
+	@GetMapping("/readableList")
 	public List<SemesterResultsPOJO> getAllSemesterResultsPOJO() {
 		return this.semesterResultsService.getAllReadableSemesterResults();
 	}
 
-	@GetMapping("/all")
+	@GetMapping("/list")
 	public List<SemesterResults> getAllSemesterResults() {
 		return this.semesterResultsService.getAllSemesterResults();
 	}
@@ -96,7 +97,7 @@ public class SemesterResultsRestController {
 		}
 	}
 
-	@PostMapping("/delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Object> deleteSemesterResult(@PathVariable("id") int semesterResultId) {
 		if (this.semesterResultsService.deleteSemesterResultsById(semesterResultId))
 			return new ResponseEntity<>(this.semesterResultsService.getSemesterResultsById(semesterResultId).toString(),
