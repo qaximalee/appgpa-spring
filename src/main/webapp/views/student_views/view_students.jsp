@@ -12,19 +12,27 @@
 <link rel="stylesheet" href="../resources/css/alertify.min.css" />
 <!-- include a theme -->
 <link rel="stylesheet" href="../resources/css/themes/default.min.css" />
-
-
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,500" rel="stylesheet"/>
-
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+ <link rel="stylesheet" href="../resources/css/bootstrap_search.css"/>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<link rel="stylesheet" href="../resources/css/bootstrap_search.css"/>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ <style>
+ 	.dif_formats {
+	    position: absolute;
+	    right: 113px;
+	    display: none;
+	}
+ 	.dif_formats a{
+ 		display: inline-block;
+ 		margin-left: 5px;
+ 		overflow: hidden;
+ 		position: relative;
+ 		z-index: 1;
+ 	}
+ </style>
 </head>
 <body>
 	<jsp:include page="../header/nav_bar.jsp"></jsp:include>
@@ -35,7 +43,14 @@
 	
 	<div class="row">
 	<div class="container">
-		<h2>All Students</h2><a href="../rest-jasper-report/all_students_pdf" target="_blank"><img src="../resources/images/download_image.png" width="30px" height="30px" data-toggle="tooltip" title="Download PDF"/></a>
+		<h2 style="overflow:hidden;" >All Students		
+		<a href="#" class="all_stdnt_link"><img src="../resources/images/download_image.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip"  title="Download Report"/></a>
+		<div class="dif_formats">
+			<a href="../rest-jasper-report/pdf/all_students" target="_blank"><img src="../resources/images/pdf.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="Download PDF"/></a>
+			<a href="../rest-jasper-report/csv/all_students" target="_blank"><img src="../resources/images/csv.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="Download CSV"/></a>
+			<a href="../rest-jasper-report/html/all_students" target="_blank"><img src="../resources/images/html.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="View HTML"/></a>
+		</div>
+		</h2>
 		<table class="table responsive" id="sort">
 			<thead>
 				<tr>
@@ -62,14 +77,20 @@
 		</table>
 		<br /> <a href="${pageContext.request.contextPath}/views/student_views/add_student_form.jsp">Add New Student</a>
 	</div></div>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- <script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
 	<script src="https://cdn.datatables.net/plug-ins/1.10.15/sorting/stringMonthYear.js"></script>
 	<script type="text/javascript">	
+		// toggle docs formats
+		$(document).ready(function(){
+			$('.all_stdnt_link').click(function(){
+				$('.dif_formats').fadeToggle();
+			});
+		});
 		$(document).ready(function() {
 		   $("#sort").DataTable({
 		      columnDefs : [
@@ -107,6 +128,7 @@
 			alertify.error('Student is not Deleted');
 			document.getElementById("fromRequest").value = null;
 		}
+		
 	</script>
 </body>
 </html>

@@ -9,19 +9,43 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>	
+<style>
+ 	.dif_formats {
+	    position: absolute;
+	    right: 113px;
+	    display: none;
+	}
+ 	.dif_formats a{
+ 		display: inline-block;
+ 		margin-left: 5px;
+ 		position: relative;
+ 		z-index: 1;
+ 	}
+ 	.all_stdnt_link{
+ 	    position: absolute;
+    right: 180px;
+    top: 90px;
+ 	}
+ </style>
 </head>
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
 
 	<div class="container">
 		<form onchange="generateResult()">
-			<div class="form-group">
+			<div class="form-group" style="overflow: hidden">
 				<label for="studentId">Student Id:</label> <select class="form-control" style="width: 15%;" name="studentId" id="studentId" onchange="getStudent()">
 					<c:forEach items="${studentList}" var="student">
 						<option value='<c:out value="${student.getStudentId()}"/>'><c:out
 								value="${student.getRegistrationNo()}" /></option>
 					</c:forEach>
 				</select>
+				<a href="#" class="all_stdnt_link"><img src="../resources/images/download_image.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip"  title="Download Report"/></a>
+				<div class="dif_formats">
+					<a href="#" target="_blank" id="pdf_report"><img src="../resources/images/pdf.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="Download PDF"/></a>
+					<a href="#" target="_blank" id="csv_report"><img src="../resources/images/csv.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="Download CSV"/></a>
+					<a href="#" target="_blank" id="html_report"><img src="../resources/images/html.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="View HTML"/></a>
+				</div>
 			</div>
 			<span id="studName">Choose Student Registration NO...</span><br>
 			<div id="downloadAnchorTag"></div>
@@ -33,12 +57,25 @@
 		</table>
 	</div>
 	<script type="text/javascript">
+		// toggle docs formats
+		$(document).ready(function(){
+			$('.all_stdnt_link').click(function(){
+				$('.dif_formats').fadeToggle();
+			});
+		});
 		function getStudent(){
 			var std = document.getElementById("studentId");
 			var stdId = std.options[std.selectedIndex].value; 
 			const url = "../course-results/getStudentByRegistration?studentID="+stdId;
-			document.getElementById("downloadAnchorTag").innerHTML = "";
-			$("div#downloadAnchorTag").append('Download Result <a href="' + "../rest-jasper-report/result_pdf/" +stdId+ '" target="_blank"><img src="../resources/images/download_image.png" width="30px" height="30px" data-toggle="tooltip" title="Download PDF"/></a>');
+			$('#pdf_report').onclick(function(){
+				$('#pdf_report').href = "../rest-jasper-report/pdf/result/"+stdId;
+			});
+			$('#csv_report').onclick(function(){
+				$('#csv_report').href = "../rest-jasper-report/csv/result/"+stdId;
+			});
+			$('#html_report').onclick(function(){
+				$('#html_report').href = "../rest-jasper-report/html/result/"+stdId;
+			});
 			// Populate dropdown with list of students
 			$.getJSON(url, function (data) {
 				var studentDetails = "Marksheet Of: "+data.firstName+" "+data.lastName;

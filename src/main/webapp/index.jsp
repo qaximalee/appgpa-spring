@@ -33,7 +33,11 @@
 	.list-group-item { margin-bottom: 10px; margin-right: 5px;  }
 	.list-group{ margin-bottom: 10px; }
 	.crnt_smstr_list{ height: 320px; overflow-x: hidden; }
-
+.dif_formats,.dif_formats2{
+	display: none;
+}
+.dif_formats a{ display: inline-block; width:32%; }
+.dif_formats2 a{ display: inline-block; width:32%; }
 </style>
 <body>
 	<h2>CGPA Calculator System</h2>
@@ -41,12 +45,15 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-3">
-
-				<div class="list-group-item list-group-item-info" style="font-weight: 600; font-size: 16px; margin-bottom: 10px;">	    	
+				<div class="list-group-item list-group-item-info" style="font-weight: 600; font-size: 16px; margin-bottom: 10px; overflow:hidden;">	    	
 			    	Top Marks By Courses
-			    	<!-- href="rest-jasper-report/top_high_course_marks_pdf" -->
-			    	<a href="rest-jasper-report/html/single_student" target="_blank"><img src="resources/images/download_image.png" width="30px" height="30px" data-toggle="tooltip" title="Download PDF"/></a>
+			    	<a href="#" class="top_marks_by_courses"><img src="resources/images/download_image.png" width="30px" height="30px" data-toggle="tooltip" class="pull-right " title="Download Report"/></a>
 			  	</div>
+			  	<div class="list-group-item list-group-item-danger dif_formats text-center">
+					<a href="rest-jasper-report/pdf/top_high_course_marks" target="_blank"><img src="resources/images/pdf.png" width="30px" height="30px" data-toggle="tooltip" class=" " title="Download PDF"/></a>
+					<a href="rest-jasper-report/csv/top_high_course_marks" target="_blank"><img src="resources/images/csv.png" width="30px" height="30px" data-toggle="tooltip" class=" " title="Download CSV"/></a>
+					<a href="rest-jasper-report/html/top_high_course_marks" target="_blank"><img src="resources/images/html.png" width="30px" height="30px" data-toggle="tooltip" class=" " title="View HTML"/></a>
+				</div>
 			  	<div class="crnt_smstr_list" id="students_with_higher_marks">
 					<!-- <div class="list-group">
 						<a href="#" class="list-group-item ">
@@ -57,6 +64,7 @@
 					</div> -->
 				</div>
 			</div>
+			
 			<div class="col-xs-3">
 				<div class="list-group list-group-item list-group-item-success" style="font-weight: 600; font-size: 16px;">
 			    	<span class="badge" style="font-size: 16px;">No of Courses</span>
@@ -84,9 +92,14 @@
 				</div>
 			</div>
 			<div class="col-xs-3">
-				<div class="list-group-item list-group-item-warning" style="font-weight: 600; font-size: 16px; margin-bottom: 10px;">	    	Semester Completed By Students
-					  	<a href="rest-jasper-report/top_cgpa_holder_pdf" target="_blank"><img src="resources/images/download_image.png" width="30px" height="30px" data-toggle="tooltip" title="Download PDF"/></a>
+				<div class="list-group-item list-group-item-warning" style="font-weight: 600; font-size: 16px; margin-bottom: 10px; overflow: hidden;">	Top CGPA Holders
+					  	<a href="#" class="top_marks_by_courses2"><img src="resources/images/download_image.png" width="30px" height="30px" data-toggle="tooltip" title="Download Report" class="pull-right" /></a>
 				  	</div>
+				<div class="list-group-item list-group-item-danger dif_formats2 text-center">
+					<a href="rest-jasper-report/pdf/top_cgpa_holder" target="_blank"><img src="resources/images/pdf.png" width="30px" height="30px" data-toggle="tooltip" class=" " title="Download PDF"/></a>
+					<a href="rest-jasper-report/csv/top_cgpa_holder" target="_blank"><img src="resources/images/csv.png" width="30px" height="30px" data-toggle="tooltip" class=" " title="Download CSV"/></a>
+					<a href="rest-jasper-report/html/top_cgpa_holder" target="_blank"><img src="resources/images/html.png" width="30px" height="30px" data-toggle="tooltip" class=" " title="View HTML"/></a>
+				</div>			  	
 				<div class="crnt_smstr_list" id="top_cgpa_of_students">
 					
 					<!-- <div class="list-group" >
@@ -188,6 +201,16 @@
 			$.getJSON(url,(data) => data ? resolve(data) : reject(data));
 		});
 	}
+
+	// toggle 
+	$(document).ready(function(){
+		$('.top_marks_by_courses').click(function(){
+			$('.dif_formats').slideToggle();
+		});
+		$('.top_marks_by_courses2').click(function(){
+			$('.dif_formats2').slideToggle();
+		});
+	});
 
 </script>
 </html>

@@ -186,7 +186,7 @@ public class JasperReports {
 	 * 
 	 * @throws IOException
 	 */
-	@GetMapping(value = "/result/{format}/{studentId}")
+	@GetMapping(value = "/{format}/result/{studentId}")
 	public void getResultOfStudent(@PathVariable("format") String format, @PathVariable("studentId") int studentId,
 			HttpServletResponse response, HttpServletRequest request) throws JRException, IOException {
 		List<Result> results = resultsService.generateResult(studentId);

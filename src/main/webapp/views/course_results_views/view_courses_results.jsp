@@ -21,13 +21,33 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="../resources/css/bootstrap_search.css"/>
+<style>
+ 	.dif_formats {
+	    position: absolute;
+	    right: 104px;
+	    display: none;
+	}
+ 	.dif_formats a{
+ 		display: inline-block;
+ 		margin-left: 5px;
+ 		position: relative;
+ 		z-index: 1;
+ 	}
+ </style>
 </head>
 <body>
 	<jsp:include page="../header/nav_bar.jsp"></jsp:include>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<div class="row">
 	<div class="container">
-		<h1>Courses Results List</h1><a href="../rest-jasper-report/course_results_pdf" target="_blank"><img src="../resources/images/download_image.png" width="30px" height="30px" data-toggle="tooltip" title="Download PDF"/></a>
+		<h2 style="overflow:hidden;">Courses Results List
+			<a href="#" class="all_stdnt_link"><img src="../resources/images/download_image.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip"  title="Download Report"/></a>
+			<div class="dif_formats">
+				<a href="../rest-jasper-report/pdf/course_results" target="_blank"><img src="../resources/images/pdf.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="Download PDF"/></a>
+				<a href="../rest-jasper-report/csv/course_results" target="_blank"><img src="../resources/images/csv.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="Download CSV"/></a>
+				<a href="../rest-jasper-report/html/course_results" target="_blank"><img src="../resources/images/html.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="View HTML"/></a>
+			</div>
+		</h2><!-- <a href="../rest-jasper-report/course_results_pdf" target="_blank"><img src="../resources/images/ download_image.png" width="30px" height="30px" data-toggle="tooltip" title="Download PDF"/></a>-->
 		
 		<input type="hidden" id="fromRequest"
 			value="${alertMessageIdentifier}">
@@ -77,13 +97,20 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
 	<script src="https://cdn.datatables.net/plug-ins/1.10.15/sorting/stringMonthYear.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function() {
-		   $("#sort").DataTable({
-		      columnDefs : [
-		    { type : 'date', targets : [9] }
-		],  
-		   });
+
+		// toggle docs formats
+		$(document).ready(function(){
+			$('.all_stdnt_link').click(function(){
+				$('.dif_formats').fadeToggle();
+			});
 		});
+		$(document).ready(function() {
+			   $("#sort").DataTable({
+			      columnDefs : [
+			    { type : 'date', targets : [9] }
+			],  
+			   });
+			});
 		var fromRequest = document.getElementById("fromRequest").value;
 		if(fromRequest != null && fromRequest == "from-create"){
 			alertify.success('Course Result Added');
