@@ -16,14 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ihsinformatics.spring.appgpa.model.Course;
 import com.ihsinformatics.spring.appgpa.model.CourseResults;
-import com.ihsinformatics.spring.appgpa.model.Lookup;
 import com.ihsinformatics.spring.appgpa.model.Student;
 import com.ihsinformatics.spring.appgpa.service.CourseResultsService;
 import com.ihsinformatics.spring.appgpa.service.CourseService;
-import com.ihsinformatics.spring.appgpa.service.LookupService;
 import com.ihsinformatics.spring.appgpa.service.SemesterService;
 import com.ihsinformatics.spring.appgpa.service.StudentService;
-import com.ihsinformatics.spring.appgpa.service.imp.CourseResultsServiceImp;
 import com.ihsinformatics.spring.appgpa.values.Values;
 
 @Controller
@@ -42,52 +39,12 @@ public class CourseResultsController {
 	@Autowired
 	private SemesterService semesterService;
 
-	@Autowired
-	private LookupService lookupService;
-
-	public void setCourseResultsService(CourseResultsServiceImp courseResultsService) {
-		this.courseResultsService = courseResultsService;
-	}
-
-	public void setStudentService(StudentService studentService) {
-		this.studentService = studentService;
-	}
-
-	public void setCourseService(CourseService courseService) {
-		this.courseService = courseService;
-	}
-
-	public void setSemesterService(SemesterService semesterService) {
-		this.semesterService = semesterService;
-	}
-
-	public void setLookupService(LookupService lookupService) {
-		this.lookupService = lookupService;
-	}
-
 	@RequestMapping(value = "/addCourseResults", method = RequestMethod.POST)
 	public ModelAndView addCourseResults(@RequestParam("studentId") int studentId,
 			@RequestParam("semesterId") int semesterId, @RequestParam("courseId") int courseId,
 			@RequestParam("percentage") double percentage) {
-		Course course = courseService.getCourseById(courseId);
-		Student student = studentService.getStudentById(studentId);
-
-		StringBuilder grade = new StringBuilder();
-		double gpa = 0.0;
-
-		List<Lookup> listOfLookup = lookupService.getAllLookup();
-		for (Lookup lookup : listOfLookup) {
-			if (percentage >= lookup.getStartParcentage() && percentage <= lookup.getEndPercentage()) {
-				gpa = lookup.getGpa();
-				grade.append(lookup.getGrade());
-			}
-		}
-
-		// GPA Multiply by 3 (ie 3 is credit hours)
-		double totalPoints = gpa * 3;
-		CourseResults courseResults = new CourseResults(0, course, student, percentage, gpa, grade.toString(),
-				totalPoints);
-		grade.replace(0, grade.length(), "");
+		CourseResults courseResults = courseResultsService.calculateCourseResult(studentId, semesterId, courseId,
+				percentage);
 		if (courseResultsService.save(courseResults))
 			return courseResultsView(Values.CREATED_SUCCESS);
 		else

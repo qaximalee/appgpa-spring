@@ -15,14 +15,29 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ihsinformatics.spring.appgpa.dao.CourseResultsDao;
+import com.ihsinformatics.spring.appgpa.model.Course;
 import com.ihsinformatics.spring.appgpa.model.CourseResults;
 import com.ihsinformatics.spring.appgpa.model.CourseResultsPOJO;
+import com.ihsinformatics.spring.appgpa.model.Lookup;
+import com.ihsinformatics.spring.appgpa.model.Student;
+import com.ihsinformatics.spring.appgpa.service.CourseService;
+import com.ihsinformatics.spring.appgpa.service.LookupService;
+import com.ihsinformatics.spring.appgpa.service.StudentService;
 
 public class CourseResultsDaoImp implements CourseResultsDao {
 
+	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Autowired
+	private CourseService courseService;
+
+	@Autowired
+	private StudentService studentService;
+
+	@Autowired
+	private LookupService lookupService;
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
@@ -155,6 +170,30 @@ public class CourseResultsDaoImp implements CourseResultsDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		return courseResults;
+	}
+
+	public CourseResults calculateCourseResult(int studentId, int semesterId, int courseId, double percentage) {
+		Course course = courseService.getCourseById(courseId);
+		Student student = studentService.getStudentById(studentId);
+
+		StringBuilder grade = new StringBuilder();
+		double gpa = 0.0;
+
+		List<Lookup> listOfLookup = lookupService.getAllLookup();
+		for (Lookup lookup : listOfLookup) {
+			if (percentage >= lookup.getStartParcentage() && percentage <= lookup.getEndPercentage()) {
+				gpa = lookup.getGpa();
+				grade.append(lookup.getGrade());
+			}
+		}
+
+		// GPA Multiply by 3 (ie 3 is credit hours)
+		double totalPoints = gpa * 3;
+		CourseResults courseResults = new CourseResults(0, course, student, percentage, gpa, grade.toString(),
+				totalPoints);
+		grade.replace(0, grade.length(), "");
 
 		return courseResults;
 	}

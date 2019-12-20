@@ -159,5 +159,10 @@
 			</plugin>
 		</plugins>
 		<finalName>appgpa-spring</finalName>
+		<resources>
+		<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			</resources>
 	</build>
 </project>

@@ -14,31 +14,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ihsinformatics.spring.appgpa.model.CourseResults;
 import com.ihsinformatics.spring.appgpa.model.Result;
-import com.ihsinformatics.spring.appgpa.model.SemesterResults;
-import com.ihsinformatics.spring.appgpa.service.CourseResultsService;
-import com.ihsinformatics.spring.appgpa.service.SemesterResultsService;
+import com.ihsinformatics.spring.appgpa.service.ResultsService;
 import com.ihsinformatics.spring.appgpa.service.StudentService;
 
 @Controller
 @RequestMapping("/result")
 public class ResultController {
 
-	private int CREDIT_HOUR = 3;
-
 	@Autowired
 	private StudentService studentService;
 
 	@Autowired
-	private SemesterResultsService semesterResultsService;
-
-	@Autowired
-	private CourseResultsService courseResultsService;
-
-	public void setStudentService(StudentService studentService) {
-		this.studentService = studentService;
-	}
+	private ResultsService resultsService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView viewResultsForm() {
@@ -46,12 +34,19 @@ public class ResultController {
 				studentService.getAllStudents());
 	}
 
+	/**
+	 * This method will get generated result of a student and parse into JSON.
+	 * 
+	 * @param HttpServletResponse
+	 * @param studentId
+	 */
 	@RequestMapping(value = "/getResultByStudent", method = RequestMethod.GET)
 	public void getResultByStudent(HttpServletResponse response, @RequestParam("id") int studentId) {
-		List<SemesterResults> list = semesterResultsService.getSemesterResultsEntityByStudentId(studentId);
-		List<Result> results = new ArrayList<>();
+
+		List<Result> results = resultsService.generateResult(studentId);
+
 		String message = "NOT-NULL";
-		if (list.size() <= 0) {
+		if (results == null) {
 			message = "NULL";
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("message", message);
@@ -67,26 +62,9 @@ public class ResultController {
 			return;
 		}
 
-		int counter = 0;
-		while (counter < list.size()) {
-			List<CourseResults> courseResults = courseResultsService
-					.getCourseResultsByStudentAndSemesterId(list.get(counter).getSemester().getSemesterId(), studentId);
-			for (CourseResults courseResult : courseResults) {
-				Result result = new Result(list.get(counter).getSemesterResultId(),
-						courseResult.getCourse().getCourseCode(), courseResult.getCourse().getName(),
-						list.get(counter).getSemester().getSemesterNo(), courseResult.getPercentage(), CREDIT_HOUR,
-						courseResult.getGpa(), courseResult.getGrade(), courseResult.getTotalPoints(),
-						list.get(counter).getSemesterGPA(), list.get(counter).getcGPA());
-				results.add(result);
-			}
-			counter++;
-		}
-
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("message", message);
 		jsonObject.put("results", results);
-
-		// JSONArray jsonResults = new JSONArray(results);
 
 		try {
 			response.getWriter().print(jsonObject.toString());

@@ -23,32 +23,39 @@ public class StudentStatisticsController {
 	@Autowired
 	private StudentStatisticsService studentStatisticsService;
 
-	public void setStudentStatisticsService(StudentStatisticsService studentStatisticsService) {
-		this.studentStatisticsService = studentStatisticsService;
-	}
-
+	/**
+	 * This end point will return a json array in which total no of students will be
+	 * return by semester-wise.
+	 * 
+	 * @return String JSONArray
+	 */
 	@GetMapping("/getStudentBySemester")
 	public String getStudentBySemester() {
 		Map<Integer, Integer> studentsBySemester = studentStatisticsService.getTotalStudentsBySemester();
-		// System.out.println(studentsBySemester.toString());
 
 		JSONObject studentJson = new JSONObject(studentsBySemester);
 		return studentJson.toString();
 	}
 
+	/**
+	 * This end point will return all student who have get higher marks by
+	 * course-wise.
+	 * 
+	 * @return String JSONArray
+	 */
 	@GetMapping("/getCoursesByHigherMarks")
 	public String getCoursesByHigherMarks() {
 		List<CourseDto> courseDto = studentStatisticsService.getTopCoursesByHigherMarks();
 
-		/*
-		 * for (CourseDto cDto : courseDto) System.out.println("Course Name: " +
-		 * cDto.getCourse().getName() + "Top Percentage: " + cDto.getMarks() +
-		 * "Student Info: " + cDto.getStudents().getFirstName());
-		 */
 		JSONArray studentJson = new JSONArray(courseDto);
 		return studentJson.toString();
 	}
 
+	/**
+	 * This end point will return total no of courses in all semesters.
+	 * 
+	 * @return String JSONArray
+	 */
 	@GetMapping("/getTotalCoursesBySemester")
 	public String getTotalCoursesBySemester() {
 		List<CoursesBySemesterDto> coursesBySemesterList = studentStatisticsService.getTotalCoursesBySemester();
@@ -57,6 +64,11 @@ public class StudentStatisticsController {
 		return studentJson.toString();
 	}
 
+	/**
+	 * This will return all students with there current semester.
+	 * 
+	 * @return String JSONArray
+	 */
 	@GetMapping("/getStudentsCurrentSemester")
 	public String getStudentsCurrentSemester() {
 		List<StudentSemesterDto> studentCurrentSemester = studentStatisticsService.getStudentsBySemesterCompletion();
@@ -65,6 +77,11 @@ public class StudentStatisticsController {
 		return studentJson.toString();
 	}
 
+	/**
+	 * This end point will return top cgpa holders.
+	 * 
+	 * @return String JSONArray
+	 */
 	@GetMapping("/getTopCgpaHolder")
 	public String getTopCgpaHolders() {
 		List<TopCgpaPOJO> topCgpaHolders = studentStatisticsService.getTopCgpaHolders();

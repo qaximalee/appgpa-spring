@@ -9,38 +9,49 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ihsinformatics.spring.appgpa.model.CourseResults;
 import com.ihsinformatics.spring.appgpa.model.Result;
-import com.ihsinformatics.spring.appgpa.model.SemesterResults;
-import com.ihsinformatics.spring.appgpa.service.CourseResultsService;
-import com.ihsinformatics.spring.appgpa.service.SemesterResultsService;
-import com.ihsinformatics.spring.appgpa.service.StudentService;
+import com.ihsinformatics.spring.appgpa.service.ResultsService;
 
 @RestController
 @RequestMapping("/rest-result")
 public class ResultRestController {
 
-	private int CREDIT_HOUR = 3;
-
 	@Autowired
-	private StudentService studentService;
+	ResultsService resultsService;
 
-	@Autowired
-	private SemesterResultsService semesterResultsService;
+	/**
+	 * This method will generate Student's Overall Results by there ID. It will
+	 * generate a json with NULL string if the student doesn't have any previous
+	 * results.
+	 * 
+	 * @param studentId
+	 */
 
-	@Autowired
-	private CourseResultsService courseResultsService;
+	/*
+	 * @PostMapping("/getResultByStudent/{id}") public ResponseEntity<JSONObject>
+	 * getResultByStudent(@PathVariable("id") int studentId) {
+	 * 
+	 * List<Result> results = resultsService.generateResult(studentId);
+	 * 
+	 * if (results == null) { JSONObject jsonObject = new JSONObject();
+	 * jsonObject.put("message", "NULL"); jsonObject.put("results", new
+	 * ArrayList<>()); return new ResponseEntity<>(jsonObject,
+	 * HttpStatus.NOT_FOUND); } else { JSONObject jsonObject = new JSONObject();
+	 * jsonObject.put("message", "NOT-NULL"); jsonObject.put("results", results);
+	 * return new ResponseEntity<>(jsonObject, HttpStatus.OK); } }
+	 */
 
-	@PostMapping("/getResultByStudent/{id}")
+	@RequestMapping(value = "/getResultByStudent/{id}", method = RequestMethod.GET)
 	public void getResultByStudent(HttpServletResponse response, @PathVariable("id") int studentId) {
-		List<SemesterResults> list = semesterResultsService.getSemesterResultsEntityByStudentId(studentId);
-		List<Result> results = new ArrayList<>();
+
+		List<Result> results = resultsService.generateResult(studentId);
+
 		String message = "NOT-NULL";
-		if (list.size() <= 0) {
+		if (results == null) {
 			message = "NULL";
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("message", message);
@@ -54,21 +65,6 @@ public class ResultRestController {
 				e.printStackTrace();
 			}
 			return;
-		}
-
-		int counter = 0;
-		while (counter < list.size()) {
-			List<CourseResults> courseResults = courseResultsService
-					.getCourseResultsByStudentAndSemesterId(list.get(counter).getSemester().getSemesterId(), studentId);
-			for (CourseResults courseResult : courseResults) {
-				Result result = new Result(list.get(counter).getSemesterResultId(),
-						courseResult.getCourse().getCourseCode(), courseResult.getCourse().getName(),
-						list.get(counter).getSemester().getSemesterNo(), courseResult.getPercentage(), CREDIT_HOUR,
-						courseResult.getGpa(), courseResult.getGrade(), courseResult.getTotalPoints(),
-						list.get(counter).getSemesterGPA(), list.get(counter).getcGPA());
-				results.add(result);
-			}
-			counter++;
 		}
 
 		JSONObject jsonObject = new JSONObject();

@@ -76,4 +76,10 @@ public class SemesterResultsServiceImp implements SemesterResultsService {
 		// TODO Auto-generated method stub
 		return this.semesterResultsDao.getSemesterResultsEntityByStudentId(studentId);
 	}
+
+	@Override
+	public SemesterResults calculateSemesterResults(int studentId, int semesterId) {
+		// TODO Auto-generated method stub
+		return this.semesterResultsDao.calculateSemesterResults(studentId, semesterId);
+	}
 }

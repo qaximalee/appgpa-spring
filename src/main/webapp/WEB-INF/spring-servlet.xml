@@ -121,6 +121,10 @@
 		<beans:property name="studentStatisticsDao" ref="studentStatisticsDao"></beans:property>
 	</beans:bean>
 	
+	<!-- Bean For ResultsGeneration -->
+	<beans:bean id="resultsService" class="com.ihsinformatics.spring.appgpa.service.imp.ResultsServiceImp" >
+	</beans:bean>
+	
 	<!--                                  BEANS INITIALIZATION ENDED                                         -->
 	
 	

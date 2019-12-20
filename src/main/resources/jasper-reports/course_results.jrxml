@@ -252,7 +252,7 @@ sem.semester_no]]>
 				<textFieldExpression><![CDATA[$F{Registration_No}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="249" y="0" width="247" height="30" uuid="9dd53a72-87dd-4259-9ee2-8cd0006d7354">
+				<reportElement stretchType="RelativeToBandHeight" x="249" y="0" width="247" height="30" uuid="9dd53a72-87dd-4259-9ee2-8cd0006d7354">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8e47baf3-c49a-4d66-bc91-1d1222660d5b"/>
 				</reportElement>
 				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">

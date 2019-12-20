@@ -38,7 +38,7 @@
 	<columnHeader>
 		<band height="30" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="185" height="30" uuid="135929f5-7667-499c-8046-a3a183448e04">
+				<reportElement x="0" y="0" width="110" height="30" uuid="135929f5-7667-499c-8046-a3a183448e04">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5787a278-96f5-4aeb-89e3-25c3ce5708e0"/>
 				</reportElement>
 				<box topPadding="7" leftPadding="0" bottomPadding="0" rightPadding="0">
@@ -53,7 +53,7 @@
 				<text><![CDATA[Course Code]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="185" y="0" width="105" height="30" uuid="db4ce5eb-5bb3-46eb-b8af-117a005103a4">
+				<reportElement x="110" y="0" width="105" height="30" uuid="db4ce5eb-5bb3-46eb-b8af-117a005103a4">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="99c7028d-b4c3-46a6-b7b6-73bd262cb1c0"/>
 				</reportElement>
 				<box topPadding="7" leftPadding="0" bottomPadding="0" rightPadding="0">
@@ -68,7 +68,7 @@
 				<text><![CDATA[Semester]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="290" y="0" width="265" height="30" uuid="57259954-807a-4f53-901c-e99a6f7837db">
+				<reportElement x="215" y="0" width="340" height="30" uuid="57259954-807a-4f53-901c-e99a6f7837db">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d160c877-be31-4379-abbc-2a909fc6afb3"/>
 				</reportElement>
 				<box topPadding="7" leftPadding="0" bottomPadding="0" rightPadding="0">
@@ -87,7 +87,7 @@
 	<detail>
 		<band height="30" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="185" height="30" uuid="82e54c22-e138-4f48-8c6c-a27619c42251">
+				<reportElement x="0" y="0" width="110" height="30" uuid="82e54c22-e138-4f48-8c6c-a27619c42251">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5787a278-96f5-4aeb-89e3-25c3ce5708e0"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
@@ -96,7 +96,7 @@
 				<textFieldExpression><![CDATA[$F{Course_Code}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="185" y="0" width="105" height="30" uuid="a9270abe-bfe1-4535-9add-df71fbc3850a">
+				<reportElement x="110" y="0" width="105" height="30" uuid="a9270abe-bfe1-4535-9add-df71fbc3850a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="99c7028d-b4c3-46a6-b7b6-73bd262cb1c0"/>
 				</reportElement>
 				<box topPadding="8" leftPadding="0" bottomPadding="0" rightPadding="0"/>
@@ -104,7 +104,7 @@
 				<textFieldExpression><![CDATA[$F{Semester}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="290" y="0" width="265" height="30" uuid="eed2868a-5e9f-48f9-92d4-a0fe1acd7980">
+				<reportElement stretchType="RelativeToBandHeight" x="215" y="0" width="340" height="30" uuid="eed2868a-5e9f-48f9-92d4-a0fe1acd7980">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d160c877-be31-4379-abbc-2a909fc6afb3"/>
 				</reportElement>
 				<box topPadding="8" leftPadding="0" bottomPadding="0" rightPadding="0"/>

@@ -87,4 +87,14 @@ public interface SemesterResultsDao {
 	 * @return List<SemesterResults>
 	 */
 	List<SemesterResults> getSemesterResultsEntityByStudentId(int studentId);
+
+	/**
+	 * It will calculate the results for a student and return it to the calling
+	 * controller(s).
+	 * 
+	 * @param semesterId
+	 * @param studentId
+	 * @return'
+	 */
+	public SemesterResults calculateSemesterResults(int studentId, int semesterId);
 }

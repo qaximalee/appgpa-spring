@@ -9,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ihsinformatics.spring.appgpa.model.Semester;
 import com.ihsinformatics.spring.appgpa.service.SemesterService;
-import com.ihsinformatics.spring.appgpa.service.imp.SemesterServiceImp;
 import com.ihsinformatics.spring.appgpa.values.Values;
 
 @Controller
@@ -19,10 +18,13 @@ public class SemesterController {
 	@Autowired
 	private SemesterService semesterService;
 
-	public void setSemesterService(SemesterServiceImp semesterService) {
-		this.semesterService = semesterService;
-	}
-
+	/**
+	 * This end point will add semester. Semester No should be unique and not
+	 * greater than 8 and less than 1.
+	 * 
+	 * @param semesterNo
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/addSemester", method = RequestMethod.POST)
 	public ModelAndView addSemester(@RequestParam("semesterNo") int semesterNo) {
 		Semester semester = new Semester(0, semesterNo);
@@ -33,6 +35,13 @@ public class SemesterController {
 			return viewSemesters(Values.CREATED_UNSUCCESS);
 	}
 
+	/**
+	 * This end point will update semester. Semester No shouldn't be greater than 8
+	 * and lesser than 1 and should be unique.
+	 * 
+	 * @param semesterId
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/editSemester", method = RequestMethod.POST)
 	public ModelAndView editSemester(@RequestParam("semesterId") int semesterId,
 			@RequestParam("semesterNo") int semesterNo) {
@@ -44,6 +53,12 @@ public class SemesterController {
 			return viewSemesters(Values.UPDATED_UNSUCCESS);
 	}
 
+	/**
+	 * It will display the edit form for the semester.
+	 * 
+	 * @param semesterId
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/editSemesterForm", method = RequestMethod.GET)
 	public ModelAndView editSemesterForm(@RequestParam("id") int semesterId) {
 		ModelAndView mav = new ModelAndView("semester_views/edit_semester_form");
@@ -51,6 +66,12 @@ public class SemesterController {
 		return mav;
 	}
 
+	/**
+	 * This end point will delete a semester by it's semester id.
+	 * 
+	 * @param semesterId
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/deleteSemester", method = RequestMethod.GET)
 	public ModelAndView deleteSemester(@RequestParam("id") int semesterId) {
 
@@ -60,6 +81,15 @@ public class SemesterController {
 			return viewSemesters(Values.DELETED_UNSUCCESS);
 	}
 
+	/**
+	 * It will show all semesters on web. It will take a parameter of string which
+	 * is to identify that if any semester added, updated or deleted, by which we
+	 * can generate a notification on front-end.
+	 * 
+	 * @param alertMessageIdentifier:
+	 *            String
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/viewSemesters")
 	public ModelAndView viewSemesters(String alertMessageIdentifier) {
 		// TODO Auto-generated method stub
@@ -74,6 +104,12 @@ public class SemesterController {
 
 	}
 
+	/**
+	 * This end-point will show the initial view of the module, in this case it will
+	 * show add semester view.
+	 * 
+	 * @return ModelAndView
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView initialView() {
 		return new ModelAndView("semester_views/add_semester_form");

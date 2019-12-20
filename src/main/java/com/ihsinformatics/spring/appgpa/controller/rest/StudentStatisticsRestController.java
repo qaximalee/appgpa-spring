@@ -21,30 +21,53 @@ public class StudentStatisticsRestController {
 	@Autowired
 	private StudentStatisticsService studentStatisticsService;
 
-	public void setStudentStatisticsService(StudentStatisticsService studentStatisticsService) {
-		this.studentStatisticsService = studentStatisticsService;
-	}
-
+	/**
+	 * This end point will return a json array in which total no of students will be
+	 * return by semester-wise.
+	 * 
+	 * @return String JSONArray
+	 */
 	@GetMapping("/getStudentBySemester")
 	public Map<Integer, Integer> getStudentBySemester() {
 		return studentStatisticsService.getTotalStudentsBySemester();
 	}
 
+	/**
+	 * This end point will return all student who have get higher marks by
+	 * course-wise.
+	 * 
+	 * @return String JSONArray
+	 */
 	@GetMapping("/getCoursesByHigherMarks")
 	public List<CourseDto> getCoursesByHigherMarks() {
 		return studentStatisticsService.getTopCoursesByHigherMarks();
 	}
 
+	/**
+	 * This end point will return total no of courses in all semesters.
+	 * 
+	 * @return String JSONArray
+	 */
 	@GetMapping("/getTotalCoursesBySemester")
 	public List<CoursesBySemesterDto> getTotalCoursesBySemester() {
 		return studentStatisticsService.getTotalCoursesBySemester();
 	}
 
+	/**
+	 * This will return all students with there current semester.
+	 * 
+	 * @return String JSONArray
+	 */
 	@GetMapping("/getStudentsCurrentSemester")
 	public List<StudentSemesterDto> getStudentsCurrentSemester() {
 		return studentStatisticsService.getStudentsBySemesterCompletion();
 	}
 
+	/**
+	 * This end point will return top cgpa holders.
+	 * 
+	 * @return String JSONArray
+	 */
 	@GetMapping("/getTopCgpaHolder")
 	public List<TopCgpaPOJO> getTopCgpaHolders() {
 		return studentStatisticsService.getTopCgpaHolders();

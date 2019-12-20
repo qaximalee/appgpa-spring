@@ -14,15 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ihsinformatics.spring.appgpa.model.CourseResults;
-import com.ihsinformatics.spring.appgpa.model.Semester;
 import com.ihsinformatics.spring.appgpa.model.SemesterResults;
 import com.ihsinformatics.spring.appgpa.model.SemesterResultsPOJO;
-import com.ihsinformatics.spring.appgpa.model.Student;
-import com.ihsinformatics.spring.appgpa.service.CourseResultsService;
 import com.ihsinformatics.spring.appgpa.service.SemesterResultsService;
-import com.ihsinformatics.spring.appgpa.service.SemesterService;
-import com.ihsinformatics.spring.appgpa.service.StudentService;
 
 @RestController
 @RequestMapping("rest-semesterResults")
@@ -31,54 +25,50 @@ public class SemesterResultsRestController {
 	@Autowired
 	private SemesterResultsService semesterResultsService;
 
-	@Autowired
-	private SemesterService semesterService;
-
-	@Autowired
-	private StudentService studentService;
-
-	@Autowired
-	private CourseResultsService courseResultsService;
-
+	/**
+	 * This end point will return all semester results in a readable form. It will
+	 * not return semester or student id but return student's info.
+	 * 
+	 * @return List<SemesterResultsPOJO>
+	 */
 	@GetMapping("/readableList")
 	public List<SemesterResultsPOJO> getAllSemesterResultsPOJO() {
 		return this.semesterResultsService.getAllReadableSemesterResults();
 	}
 
+	/**
+	 * This end point will return all semester results in a non readable form i.e it
+	 * will return semester's id, student's id.
+	 * 
+	 * @return List<SemesterResults>
+	 */
 	@GetMapping("/list")
 	public List<SemesterResults> getAllSemesterResults() {
 		return this.semesterResultsService.getAllSemesterResults();
 	}
 
+	/**
+	 * This end point will return a single semester result by it's id.
+	 * 
+	 * @return SemesterResults
+	 */
 	@PostMapping("/{id}")
 	public SemesterResults getSingleSemesterResult(@PathVariable("id") int semesterResultId) {
 		return this.semesterResultsService.getSemesterResultsById(semesterResultId);
 	}
 
+	/**
+	 * This end point will generate the semester results by student id and there
+	 * semester id. results.
+	 * 
+	 * @param studentId
+	 * @param semesterId
+	 * @return ResponseEntity<Object>
+	 */
 	@PostMapping("/add")
 	public ResponseEntity<Object> addSemesterResults(@RequestParam("studentId") int studentId,
 			@RequestParam("semesterId") int semesterId) {
-		Student student = studentService.getStudentById(studentId);
-		Semester semester = semesterService.getSemesterById(semesterId);
-
-		List<CourseResults> listOfCourseResults = courseResultsService
-				.getCourseResultsByStudentAndSemesterId(semesterId, studentId);
-
-		// Semester GPA can be get by below formula
-		// gpa = totalPoints / gradableCredit
-		// where,
-		// totalPoints = gpa * credit hours
-		// gradableCredit = total credit hours
-		double totalPoints = 0.0;
-
-		for (CourseResults courseResults : listOfCourseResults) {
-			totalPoints += courseResults.getTotalPoints();
-		}
-
-		double gradableCredit = 3 * listOfCourseResults.size();
-		double semesterGPA = totalPoints / gradableCredit;
-
-		SemesterResults semesterResults = new SemesterResults(0, semester, student, semesterGPA, semesterGPA);
+		SemesterResults semesterResults = semesterResultsService.calculateSemesterResults(studentId, semesterId);
 
 		boolean isSemesterResultPresent = semesterResultsService.getSemesterResultsByStudentAndSemesterId(studentId,
 				semesterId);
@@ -97,6 +87,12 @@ public class SemesterResultsRestController {
 		}
 	}
 
+	/**
+	 * This will delete a semester result by it's semester results's id.
+	 * 
+	 * @param semestesResultId
+	 * @return ResponseEntity<Object>
+	 */
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Object> deleteSemesterResult(@PathVariable("id") int semesterResultId) {
 		if (this.semesterResultsService.deleteSemesterResultsById(semesterResultId))

@@ -51,7 +51,7 @@
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[First_Name]]></text>
+				<text><![CDATA[First Name]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="185" y="0" width="185" height="30" uuid="7d64a359-daff-48a1-9a63-a7bddeac389b">
@@ -67,7 +67,7 @@
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Last_Name]]></text>
+				<text><![CDATA[Last Name]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="370" y="0" width="185" height="30" uuid="cf1a791e-a39b-4627-9ad6-88b4e39b7117">
@@ -83,7 +83,7 @@
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Registration_No]]></text>
+				<text><![CDATA[Registration No]]></text>
 			</staticText>
 		</band>
 	</columnHeader>

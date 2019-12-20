@@ -50,7 +50,7 @@ group by cr.course_id order by Percentage desc]]>
 	<columnHeader>
 		<band height="30" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="95" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="68a64313-ad0f-4d63-8dc7-615b828a4833">
+				<reportElement x="0" y="0" width="80" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="68a64313-ad0f-4d63-8dc7-615b828a4833">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5ce91ba4-d0b1-485f-8dda-33156d24fcf3"/>
 				</reportElement>
 				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
@@ -64,7 +64,7 @@ group by cr.course_id order by Percentage desc]]>
 				<text><![CDATA[First Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="95" y="0" width="92" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="475f5d92-ce50-4a97-accc-d8b2e9534495">
+				<reportElement x="80" y="0" width="70" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="475f5d92-ce50-4a97-accc-d8b2e9534495">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="066740c7-5ad4-4fec-93e3-5bf871ff6cd6"/>
 				</reportElement>
 				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
@@ -78,7 +78,7 @@ group by cr.course_id order by Percentage desc]]>
 				<text><![CDATA[Last Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="187" y="0" width="92" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="a424471b-0b42-4df7-8a58-e6772021ddee">
+				<reportElement x="150" y="0" width="80" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="a424471b-0b42-4df7-8a58-e6772021ddee">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="467d53b6-dfab-4580-9723-bbbae87cdeae"/>
 				</reportElement>
 				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
@@ -92,7 +92,7 @@ group by cr.course_id order by Percentage desc]]>
 				<text><![CDATA[Registration No]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="279" y="0" width="92" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="cd6a0637-eb96-40a1-abd5-e8ac3df5b440">
+				<reportElement x="230" y="0" width="177" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="cd6a0637-eb96-40a1-abd5-e8ac3df5b440">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6f4856bb-957e-4755-b04f-fe44c672e59f"/>
 				</reportElement>
 				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
@@ -106,7 +106,7 @@ group by cr.course_id order by Percentage desc]]>
 				<text><![CDATA[Course Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="371" y="0" width="92" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="db4bd491-6b24-4474-bd91-bda5be7c6131">
+				<reportElement x="407" y="0" width="73" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="db4bd491-6b24-4474-bd91-bda5be7c6131">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="955010bc-27d0-4360-a10a-120e1e879e6d"/>
 				</reportElement>
 				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
@@ -120,7 +120,7 @@ group by cr.course_id order by Percentage desc]]>
 				<text><![CDATA[Course Code]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="463" y="0" width="92" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="f125cc23-0a55-42f3-8693-1e38d11b161b">
+				<reportElement x="480" y="0" width="75" height="30" backcolor="rgba(38, 142, 222, 0.49019608)" uuid="f125cc23-0a55-42f3-8693-1e38d11b161b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="906ebfe1-a246-4e44-ad40-fdc429b573ca"/>
 				</reportElement>
 				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0">
@@ -131,14 +131,14 @@ group by cr.course_id order by Percentage desc]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[Percentage]]></text>
+				<text><![CDATA[Percentage (%)]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="31" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="95" height="30" uuid="5298cae3-e402-4814-a4af-723776340203">
+				<reportElement x="0" y="0" width="80" height="30" uuid="5298cae3-e402-4814-a4af-723776340203">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5ce91ba4-d0b1-485f-8dda-33156d24fcf3"/>
 				</reportElement>
 				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
@@ -146,7 +146,7 @@ group by cr.course_id order by Percentage desc]]>
 				<textFieldExpression><![CDATA[$F{First_Name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="95" y="0" width="92" height="30" uuid="3d263021-2f3d-4ce4-9f14-26a72f648e68">
+				<reportElement x="80" y="0" width="70" height="30" uuid="3d263021-2f3d-4ce4-9f14-26a72f648e68">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="066740c7-5ad4-4fec-93e3-5bf871ff6cd6"/>
 				</reportElement>
 				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
@@ -154,7 +154,7 @@ group by cr.course_id order by Percentage desc]]>
 				<textFieldExpression><![CDATA[$F{Last_Name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="187" y="0" width="92" height="30" uuid="ae483fec-95d3-4cb9-8970-b30ec110cd13">
+				<reportElement x="150" y="0" width="80" height="30" uuid="ae483fec-95d3-4cb9-8970-b30ec110cd13">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="467d53b6-dfab-4580-9723-bbbae87cdeae"/>
 				</reportElement>
 				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
@@ -162,7 +162,7 @@ group by cr.course_id order by Percentage desc]]>
 				<textFieldExpression><![CDATA[$F{Registration_No}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="279" y="0" width="92" height="30" uuid="7842edd1-fd4e-49ad-ad70-2c18668e1013">
+				<reportElement x="230" y="0" width="177" height="30" uuid="7842edd1-fd4e-49ad-ad70-2c18668e1013">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6f4856bb-957e-4755-b04f-fe44c672e59f"/>
 				</reportElement>
 				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
@@ -170,7 +170,7 @@ group by cr.course_id order by Percentage desc]]>
 				<textFieldExpression><![CDATA[$F{Course_Name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="371" y="0" width="92" height="30" uuid="1fa9fe53-6dec-41b1-a1b9-453608a9a57a">
+				<reportElement x="407" y="0" width="73" height="30" uuid="1fa9fe53-6dec-41b1-a1b9-453608a9a57a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="955010bc-27d0-4360-a10a-120e1e879e6d"/>
 				</reportElement>
 				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>
@@ -178,7 +178,7 @@ group by cr.course_id order by Percentage desc]]>
 				<textFieldExpression><![CDATA[$F{Course_Code}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="463" y="0" width="92" height="30" uuid="b6c016be-28b3-40df-8e56-49ed7a7b2161">
+				<reportElement x="480" y="0" width="75" height="30" uuid="b6c016be-28b3-40df-8e56-49ed7a7b2161">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="906ebfe1-a246-4e44-ad40-fdc429b573ca"/>
 				</reportElement>
 				<box topPadding="6" leftPadding="0" bottomPadding="0" rightPadding="0"/>

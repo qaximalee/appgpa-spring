@@ -24,4 +24,6 @@ public interface SemesterResultsService {
 	boolean getSemesterResultsByStudentAndSemesterId(int studentId, int semesterId);
 
 	List<SemesterResults> getSemesterResultsEntityByStudentId(int studentId);
+
+	SemesterResults calculateSemesterResults(int studentId, int semesterId);
 }

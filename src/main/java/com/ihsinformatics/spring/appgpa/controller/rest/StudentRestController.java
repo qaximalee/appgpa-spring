@@ -6,18 +6,19 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ihsinformatics.spring.appgpa.model.Student;
 import com.ihsinformatics.spring.appgpa.service.StudentService;
-import com.ihsinformatics.spring.appgpa.service.imp.StudentServiceImp;
 import com.ihsinformatics.spring.appgpa.validation.Validate;
 import com.ihsinformatics.spring.appgpa.values.RestValues;
 
@@ -27,10 +28,6 @@ public class StudentRestController {
 
 	@Autowired
 	private StudentService studentService;
-
-	public void setStudentService(StudentServiceImp studentService) {
-		this.studentService = studentService;
-	}
 
 	/**
 	 * Get All Students in database.
@@ -92,44 +89,17 @@ public class StudentRestController {
 	}
 
 	/**
-	 * HTTP:
-	 * http://localhost:8080/appgpa-spring/rest-student/editStudentForm/{studentId}
-	 * Parameters { registrationNo i.e EP-1234567 firstName i.e Muhammad lastName
-	 * i.e Ali or Noor-u } This end-point will UPDATE Student by validating above
-	 * parameter values.
+	 * HTTP: http://localhost:8080/appgpa-spring/rest-student/update Parameters
+	 * { @RequestBody(Student) }
 	 * 
 	 * @return JSON of student or Error message
 	 */
-	@PutMapping("/update/{id}")
-	public String editStudent(@PathVariable("id") int studentId, @RequestParam("registrationNo") String registrationNo,
-			@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName
-
-	) {
-		boolean validationError = false;
-
-		JSONObject jsonError = new JSONObject();
-
-		if (!Validate.isValidRegistrationNo(registrationNo)) {
-			validationError = true;
-			jsonError.append("error", "invalid-registrationNo");
-		}
-		if (!Validate.isValidFirstName(firstName)) {
-			validationError = true;
-			jsonError.append("error", "invalid-firstName");
-		}
-		if (!Validate.isValidLastName(lastName)) {
-			validationError = true;
-			jsonError.append("error", "invalid-lastName");
-		}
-
-		Student student = new Student(studentId, registrationNo, firstName, lastName);
-
-		if (validationError)
-			return jsonError.toString();
-		else if (studentService.update(student))
-			return new JSONObject(student).toString();
+	@PutMapping("/update")
+	public ResponseEntity<Object> updateStudent(@Validated @RequestBody Student student) {
+		if (studentService.update(student))
+			return new ResponseEntity<>(student, HttpStatus.OK);
 		else
-			return new JSONObject().put("error", RestValues.UPDATED_UNSUCCESS).toString();
+			return new ResponseEntity<>(new JSONObject().put("error", "Student is not Found"), HttpStatus.BAD_REQUEST);
 	}
 
 	/**

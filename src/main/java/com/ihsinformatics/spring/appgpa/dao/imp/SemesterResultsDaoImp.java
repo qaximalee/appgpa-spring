@@ -18,14 +18,20 @@ import com.ihsinformatics.spring.appgpa.dao.SemesterDao;
 import com.ihsinformatics.spring.appgpa.dao.SemesterResultsDao;
 import com.ihsinformatics.spring.appgpa.dao.StudentDao;
 import com.ihsinformatics.spring.appgpa.model.CourseResults;
+import com.ihsinformatics.spring.appgpa.model.Semester;
 import com.ihsinformatics.spring.appgpa.model.SemesterResults;
 import com.ihsinformatics.spring.appgpa.model.SemesterResultsPOJO;
+import com.ihsinformatics.spring.appgpa.model.Student;
+import com.ihsinformatics.spring.appgpa.service.CourseResultsService;
 
 public class SemesterResultsDaoImp implements SemesterResultsDao {
 
 	private SessionFactory sessionFactory;
 	private StudentDao studentDao;
 	private SemesterDao semesterDao;
+
+	@Autowired
+	private CourseResultsService courseResultsService;
 
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
@@ -337,5 +343,38 @@ public class SemesterResultsDaoImp implements SemesterResultsDao {
 			e.printStackTrace();
 		}
 		return semesterResults;
+	}
+
+	/**
+	 * It will calculate the results for a student and return it to the calling
+	 * controller(s).
+	 * 
+	 * @param semesterId
+	 * @param studentId
+	 * @return'
+	 */
+	@Override
+	public SemesterResults calculateSemesterResults(int studentId, int semesterId) {
+		Student student = studentDao.getStudentById(studentId);
+		Semester semester = semesterDao.getSemesterById(semesterId);
+
+		List<CourseResults> listOfCourseResults = courseResultsService
+				.getCourseResultsByStudentAndSemesterId(semesterId, studentId);
+
+		// Semester GPA can be get by below formula
+		// gpa = totalPoints / gradableCredit
+		// where,
+		// totalPoints = gpa * credit hours
+		// gradableCredit = total credit hours
+		double totalPoints = 0.0;
+
+		for (CourseResults courseResults : listOfCourseResults) {
+			totalPoints += courseResults.getTotalPoints();
+		}
+
+		double gradableCredit = 3 * listOfCourseResults.size();
+		double semesterGPA = totalPoints / gradableCredit;
+
+		return new SemesterResults(0, semester, student, semesterGPA, semesterGPA);
 	}
 }

@@ -20,4 +20,6 @@ public interface CourseResultsDao {
 	List<CourseResults> getCourseResultsByStudentAndSemesterId(int semesterId, int studentId);
 
 	List<CourseResultsPOJO> getAllReadableCourseResults();
+
+	CourseResults calculateCourseResult(int studentId, int semesterId, int courseId, double percentage);
 }

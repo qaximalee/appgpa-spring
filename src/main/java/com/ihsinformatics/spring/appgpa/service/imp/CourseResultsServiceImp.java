@@ -65,4 +65,9 @@ public class CourseResultsServiceImp implements CourseResultsService {
 		return this.courseResultsDao.getAllReadableCourseResults();
 	}
 
+	@Override
+	public CourseResults calculateCourseResult(int studentId, int semesterId, int courseId, double percentage) {
+		// TODO Auto-generated method stub
+		return this.courseResultsDao.calculateCourseResult(studentId, semesterId, courseId, percentage);
+	}
 }
