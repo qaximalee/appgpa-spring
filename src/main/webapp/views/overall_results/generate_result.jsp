@@ -12,7 +12,7 @@
 <style>
  	.dif_formats {
 	    position: absolute;
-	    right: 113px;
+	    right: 180px;
 	    display: none;
 	}
  	.dif_formats a{
@@ -40,11 +40,11 @@
 								value="${student.getRegistrationNo()}" /></option>
 					</c:forEach>
 				</select>
-				<a href="#" class="all_stdnt_link"><img src="../resources/images/download_image.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip"  title="Download Report"/></a>
+				<a href="#" class="all_stdnt_link" id="downloadAnchorTag"><img src="../resources/images/download_image.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip"  title="Download Report"/></a>
 				<div class="dif_formats">
-					<a href="#" target="_blank" id="pdf_report"><img src="../resources/images/pdf.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="Download PDF"/></a>
-					<a href="#" target="_blank" id="csv_report"><img src="../resources/images/csv.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="Download CSV"/></a>
-					<a href="#" target="_blank" id="html_report"><img src="../resources/images/html.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="View HTML"/></a>
+					<a href="" target="_blank" id="pdf_report"><img src="../resources/images/pdf.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="Download PDF"/></a>
+					<a href="" target="_blank" id="csv_report"><img src="../resources/images/csv.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="Download CSV"/></a>
+					<a href="" target="_blank" id="html_report"><img src="../resources/images/html.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="View HTML"/></a>
 				</div>
 			</div>
 			<span id="studName">Choose Student Registration NO...</span><br>
@@ -57,25 +57,38 @@
 		</table>
 	</div>
 	<script type="text/javascript">
+		
 		// toggle docs formats
 		$(document).ready(function(){
 			$('.all_stdnt_link').click(function(){
 				$('.dif_formats').fadeToggle();
+			
+				$('#pdf_report').click(function(){
+					let std = document.getElementById("studentId");
+					let stdId = std.options[std.selectedIndex].value;
+					console.log(stdId);
+					document.getElementById("pdf_report").href = "../rest-jasper-report/pdf/result/"+stdId;					
+				});
+				$('#csv_report').click(function(){
+					let std = document.getElementById("studentId");
+					let stdId = std.options[std.selectedIndex].value;
+					console.log(stdId);
+					document.getElementById('csv_report').href = "../rest-jasper-report/csv/result/"+stdId;
+				});
+				$('#html_report').click(function(){
+					let std = document.getElementById("studentId");
+					let stdId = std.options[std.selectedIndex].value;
+					console.log(stdId);
+					document.getElementById('html_report').href = "../rest-jasper-report/html/result/"+stdId;
+				});			
 			});
 		});
+		
 		function getStudent(){
 			var std = document.getElementById("studentId");
 			var stdId = std.options[std.selectedIndex].value; 
 			const url = "../course-results/getStudentByRegistration?studentID="+stdId;
-			$('#pdf_report').onclick(function(){
-				$('#pdf_report').href = "../rest-jasper-report/pdf/result/"+stdId;
-			});
-			$('#csv_report').onclick(function(){
-				$('#csv_report').href = "../rest-jasper-report/csv/result/"+stdId;
-			});
-			$('#html_report').onclick(function(){
-				$('#html_report').href = "../rest-jasper-report/html/result/"+stdId;
-			});
+			
 			// Populate dropdown with list of students
 			$.getJSON(url, function (data) {
 				var studentDetails = "Marksheet Of: "+data.firstName+" "+data.lastName;
@@ -95,8 +108,11 @@
 
 			const url = "../result/getResultByStudent?id="+stdId;
 			$.getJSON(url, function (data) {
-				if(data.message == "NULL"){
-					document.getElementById("downloadAnchorTag").innerHTML = "";
+				// Show Report Download Button
+				$("#downloadAnchorTag").show();
+				if(data.results == ""){
+					// Hide Report Download Button if there isn't any result for the student
+					$("#downloadAnchorTag").hide();
 				}
 				var table = document.querySelector("table");
 				var resultData = data.results;
@@ -155,7 +171,7 @@
 					for (key in element) {
 						//console.log(element.length);
 						if(counter == tableSequence.length)
-					  		break;
+					 		break;
 						if(counter < 8){
 							let cell = row.insertCell();
 							let text = document.createTextNode(element[tableSequence[counter]]);

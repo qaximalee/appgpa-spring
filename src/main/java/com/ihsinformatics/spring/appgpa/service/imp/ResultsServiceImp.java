@@ -126,6 +126,8 @@ public class ResultsServiceImp implements ResultsService {
 	 */
 	private void generatePDF(HttpServletResponse response, JasperPrint jrPrint, String filename)
 			throws IOException, JRException {
+		response.setContentType("APPLICATION/OCTET-STREAM");
+		response.setHeader("Content-Disposition", "attachment; filename=" + filename + ".pdf");
 		JRPdfExporter exporter = new JRPdfExporter();
 		exporter.setExporterInput(new SimpleExporterInput(jrPrint));
 		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(response.getOutputStream()));
@@ -143,6 +145,8 @@ public class ResultsServiceImp implements ResultsService {
 	 */
 	private void generateHTML(HttpServletResponse response, JasperPrint jrPrint, String filename)
 			throws IOException, JRException {
+		response.setContentType("APPLICATION/OCTET-STREAM");
+		response.setHeader("Content-Disposition", "attachment; filename=" + filename + ".html");
 		// TODO Auto-generated method stub
 		HtmlExporter exporter = new HtmlExporter();
 		exporter.setExporterInput(new SimpleExporterInput(jrPrint));

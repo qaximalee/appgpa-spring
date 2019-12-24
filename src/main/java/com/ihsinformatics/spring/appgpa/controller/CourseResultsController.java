@@ -39,6 +39,20 @@ public class CourseResultsController {
 	@Autowired
 	private SemesterService semesterService;
 
+	/**
+	 * This end point will save a course result of a student.
+	 * 
+	 * @param int:
+	 *            studentId
+	 * @param int:
+	 *            semesterId
+	 * @param int:
+	 *            courseId
+	 * @param double:
+	 *            percentage
+	 * 
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/addCourseResults", method = RequestMethod.POST)
 	public ModelAndView addCourseResults(@RequestParam("studentId") int studentId,
 			@RequestParam("semesterId") int semesterId, @RequestParam("courseId") int courseId,
@@ -51,6 +65,14 @@ public class CourseResultsController {
 			return courseResultsView(Values.CREATED_UNSUCCESS);
 	}
 
+	/**
+	 * This end point will give JSON string of all courses by there semesters.
+	 * 
+	 * @param HttpServletResponse:
+	 *            response
+	 * @param int:
+	 *            semesterId
+	 */
 	@RequestMapping(value = "/getCoursesBySemester", method = RequestMethod.GET)
 	public void getCoursesBySemester(HttpServletResponse response, @RequestParam("semesterID") int semesterId) {
 		List<Course> courses = courseService.getCoursesBySemesterId(semesterId);
@@ -63,6 +85,14 @@ public class CourseResultsController {
 		}
 	}
 
+	/**
+	 * This end point will give JSON string of Student by there Registration No.
+	 * 
+	 * @param HttpServletResponse:
+	 *            response
+	 * @param int:
+	 *            studentId
+	 */
 	@RequestMapping(value = "/getStudentByRegistration", method = RequestMethod.GET)
 	public void getStudentByRegistration(HttpServletResponse response, @RequestParam("studentID") int studentId) {
 		Student students = studentService.getStudentById(studentId);
@@ -75,6 +105,14 @@ public class CourseResultsController {
 		}
 	}
 
+	/**
+	 * This end point will delete a course result by the course result id.
+	 * 
+	 * @param int:
+	 *            courseResultsId
+	 * 
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/deleteCourseResult", method = RequestMethod.GET)
 	public ModelAndView deleteCourseResult(@RequestParam("id") int courseResultsId) {
 		if (courseResultsService.deleteCourseResultsById(courseResultsId))
@@ -83,6 +121,16 @@ public class CourseResultsController {
 			return courseResultsView(Values.DELETED_UNSUCCESS);
 	}
 
+	/**
+	 * This end point will show all course results of all students and take a string
+	 * which will be used to identify the user added course result or updated or
+	 * deleted.
+	 * 
+	 * @param String:
+	 *            alertMessageIdentifier
+	 * 
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/viewCourseResults")
 	public ModelAndView courseResultsView(String alertMessageIdentifier) {
 		if (alertMessageIdentifier == null) {
@@ -95,6 +143,11 @@ public class CourseResultsController {
 		return mav;
 	}
 
+	/**
+	 * This end point will show the main page of the Course Results.
+	 * 
+	 * @return ModelAndView
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView initialView() {
 		ModelAndView mav = new ModelAndView("course_results_views/add_course_results_form");

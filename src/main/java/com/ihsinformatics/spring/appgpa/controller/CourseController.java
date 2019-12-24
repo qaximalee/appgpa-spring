@@ -11,7 +11,6 @@ import com.ihsinformatics.spring.appgpa.model.Course;
 import com.ihsinformatics.spring.appgpa.model.Semester;
 import com.ihsinformatics.spring.appgpa.service.CourseService;
 import com.ihsinformatics.spring.appgpa.service.SemesterService;
-import com.ihsinformatics.spring.appgpa.service.imp.CourseServiceImp;
 import com.ihsinformatics.spring.appgpa.values.Values;
 
 @Controller
@@ -24,14 +23,18 @@ public class CourseController {
 	@Autowired
 	private SemesterService semesterService;
 
-	public void setCourseService(CourseServiceImp courseService) {
-		this.courseService = courseService;
-	}
-
-	public void setSemesterService(SemesterService semesterService) {
-		this.semesterService = semesterService;
-	}
-
+	/**
+	 * This end point will add a course.
+	 * 
+	 * @param int:
+	 *            courseCode of the course
+	 * @param int:
+	 *            semesterId of the course
+	 * @param String:
+	 *            name of the course
+	 * 
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/addCourse", method = RequestMethod.POST)
 	public ModelAndView addCourse(@RequestParam("courseCode") int courseCode, @RequestParam("semester") int semesterId,
 			@RequestParam("name") String name) {
@@ -44,6 +47,20 @@ public class CourseController {
 			return viewCourses(Values.CREATED_UNSUCCESS);
 	}
 
+	/**
+	 * This end point will update a course.
+	 * 
+	 * @param int:
+	 *            courseId of the course
+	 * @param int:
+	 *            courseCode of the course
+	 * @param int:
+	 *            semesterId of the course
+	 * @param String:
+	 *            name of the course
+	 * 
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/editCourse", method = RequestMethod.POST)
 	public ModelAndView editCourse(@RequestParam("courseId") int courseId, @RequestParam("courseCode") int courseCode,
 			@RequestParam("semesterId") int semesterId, @RequestParam("name") String name) {
@@ -56,6 +73,14 @@ public class CourseController {
 			return viewCourses(Values.UPDATED_UNSUCCESS);
 	}
 
+	/**
+	 * This end point will show the edit view of the Course.
+	 * 
+	 * @param int:
+	 *            course id of that course which you want to update
+	 * 
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/editCourseForm", method = RequestMethod.GET)
 	public ModelAndView editCourseForm(@RequestParam("id") int courseId) {
 		ModelAndView mav = new ModelAndView("course_views/edit_course_form");
@@ -64,6 +89,13 @@ public class CourseController {
 		return mav;
 	}
 
+	/**
+	 * This end point will delete a course.
+	 * 
+	 * @param courseId
+	 * 
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/deleteCourse", method = RequestMethod.GET)
 	public ModelAndView deleteCourse(@RequestParam("id") int courseId) {
 
@@ -73,6 +105,15 @@ public class CourseController {
 			return viewCourses(Values.DELETED_UNSUCCESS);
 	}
 
+	/**
+	 * This method will show All the courses and a parameter will be taken which is
+	 * used to identify a user has updated, added or deleted a course.
+	 * 
+	 * @param Stirng:
+	 *            alertMessageIdentifier
+	 * 
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/viewCourses")
 	public ModelAndView viewCourses(String alertMessageIdentifier) {
 		if (alertMessageIdentifier == null) {
@@ -85,6 +126,11 @@ public class CourseController {
 		return mav;
 	}
 
+	/**
+	 * This end point will show the Main page of the Course.
+	 * 
+	 * @return ModelAndView
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView initialView() {
 		ModelAndView mav = new ModelAndView("course_views/add_course_form");

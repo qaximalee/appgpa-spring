@@ -21,7 +21,7 @@
 
 		<form action="${pageContext.request.contextPath}/course-results/addCourseResults" method="post">
 			<div class="form-group">
-				<label for="studentId">Student Id:</label> <select class="form-control" name="studentId" id="studentId" onchange="getStudent()"
+				<label for="studentId">Student Id:</label> <select class="form-control" name="studentId" id="studentId" 
 					required>
 					<c:forEach items="${studentList}" var="student">
 						<option value='<c:out value="${student.getStudentId()}"/>'><c:out
@@ -31,7 +31,7 @@
 			</div>
 			<h3 id="studName">Choose Student Registration NO...</h3>
 			<div class="form-group" style="padding-top: 30px">
-				<label for="semesterId">Semester Id:</label> <select class="form-control" name="semesterId" id="semesterId" onchange="getSem()"
+				<label for="semesterId">Semester Id:</label> <select class="form-control" name="semesterId" id="semesterId" 
 					required >
 					<c:forEach items="${semesterList}" var="semester">
 								<option value='<c:out value="${semester.getSemesterId()}"/>'><c:out
@@ -58,6 +58,14 @@
 		/*
 			This function fetch Courses by semesterId and Fill the dropdown on selecting the Semester
 		*/
+		$(document).ready(function(){
+			$('#studentId').change(function(){
+				getStudent();
+			});
+			$('#semesterId').change(function(){
+				getStudent();
+			});
+		});
 		function getSem(){
 			var s = document.getElementById("semesterId");
 			var semNum = s.options[s.selectedIndex].value;

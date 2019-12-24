@@ -53,6 +53,7 @@ public class JasperReports {
 	public void getTopCgpaHolderReport(@PathVariable("format") String format, HttpServletResponse response,
 			HttpServletRequest request) throws JRException, IOException, SQLException {
 		JasperReport jsReport = resultsService.getCompiledFile("top_cgpa_holders", request);
+
 		// Sending Parameters to the Field value.
 		Map<String, Object> params = new HashMap<>();
 		params.put("queryCondition", 11);

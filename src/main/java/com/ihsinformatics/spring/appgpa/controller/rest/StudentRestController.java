@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ihsinformatics.spring.appgpa.model.Student;
 import com.ihsinformatics.spring.appgpa.service.StudentService;
-import com.ihsinformatics.spring.appgpa.validation.Validate;
 import com.ihsinformatics.spring.appgpa.values.RestValues;
 
 @RestController
@@ -61,28 +60,9 @@ public class StudentRestController {
 	public String addStudent(@RequestParam("registrationNo") String registrationNo,
 			@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
 
-		boolean validationError = false;
-
-		JSONObject jsonError = new JSONObject();
-
-		if (!Validate.isValidRegistrationNo(registrationNo)) {
-			validationError = true;
-			jsonError.append("error", "invalid-registrationNo");
-		}
-		if (!Validate.isValidFirstName(firstName)) {
-			validationError = true;
-			jsonError.append("error", "invalid-firstName");
-		}
-		if (!Validate.isValidLastName(lastName)) {
-			validationError = true;
-			jsonError.append("error", "invalid-lastName");
-		}
-
 		Student student = new Student(0, registrationNo, firstName, lastName);
 
-		if (validationError)
-			return jsonError.toString();
-		else if (studentService.save(student))
+		if (studentService.save(student))
 			return new JSONObject(student).toString();
 		else
 			return new JSONObject().put("error", RestValues.SAVED_UNSUCCESS).toString();

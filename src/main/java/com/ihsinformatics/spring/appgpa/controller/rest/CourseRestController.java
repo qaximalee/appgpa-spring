@@ -22,6 +22,10 @@ import com.ihsinformatics.spring.appgpa.model.Semester;
 import com.ihsinformatics.spring.appgpa.service.CourseService;
 import com.ihsinformatics.spring.appgpa.service.SemesterService;
 
+/**
+ * It is a Rest Controller Class. This Class contains CRUD operation's end
+ * points for the Course.
+ */
 @RestController
 @RequestMapping("/rest-course")
 public class CourseRestController {

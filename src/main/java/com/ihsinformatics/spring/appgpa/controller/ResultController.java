@@ -28,6 +28,11 @@ public class ResultController {
 	@Autowired
 	private ResultsService resultsService;
 
+	/**
+	 * This method will show the Web view of the Result Generation page.
+	 * 
+	 * @return ModelAndView
+	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView viewResultsForm() {
 		return new ModelAndView("/overall_results/generate_result").addObject("studentList",
@@ -45,11 +50,9 @@ public class ResultController {
 
 		List<Result> results = resultsService.generateResult(studentId);
 
-		String message = "NOT-NULL";
+		// This string will identify where the json results has data or not.
 		if (results == null) {
-			message = "NULL";
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("message", message);
 			jsonObject.put("results", new ArrayList<>());
 
 			try {
@@ -63,7 +66,6 @@ public class ResultController {
 		}
 
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("message", message);
 		jsonObject.put("results", results);
 
 		try {
@@ -74,4 +76,12 @@ public class ResultController {
 			e.printStackTrace();
 		}
 	}
+
+	/*
+	 * @RequestMapping(value = "/getResultByStudent", method = RequestMethod.GET)
+	 * public ModelAndView getResultByStudent(@RequestParam("id") int studentId) {
+	 * return new
+	 * ModelAndView("overall_results/generate_result").addObject("results",
+	 * resultsService.generateResult(studentId)); }
+	 */
 }

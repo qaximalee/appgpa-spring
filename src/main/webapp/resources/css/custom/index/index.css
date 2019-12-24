@@ -1,0 +1,29 @@
+body{ background-color: #f1f1f1; }
+	/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #777; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background:#555; 
+}
+	.list-group-item { margin-bottom: 10px; margin-right: 5px;  }
+	.list-group{ margin-bottom: 10px; }
+	.crnt_smstr_list{ height: 320px; overflow-x: hidden; }
+.dif_formats,.dif_formats2{
+	display: none;
+}
+.dif_formats a{ display: inline-block; width:32%; }
+.dif_formats2 a{ display: inline-block; width:32%; }
