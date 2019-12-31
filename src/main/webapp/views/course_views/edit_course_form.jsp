@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Edit Form</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Edit Form</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 <jsp:include page="../header/nav_bar.jsp"></jsp:include>
@@ -24,12 +20,14 @@
 			<div class="form-group">
 				<label for="courseCode">Course Code:</label> <input type="text"
 					class="form-control" id="courseCode"
-					value="${course.getCourseCode()}" name="courseCode">
+					value="${course.getCourseCode()}" name="courseCode" onchange="isValidCode()" required>
+				<span class="error"><p id="course_code_error"></p></span>
 			</div>
 			<div class="form-group">
 				<label for="name">Course Name:</label> <input type="text"
 					class="form-control" id="name" value="${course.getName()}"
-					name="name">
+					name="name" onchange="isValidCourseName()" required>
+				<span class="error"><p id="course_name_error"></p></span>
 			</div>
 			<div class="form-group">
 				<label for="name">Semester No:</label> <select name="semesterId"
@@ -43,6 +41,8 @@
 			<button type="submit" class="btn btn-default">Update Course</button>
 		</form>
 	</div>
-
 </body>
+	<!-- include adding course's validation -->
+	<script src="${pageContext.request.contextPath}/resources/js/custom/course/course_validation.js"></script>
+
 </html>

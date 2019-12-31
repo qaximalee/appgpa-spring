@@ -5,7 +5,7 @@
 		</div>
 		<ul class="nav navbar-nav">	
 			<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>		
-			<li class="active"><a href="index.jsp"> Home</a>
+			<li class="active"><a href="${pageContext.request.contextPath}/index.jsp"> Home</a>
 			</li>
 			<li><a
 				href="${pageContext.request.contextPath}/student">Students</a></li>

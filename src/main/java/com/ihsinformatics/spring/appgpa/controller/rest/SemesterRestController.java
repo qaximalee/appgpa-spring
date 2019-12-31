@@ -34,7 +34,7 @@ public class SemesterRestController {
 	 */
 	@GetMapping("/list")
 	public List<Semester> getAllSemester() {
-		List<Semester> semesters = this.semesterService.getAllSemester();
+		List<Semester> semesters = this.semesterService.getAllSemesters();
 		return semesters;
 	}
 

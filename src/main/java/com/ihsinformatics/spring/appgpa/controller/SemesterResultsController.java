@@ -83,7 +83,7 @@ public class SemesterResultsController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView initialView() {
 		ModelAndView mav = new ModelAndView("/semester_results_views/add_semester_results_form");
-		mav.addObject("semesterList", semesterService.getAllSemester());
+		mav.addObject("semesterList", semesterService.getAllSemesters());
 		mav.addObject("studentList", studentService.getAllStudents());
 		return mav;
 	}

@@ -27,6 +27,11 @@ public class StudentDaoImp implements StudentDao {
 		this.sessionFactory = sessionFactory;
 	}
 
+	/**
+	 * This will return all Students from the database.
+	 * 
+	 * @return List<Student>
+	 */
 	@Override
 	public List<Student> getAllStudents() {
 		// TODO Auto-generated method stub
@@ -46,6 +51,12 @@ public class StudentDaoImp implements StudentDao {
 		return students;
 	}
 
+	/**
+	 * This will give single student info from the database.
+	 * 
+	 * @param id
+	 * @return Student entity
+	 */
 	@Override
 	public Student getStudentById(int id) {
 		// TODO Auto-generated method stub
@@ -64,6 +75,12 @@ public class StudentDaoImp implements StudentDao {
 		return student;
 	}
 
+	/**
+	 * This will give single student info from the database.
+	 * 
+	 * @param id
+	 * @return Student entity
+	 */
 	@Override
 	public boolean save(Student student) {
 		// TODO Auto-generated method stub
@@ -88,6 +105,11 @@ public class StudentDaoImp implements StudentDao {
 		return saved;
 	}
 
+	/**
+	 * This method will update a student on the data.
+	 * 
+	 * @return boolean up
+	 */
 	@Override
 	public boolean update(Student student) {
 		// TODO Auto-generated method stub
@@ -112,6 +134,13 @@ public class StudentDaoImp implements StudentDao {
 		return updated;
 	}
 
+	/**
+	 * This will return true if the student successfully saved or not.
+	 * 
+	 * @param student
+	 *            id provided.
+	 * @boolean deleteStudent
+	 */
 	@Override
 	public boolean deleteStudentById(int id) {
 		// TODO Auto-generated method stub

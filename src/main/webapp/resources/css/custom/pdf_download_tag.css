@@ -1,0 +1,83 @@
+/*
+	overall results report download tag's css
+*/
+.result_dif_formats {
+	position: absolute;
+	right: 180px;
+	display: none;
+}
+
+.result_dif_formats a {
+	display: inline-block;
+	margin-left: 5px;
+	position: relative;
+	z-index: 1;
+}
+
+.all_results_link {
+	position: absolute;
+	right: 180px;
+	top: 90px;
+}
+/*
+	semester results report download tag's css
+*/
+.semester_results_dif_formats {
+	position: absolute;
+	right: 104px;
+	display: none;
+}
+
+.semester_results_dif_formats a {
+	display: inline-block;
+	margin-left: 5px;
+	position: relative;
+	z-index: 1;
+}
+/*
+	course results report download tag's css
+*/
+.course_results_dif_formats {
+	position: absolute;
+	right: 104px;
+	display: none;
+}
+
+.course_results_dif_formats a {
+	display: inline-block;
+	margin-left: 5px;
+	position: relative;
+	z-index: 1;
+}
+/*
+	course report download tag's css
+*/
+.course_dif_formats {
+	position: absolute;
+	right: 104px;
+	display: none;
+}
+
+.course_dif_formats a {
+	display: inline-block;
+	margin-left: 5px;
+	position: relative;
+	z-index: 1;
+}
+
+/* 
+	student report download tag's css
+*/
+.std_dif_formats {
+	position: absolute;
+	right: 113px;
+	display: none;
+}
+
+.std_dif_formats a {
+	display: inline-block;
+	margin-left: 5px;
+	overflow: hidden;
+	position: relative;
+	z-index: 1;
+}

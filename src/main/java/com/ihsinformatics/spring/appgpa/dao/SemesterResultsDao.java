@@ -17,17 +17,16 @@ public interface SemesterResultsDao {
 	/**
 	 * This method will get Semester Results by semester results id.
 	 * 
-	 * @param int
-	 *            id
+	 * @param semesterId
 	 * @return SemesterResults
 	 */
-	SemesterResults getSemesterResultsById(int id);
+	SemesterResults getSemesterResultsById(int semesterId);
 
 	/**
 	 * This method will save the Semester Results.
 	 * 
-	 * @param SemesterResults
-	 *            data
+	 * @param semesterResults
+	 * 
 	 * @return boolean
 	 */
 	boolean save(SemesterResults semesterResults);
@@ -35,8 +34,7 @@ public interface SemesterResultsDao {
 	/**
 	 * This method will update the Semester Results
 	 * 
-	 * @param SemesterResults
-	 *            semesterResults
+	 * @param semesterResults
 	 * @return boolean
 	 */
 	boolean update(SemesterResults semesterResults);
@@ -44,17 +42,17 @@ public interface SemesterResultsDao {
 	/**
 	 * This method will delete Semester Results.
 	 * 
-	 * @param int
-	 *            id
+	 * @param semesterResultsId
 	 * @return boolean
 	 */
-	boolean deleteSemesterResultsById(int id);
+	boolean deleteSemesterResultsById(int semesterResultsId);
 
 	/**
 	 * This method gets all data of semester results in a readable form which is
 	 * showed in the view all semester results
 	 * 
-	 * @return List<SemesterResultsPOJO>
+	 * @return List<SemesterResultsPOJO> It will contains all readable values of
+	 *         semester results.
 	 */
 	List<SemesterResultsPOJO> getAllReadableSemesterResults();
 

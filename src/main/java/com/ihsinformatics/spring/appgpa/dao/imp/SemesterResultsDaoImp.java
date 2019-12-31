@@ -361,11 +361,10 @@ public class SemesterResultsDaoImp implements SemesterResultsDao {
 		List<CourseResults> listOfCourseResults = courseResultsService
 				.getCourseResultsByStudentAndSemesterId(semesterId, studentId);
 
-		// Semester GPA can be get by below formula
-		// gpa = totalPoints / gradableCredit
-		// where,
-		// totalPoints = gpa * credit hours
-		// gradableCredit = total credit hours
+		/*
+		 * Semester GPA can be get by below formula gpa = totalPoints / gradableCredit
+		 * where, totalPoints = gpa * credit hours gradableCredit = total credit hours
+		 */
 		double totalPoints = 0.0;
 
 		for (CourseResults courseResults : listOfCourseResults) {

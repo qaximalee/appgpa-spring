@@ -98,7 +98,7 @@ public class SemesterController {
 			System.out.println(alertMessageIdentifier);
 		}
 		ModelAndView mav = new ModelAndView(Values.SEMESTER_VIEW_URL);
-		mav.addObject("data", semesterService.getAllSemester());
+		mav.addObject("data", semesterService.getAllSemesters());
 		mav.addObject("alertMessageIdentitfier", alertMessageIdentifier);
 		return mav;
 

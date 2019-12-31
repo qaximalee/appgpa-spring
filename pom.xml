@@ -44,6 +44,12 @@
 			<artifactId>spring-security-web</artifactId>
 			<version>${spring-security.version}</version>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -160,9 +166,9 @@
 		</plugins>
 		<finalName>appgpa-spring</finalName>
 		<resources>
-		<resource>
+			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
-			</resources>
+		</resources>
 	</build>
 </project>

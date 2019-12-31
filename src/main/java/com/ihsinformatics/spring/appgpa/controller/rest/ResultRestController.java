@@ -1,7 +1,6 @@
 package com.ihsinformatics.spring.appgpa.controller.rest;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,54 +29,18 @@ public class ResultRestController {
 	 * 
 	 * @param studentId
 	 */
-
-	/*
-	 * @PostMapping("/getResultByStudent/{id}") public ResponseEntity<JSONObject>
-	 * getResultByStudent(@PathVariable("id") int studentId) {
-	 * 
-	 * List<Result> results = resultsService.generateResult(studentId);
-	 * 
-	 * if (results == null) { JSONObject jsonObject = new JSONObject();
-	 * jsonObject.put("message", "NULL"); jsonObject.put("results", new
-	 * ArrayList<>()); return new ResponseEntity<>(jsonObject,
-	 * HttpStatus.NOT_FOUND); } else { JSONObject jsonObject = new JSONObject();
-	 * jsonObject.put("message", "NOT-NULL"); jsonObject.put("results", results);
-	 * return new ResponseEntity<>(jsonObject, HttpStatus.OK); } }
-	 */
-
 	@RequestMapping(value = "/getResultByStudent/{id}", method = RequestMethod.GET)
 	public void getResultByStudent(HttpServletResponse response, @PathVariable("id") int studentId) {
 
 		List<Result> results = resultsService.generateResult(studentId);
 
-		String message = "NOT-NULL";
-		if (results == null) {
-			message = "NULL";
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("message", message);
-			jsonObject.put("results", new ArrayList<>());
-
-			try {
-				response.getWriter().print(jsonObject.toString());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("------------============= RESULTSERVLET JSON ERROR =============---------------");
-				e.printStackTrace();
-			}
-			return;
-		}
-
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("message", message);
 		jsonObject.put("results", results);
-
-		// JSONArray jsonResults = new JSONArray(results);
 
 		try {
 			response.getWriter().print(jsonObject.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("------------============= RESULTSERVLET JSON ERROR =============---------------");
 			e.printStackTrace();
 		}
 	}

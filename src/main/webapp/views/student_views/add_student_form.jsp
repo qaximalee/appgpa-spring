@@ -2,21 +2,13 @@
 <html>
 <head>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="/go/alertify.js" var="alertifyJS"/>
-<c:url value="/css/alertify.min.css" var="alertifyMinCSS"/>
-<c:url value="/css/themes/default.min.css" var="defaultMinCSS"/>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Add Student Form</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<!-- include the script -->
-<script type="text/javascript" src="../../resources/js/alertify.js"></script>
-<!-- include the style -->
-<link rel="stylesheet" href="../../resources/css/alertify.min.css" />
-<!-- include a theme -->
-<link rel="stylesheet" href="../../resources/css/themes/default.min.css"/>
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -53,57 +45,7 @@
 			<button type="submit" class="btn btn-default">Create Student</button>
 		</form>
 	</div>
-	<script type="text/javascript">
-	
-		var isValidated = true;
-	
-		function fnameValidation(value){
-			var regName = /^[a-zA-Z]+$/;
-			var name = value;
-			document.getElementById('fname_error').innerHTML = '';
-			if(!regName.test(name)){
-				document.getElementById('fname_error').innerHTML = 'Enter Correct First Name';
-				isValidated = false;
-			}else if(name == ""){
-				document.getElementById('fname_error').innerHTML = 'First Name should be filled';
-				isValidated = false;
-			}
-		}
-		
-		function lnameValidation(value){
-			var regName = /^[a-zA-Z]+$/;
-			var name = value;
-			document.getElementById('lname_error').innerHTML = '';
-			if(!regName.test(name)){
-				document.getElementById('lname_error').innerHTML = 'Enter Correct Last Name';
-				isValidated = false;
-			}else if(name == ""){
-				document.getElementById('lname_error').innerHTML = 'Last Name should be filled';
-				isValidated = false;
-			}
-		}
-		
-		function isRegNoValid() {
-			var value = document.getElementById("registrationNo").value;
-			var ins = value.search(/^EP-\d{7}$/);
-			document.getElementById('reg_no_error').innerHTML = '';
-			if (ins != 0) {
-				document.getElementById('reg_no_error').innerHTML = 'Enter Correct Registration No (i.e EP-1234567)';
-				isValidated = false;
-				return false; 
-			}else if(value == ""){
-				document.getElementById('reg_no_error').innerHTML = 'Registration No should be filled';
-				isValidated = false;
-				return false;
-			}
-			isValidated = true;
-			return true;
-		}
-		
-		function getValidated(){
-			return isValidated;
-		}
-	</script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/custom/student/student_validation.js"></script>
 </body>
 
 </html>

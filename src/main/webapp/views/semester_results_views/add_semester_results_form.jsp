@@ -20,6 +20,7 @@
 
 
 	<div class="container">
+		<input type="hidden" value="${pageContext.request.contentType}" id="contextPath"> 
 		<a href="${pageContext.request.contextPath}/semester-results/viewSemesterResults" style="float:right">View All Semester Results</a>	
 		<h1>Add Semester Results</h1>
 
@@ -51,6 +52,8 @@
 		function getStudent(){
 			var std = document.getElementById("studentId");
 			var stdId = std.options[std.selectedIndex].value;
+			
+			var contextPath = document.getElementById("contextPath").value;
 			const url = "course-results/getStudentByRegistration?studentID="+stdId;
 	
 			// Populate dropdown with list of provinces

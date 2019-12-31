@@ -6,33 +6,31 @@
 <title>View Students</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- include the script -->
-<script src="../resources/js/alertify.min.js"></script>
-<!-- include the style -->
-<link rel="stylesheet" href="../resources/css/alertify.min.css" />
-<!-- include a theme -->
-<link rel="stylesheet" href="../resources/css/themes/default.min.css" />
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,500" rel="stylesheet"/>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
- <link rel="stylesheet" href="../resources/css/bootstrap_search.css"/>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
- <style>
- 	.dif_formats {
-	    position: absolute;
-	    right: 113px;
-	    display: none;
-	}
- 	.dif_formats a{
- 		display: inline-block;
- 		margin-left: 5px;
- 		overflow: hidden;
- 		position: relative;
- 		z-index: 1;
- 	}
- </style>
+	<!-- include the script -->
+	<script src="../resources/js/alertify.min.js"></script>
+	<link rel="stylesheet" href="../resources/css/alertify.min.css" />
+	
+	<!-- include a theme -->
+	<link rel="stylesheet" href="../resources/css/themes/default.min.css" />
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,500" rel="stylesheet"/>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+	
+	<!-- Include Bootstrap for Searching -->
+ 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap_search.css"/>
+ 	
+ 	<!-- include jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+	<!-- include table data scripts -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
+	<script src="https://cdn.datatables.net/plug-ins/1.10.15/sorting/stringMonthYear.js"></script>
+	
+ 	<!-- Include Bootstrap for Searching -->
+ 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/custom/pdf_download_tag.css"/>
 </head>
 <body>
 	<jsp:include page="../header/nav_bar.jsp"></jsp:include>
@@ -45,7 +43,7 @@
 	<div class="container">
 		<h2 style="overflow:hidden;" >All Students		
 		<a href="#" class="all_stdnt_link"><img src="../resources/images/download_image.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip"  title="Download Report"/></a>
-		<div class="dif_formats">
+		<div class="std_dif_formats">
 			<a href="../rest-jasper-report/pdf/all_students" target="_blank"><img src="../resources/images/pdf.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="Download PDF"/></a>
 			<a href="../rest-jasper-report/csv/all_students" target="_blank"><img src="../resources/images/csv.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="Download CSV"/></a>
 			<a href="../rest-jasper-report/html/all_students" target="_blank"><img src="../resources/images/html.png" width="30px" height="30px" class="pull-right" data-toggle="tooltip" title="View HTML"/></a>
@@ -77,58 +75,6 @@
 		</table>
 		<br /> <a href="${pageContext.request.contextPath}/views/student_views/add_student_form.jsp">Add New Student</a>
 	</div></div>
-	<!-- <script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
-	<script src="https://cdn.datatables.net/plug-ins/1.10.15/sorting/stringMonthYear.js"></script>
-	<script type="text/javascript">	
-		// toggle docs formats
-		$(document).ready(function(){
-			$('.all_stdnt_link').click(function(){
-				$('.dif_formats').fadeToggle();
-			});
-		});
-		$(document).ready(function() {
-		   $("#sort").DataTable({
-		      columnDefs : [
-		    { type : 'date', targets : [5] }
-		],  
-		   });
-		});
-		function deleteARecord(){
-			alertify.confirm(" Do you want to delete the record.",
-					  function(){
-					    alertify.success('Ok');
-					  },
-					  function(){
-					    alertify.error('Cancel');
-					  });
-		}
-	
-		var fromRequest = document.getElementById("fromRequest").value;
-		if(fromRequest == "from-create"){
-			alertify.success('Student Added');
-			document.getElementById("fromRequest").value = null;
-		}else if(fromRequest == "from-create-error"){
-			alertify.error('Student is not Created');
-			document.getElementById("fromRequest").value = null;
-		}else if( fromRequest == "from-edit"){
-			alertify.success('Student Updated');
-			document.getElementById("fromRequest").value = null;
-		}else if(fromRequest == "from-edit-error"){
-			alertify.error('Student is not Updated');
-			document.getElementById("fromRequest").value = null;
-		}else if( fromRequest == "from-delete"){
-			alertify.error('Student Deleted');
-			document.getElementById("fromRequest").value = null;
-		}else if(fromRequest == "from-delete-error"){
-			alertify.error('Student is not Deleted');
-			document.getElementById("fromRequest").value = null;
-		}
-		
-	</script>
 </body>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/custom/student/view_students.js"></script>
 </html>

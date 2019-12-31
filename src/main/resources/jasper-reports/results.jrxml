@@ -25,7 +25,7 @@
 			<staticText>
 				<reportElement x="140" y="0" width="480" height="61" uuid="adcf3965-7993-4eab-bfa7-bc06e9764a8e"/>
 				<textElement textAlignment="Center">
-					<font fontName="Algerian" size="26" isBold="true"/>
+					<font fontName="Serif" size="26" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Overall Result Of A Student]]></text>
 			</staticText>

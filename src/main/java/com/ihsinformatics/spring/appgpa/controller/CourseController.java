@@ -85,7 +85,7 @@ public class CourseController {
 	public ModelAndView editCourseForm(@RequestParam("id") int courseId) {
 		ModelAndView mav = new ModelAndView("course_views/edit_course_form");
 		mav.addObject("course", courseService.getCourseById(courseId));
-		mav.addObject("semesters", semesterService.getAllSemester());
+		mav.addObject("semesters", semesterService.getAllSemesters());
 		return mav;
 	}
 
@@ -134,7 +134,7 @@ public class CourseController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView initialView() {
 		ModelAndView mav = new ModelAndView("course_views/add_course_form");
-		mav.addObject("semesterList", semesterService.getAllSemester());
+		mav.addObject("semesterList", semesterService.getAllSemesters());
 		return mav;
 	}
 

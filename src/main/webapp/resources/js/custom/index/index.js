@@ -49,7 +49,7 @@ $(document).ready(function(){
 	});
 
 	function getStudentBySemester(){
-		const url = "student-statistics/getStudentsCurrentSemester";
+		const url = "rest-student-statistics/getStudentsCurrentSemester";
 
 		// Populate Students Info
 		return new Promise((resolve, reject) => {
@@ -59,7 +59,7 @@ $(document).ready(function(){
 	}
 
 	function getNoOfCoursesBySemester(){
-		const url = "student-statistics/getTotalCoursesBySemester";
+		const url = "rest-student-statistics/getTotalCoursesBySemester";
 
 		return new Promise((resolve, reject) => {
 			$.getJSON(url,(data) => data ? resolve(data) : reject(data));
@@ -67,7 +67,7 @@ $(document).ready(function(){
 	}
 
 	function getStudentsWithHigherMarks(){
-		const url = "student-statistics/getCoursesByHigherMarks";
+		const url = "rest-student-statistics/getCoursesByHigherMarks";
 
 		return new Promise((resolve, reject) => {
 			$.getJSON(url,(data) => data ? resolve(data) : reject(data));
@@ -75,7 +75,7 @@ $(document).ready(function(){
 	}
 
 	function getTopCgpaHolder(){
-		const url = "student-statistics/getTopCgpaHolder";
+		const url = "rest-student-statistics/getTopCgpaHolder";
 
 		return new Promise((resolve, reject) => {
 			$.getJSON(url,(data) => data ? resolve(data) : reject(data));

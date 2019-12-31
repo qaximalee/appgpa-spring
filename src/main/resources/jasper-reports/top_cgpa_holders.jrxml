@@ -51,7 +51,7 @@ order by sr.cgpa DESC]]>
 			<staticText>
 				<reportElement x="194" y="0" width="451" height="51" uuid="f23a45a8-89d4-4b8d-b10c-875f12882303"/>
 				<textElement textAlignment="Center">
-					<font fontName="Calibri Light" size="35" isBold="true"/>
+					<font fontName="Serif" size="35" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOP CGPA HOLDERS]]></text>
 			</staticText>

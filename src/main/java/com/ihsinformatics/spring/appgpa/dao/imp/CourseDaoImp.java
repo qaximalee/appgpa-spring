@@ -33,6 +33,11 @@ public class CourseDaoImp implements CourseDao {
 		this.semesterDao = semesterDao;
 	}
 
+	/**
+	 * This function will return all the Courses.
+	 * 
+	 * @return List<Course> It will contains all courses data
+	 */
 	@Override
 	public List<Course> getAllCourses() {
 		// TODO Auto-generated method stub
@@ -52,6 +57,13 @@ public class CourseDaoImp implements CourseDao {
 		return courses;
 	}
 
+	/**
+	 * This function will return a Course by course id
+	 * 
+	 * @param courseId
+	 *            Id of a course
+	 * @return Course returns the course
+	 */
 	@Override
 	public Course getCourseById(int id) {
 		// TODO Auto-generated method stub
@@ -69,6 +81,13 @@ public class CourseDaoImp implements CourseDao {
 		return course;
 	}
 
+	/**
+	 * This method will save the course into database.
+	 * 
+	 * @param course
+	 *            course object given to this method.
+	 * @return boolean if the course is added successfully or not.
+	 */
 	@Override
 	public boolean save(Course course) {
 		// TODO Auto-generated method stub
@@ -87,6 +106,13 @@ public class CourseDaoImp implements CourseDao {
 		return saved;
 	}
 
+	/**
+	 * This method will update the course in the database.
+	 * 
+	 * @param course
+	 *            course object given to this method.
+	 * @return boolean if the course is updated successfully or not.
+	 */
 	@Override
 	public boolean update(Course course) {
 		// TODO Auto-generated method stub
@@ -110,6 +136,13 @@ public class CourseDaoImp implements CourseDao {
 		return updated;
 	}
 
+	/**
+	 * This method will delete the course in the database.
+	 * 
+	 * @param courseId
+	 *            id of a course given to this method.
+	 * @return boolean if the course is deleted successfully or not.
+	 */
 	@Override
 	public boolean deleteCourseById(int id) {
 		// TODO Auto-generated method stub
@@ -130,6 +163,13 @@ public class CourseDaoImp implements CourseDao {
 		return deleted;
 	}
 
+	/**
+	 * This method will return the total courses by per semester.
+	 * 
+	 * @param semesterId
+	 *            provide semester id for which the courses are return.
+	 * @return List<Course> list of courses against the semester id.
+	 */
 	@Override
 	public List<Course> getCoursesBySemesterId(int semesterId) {
 		List<Course> courses = new ArrayList<>();

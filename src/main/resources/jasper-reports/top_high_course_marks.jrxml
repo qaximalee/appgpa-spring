@@ -41,7 +41,7 @@ group by cr.course_id order by Percentage desc]]>
 			<staticText>
 				<reportElement x="42" y="20" width="470" height="41" uuid="d210250f-805a-4dac-820e-7f4fd3d37853"/>
 				<textElement textAlignment="Center">
-					<font size="26" isBold="true"/>
+					<font fontName="Serif" size="26" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Top Marks In A Course By Students]]></text>
 			</staticText>

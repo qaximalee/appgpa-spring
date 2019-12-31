@@ -21,7 +21,6 @@ import com.ihsinformatics.spring.appgpa.dao.StudentStatisticsDao;
 import com.ihsinformatics.spring.appgpa.dto.CourseDto;
 import com.ihsinformatics.spring.appgpa.dto.CoursesBySemesterDto;
 import com.ihsinformatics.spring.appgpa.dto.StudentSemesterDto;
-import com.ihsinformatics.spring.appgpa.metamodel.CourseResults_;
 import com.ihsinformatics.spring.appgpa.model.Course;
 import com.ihsinformatics.spring.appgpa.model.CourseResults;
 import com.ihsinformatics.spring.appgpa.model.Semester;
@@ -113,7 +112,7 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 			CriteriaQuery<Object[]> criteriaQuery = criteriaBuilder.createQuery(Object[].class);
 			Root<CourseResults> root = criteriaQuery.from(CourseResults.class);
-			Join<CourseResults, Student> p = root.join(CourseResults_.STUDENT, JoinType.INNER);
+			Join<CourseResults, Student> p = root.join("student", JoinType.INNER);
 
 			criteriaQuery.multiselect(criteriaBuilder.max(root.get("percentage")).alias("percent"), p,
 					root.get("course"));
@@ -126,9 +125,6 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 				Course course = (Course) obj[2];
 				double topPercentage = (double) obj[0];
 				CourseDto courseDto = new CourseDto(course, topPercentage, student);
-				// System.out.println("CourseName: " + course.getName() + "Values: " + obj[0] +
-				// "\nValues of Students: "+ student.getFirstName() + " " +
-				// student.getLastName());
 
 				courseData.add(courseDto);
 			}
@@ -167,8 +163,6 @@ public class StudentStatisticsDaoImp implements StudentStatisticsDao {
 			for (Object[] coursesBySemester : coursesBySemesterList) {
 				Semester semester = (Semester) coursesBySemester[0];
 				long courses = (long) coursesBySemester[1];
-				// System.out.println("CourseName: " + coursesBySemester[0] + "\t\t" +
-				// coursesBySemester[1]);
 
 				coursesBySemesterData.add(new CoursesBySemesterDto(semester, courses));
 			}

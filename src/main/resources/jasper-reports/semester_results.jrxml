@@ -46,7 +46,7 @@ INNER JOIN semester as sem ON sem_rs.semester_id = sem.semester_id ORDER BY std.
 			<staticText>
 				<reportElement x="130" y="30" width="551" height="51" uuid="eaf70542-de62-42b4-b16f-dc828deac378"/>
 				<textElement textAlignment="Center">
-					<font fontName="Bradley Hand ITC" size="35" isBold="true"/>
+					<font fontName="Serif" size="35" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ALL SEMESTER RESULTS]]></text>
 			</staticText>

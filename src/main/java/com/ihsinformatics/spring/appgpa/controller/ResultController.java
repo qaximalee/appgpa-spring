@@ -1,7 +1,6 @@
 package com.ihsinformatics.spring.appgpa.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -50,21 +49,6 @@ public class ResultController {
 
 		List<Result> results = resultsService.generateResult(studentId);
 
-		// This string will identify where the json results has data or not.
-		if (results == null) {
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("results", new ArrayList<>());
-
-			try {
-				response.getWriter().print(jsonObject.toString());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("------------============= RESULTSERVLET JSON ERROR =============---------------");
-				e.printStackTrace();
-			}
-			return;
-		}
-
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("results", results);
 
@@ -72,16 +56,7 @@ public class ResultController {
 			response.getWriter().print(jsonObject.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("------------============= RESULTSERVLET JSON ERROR =============---------------");
 			e.printStackTrace();
 		}
 	}
-
-	/*
-	 * @RequestMapping(value = "/getResultByStudent", method = RequestMethod.GET)
-	 * public ModelAndView getResultByStudent(@RequestParam("id") int studentId) {
-	 * return new
-	 * ModelAndView("overall_results/generate_result").addObject("results",
-	 * resultsService.generateResult(studentId)); }
-	 */
 }

@@ -175,12 +175,12 @@ public class ResultsServiceImp implements ResultsService {
 		String jasperFilePath = tempFolderPath + File.separator + fileName + ".jasper";
 		File reportFile = new File(jasperFilePath);
 		// If compiled file is not found, then compile XML template
-		if (!reportFile.exists()) {
-			InputStream jRXmlStream = request.getSession().getServletContext()
-					.getResourceAsStream("/WEB-INF/classes/jasper-reports/" + fileName + ".jrxml");
-			JasperDesign jasperDesign = JRXmlLoader.load(jRXmlStream);
-			JasperCompileManager.compileReportToFile(jasperDesign, jasperFilePath);
-		}
+		// if (!reportFile.exists()) {
+		InputStream jRXmlStream = request.getSession().getServletContext()
+				.getResourceAsStream("/WEB-INF/classes/jasper-reports/" + fileName + ".jrxml");
+		JasperDesign jasperDesign = JRXmlLoader.load(jRXmlStream);
+		JasperCompileManager.compileReportToFile(jasperDesign, jasperFilePath);
+		// }
 		JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(reportFile.getPath());
 		return jasperReport;
 	}

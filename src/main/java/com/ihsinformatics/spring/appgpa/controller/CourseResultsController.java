@@ -151,7 +151,7 @@ public class CourseResultsController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView initialView() {
 		ModelAndView mav = new ModelAndView("course_results_views/add_course_results_form");
-		mav.addObject("semesterList", semesterService.getAllSemester());
+		mav.addObject("semesterList", semesterService.getAllSemesters());
 		mav.addObject("courseList", courseService.getAllCourses());
 		mav.addObject("studentList", studentService.getAllStudents());
 		return mav;
