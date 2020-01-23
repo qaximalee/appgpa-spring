@@ -4,6 +4,36 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
 	<display-name>SpringMVC</display-name>
+
+	<!-- Spring Security Configuration -->
+	<!-- <context-param> <param-name>contextConfigLocation</param-name> <param-value> 
+		classpath:/security-config.xml </param-value> </context-param> <filter> <filter-name>springSecurityFilterChain</filter-name> 
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> 
+		</filter> <filter-mapping> <filter-name>springSecurityFilterChain</filter-name> 
+		<url-pattern>/*</url-pattern> </filter-mapping> <listener> <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> 
+		</listener> -->
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/spring-servlet.xml
+		</param-value>
+	</context-param>	
+	
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
 	<servlet>
 		<servlet-name>spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -17,5 +47,38 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>views/login.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- This block makes sure that all the resources are accessed via HTTPS -->
+	<!-- <security-constraint>
+		<web-resource-collection>
+			<web-resource-name>HTTPSOnly</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint> -->
+	<!-- This block overrides the previous for certain resources and enables 
+		them on both HTTP and HTTPS -->
+	<!-- <security-constraint>
+		<web-resource-collection>
+			<web-resource-name>HTTPSOrHTTP</web-resource-name>
+			<url-pattern>*.jpg</url-pattern>
+			<url-pattern>/img/*</url-pattern>
+			<url-pattern>/css/*</url-pattern>
+			<url-pattern>index.html</url-pattern>
+		</web-resource-collection>
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+ -->
+	<!-- Part of Spring Security -->
+	<!-- <welcome-file-list> <welcome-file>views/login/login.jsp</welcome-file> 
+		</welcome-file-list> -->
 
 </web-app>  

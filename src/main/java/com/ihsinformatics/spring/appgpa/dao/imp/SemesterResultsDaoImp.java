@@ -224,10 +224,12 @@ public class SemesterResultsDaoImp implements SemesterResultsDao {
 			List<CourseResults> courseResults = session.createQuery(criteriaQuery).list();
 			double cGPAPoints = 0.0;
 			int totalCreditHours = 0;
+
 			for (CourseResults results : courseResults) {
 				cGPAPoints += results.getTotalPoints();
 				totalCreditHours += 3;
 			}
+
 			double cGPA = cGPAPoints / totalCreditHours;
 			return cGPA;
 		} catch (Exception e) {
